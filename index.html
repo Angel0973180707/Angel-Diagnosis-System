@@ -159,12 +159,12 @@
 
     <section class="hero">
       <div class="tag">幸福天使診斷企劃</div>
-      <h1>你不是不努力，<br>而是不瞭解卡點</h1>
+      <h1>你不是不努力，<br>而是可能卡錯地方了</h1>
       <p>
-        透過多選診斷，協助你釐清目前最需要補強的是曝光、信任、成交、回購、內容，還是品牌系統。
+        透過多選診斷，協助你釐清目前最需要補強的是曝光、信任、成交、回購、內容、品牌，還是自然流量循環。
       </p>
       <p class="muted">
-        送出後，你會看到一份初步診斷報告
+        送出後，你會看到一份初步診斷報告；完整 PPT 大綱與 AI 企劃指令會留存在後台，由我們協助後續規劃。
       </p>
     </section>
 
@@ -287,7 +287,29 @@
     </section>
 
     <section class="card">
-      <h2>七、合作理念</h2>
+      <h2>七、自然流量循環（可多選）</h2>
+      <p class="muted">
+        希望你的智慧名片未來能形成什麼樣的自然分享效果？
+      </p>
+
+      <div class="checks" data-group="referral_goal">
+        <label class="check"><input type="checkbox" value="分享給朋友">分享給朋友</label>
+        <label class="check"><input type="checkbox" value="幫忙轉介紹">幫忙轉介紹</label>
+        <label class="check"><input type="checkbox" value="收藏名片">收藏名片</label>
+        <label class="check"><input type="checkbox" value="加入社群">加入社群</label>
+        <label class="check"><input type="checkbox" value="主動回來看內容">主動回來看內容</label>
+        <label class="check"><input type="checkbox" value="願意主動推薦">願意主動推薦</label>
+        <label class="check"><input type="checkbox" value="形成口碑擴散">形成口碑擴散</label>
+        <label class="check"><input type="checkbox" value="不知道怎麼讓客戶願意分享">不知道怎麼讓客戶願意分享</label>
+      </div>
+
+      <div class="notice">
+        我們相信真正有效的智慧名片，不只是讓客戶看見你，而是讓滿意的人願意主動把你分享出去。
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>八、合作理念</h2>
 
       <label>你比較認同哪一種經營方式？</label>
       <select id="long_term_mindset">
@@ -315,7 +337,7 @@
         <h3>下一步建議</h3>
         <p>
           這份報告是初步方向。後續我們會依照你的產業、素材與經營目標，
-          協助整理更完整的智慧名片規劃與成長建議。
+          協助整理更完整的智慧名片規劃、自然流量循環與成長建議。
         </p>
         <p>
           建議先準備：Logo、個人照片、服務介紹、3個真實案例、常見問題、LINE連結。
@@ -366,6 +388,7 @@
         cta_goals: checkedValues("cta_goals"),
         materials: checkedValues("materials"),
         growth_goals: checkedValues("growth_goals"),
+        referral_goal: checkedValues("referral_goal"),
 
         long_term_mindset: val("long_term_mindset")
       };
