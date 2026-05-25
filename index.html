@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>幸福天使診斷企劃</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", Arial, sans-serif;
+      background: #fff7ec;
+      color: #2f2a24;
+    }
+
+    .wrap {
+      max-width: 920px;
+      margin: auto;
+      padding: 24px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #fff3dc, #f8dfb9);
+      padding: 36px 24px;
+      border-radius: 28px;
+      box-shadow: 0 10px 30px rgba(120, 80, 30, .12);
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin: 0 0 12px;
+      color: #5b3a16;
+    }
+
+    h2 {
+      color: #6b4318;
+      margin-top: 32px;
+    }
+
+    p {
+      line-height: 1.8;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 24px;
+      margin: 18px 0;
+      box-shadow: 0 8px 22px rgba(80, 50, 20, .08);
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      color: #4a351f;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 13px 14px;
+      border: 1px solid #e2cba8;
+      border-radius: 14px;
+      font-size: 16px;
+      background: #fffdf8;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-size: 16px;
+      font-weight: 700;
+      background: #8b6208;
+      color: white;
+      cursor: pointer;
+      margin-top: 18px;
+    }
+
+    button.secondary {
+      background: #2f6f5e;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .muted {
+      color: #75685c;
+      font-size: 14px;
+    }
+
+    .result {
+      display: none;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: #fff9ef;
+      border: 1px solid #ead6b9;
+      padding: 18px;
+      border-radius: 18px;
+      line-height: 1.7;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #f0a04b;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .notice {
+      background: #f5efe3;
+      padding: 16px;
+      border-radius: 18px;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <section class="hero">
+      <div class="tag">幸福天使診斷企劃</div>
+      <h1>你不是不努力，<br>而是可能卡錯地方了</h1>
+      <p>
+        透過 3 分鐘診斷，協助你釐清目前最需要補強的是曝光、信任、成交、回購，還是品牌系統。
+      </p>
+      <p class="muted">
+        本診斷將產出初步建議、智慧名片方向、PPT企劃大綱與後續輔導用 AI 協作指令。
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>一、基本資料</h2>
+
+      <label>姓名 *</label>
+      <input id="name" placeholder="請輸入姓名" />
+
+      <label>電話 *</label>
+      <input id="phone" placeholder="請輸入電話" />
+
+      <label>Email *</label>
+      <input id="email" placeholder="請輸入 Email" />
+
+      <label>LINE ID</label>
+      <input id="line_id" placeholder="方便後續聯繫，可不填" />
+
+      <label>品牌／店名</label>
+      <input id="business_name" placeholder="例如：幸福天使智慧名片" />
+
+      <label>產業類型</label>
+      <select id="industry">
+        <option value="">請選擇</option>
+        <option>健康調理</option>
+        <option>美容美甲</option>
+        <option>團購主</option>
+        <option>講師顧問</option>
+        <option>在地店家</option>
+        <option>房仲保險</option>
+        <option>招生教育</option>
+        <option>餐飲烘焙</option>
+        <option>其他</option>
+      </select>
+    </section>
+
+    <section class="card">
+      <h2>二、目前經營卡點</h2>
+
+      <label>你目前最常煩惱的是？</label>
+      <select id="main_pain">
+        <option value="">請選擇</option>
+        <option>明明很努力，卻缺少曝光</option>
+        <option>有人詢問，但成交率不高</option>
+        <option>客戶只買一次，回購不足</option>
+        <option>想建立品牌，但不知道怎麼開始</option>
+        <option>想招生或擴大團隊，但系統很亂</option>
+        <option>不確定自己卡在哪裡</option>
+      </select>
+
+      <label>目前主要靠什麼接單？</label>
+      <textarea id="order_source" placeholder="例如：LINE、FB、IG、朋友介紹、社團、實體店、短影音"></textarea>
+
+      <label>目前最想改善什麼？</label>
+      <select id="improve_goal">
+        <option value="">請選擇</option>
+        <option>曝光</option>
+        <option>成交</option>
+        <option>回購</option>
+        <option>品牌感</option>
+        <option>內容經營</option>
+        <option>客戶管理</option>
+        <option>招生裂變</option>
+      </select>
+
+      <label>希望客戶看完後，第一個動作是什麼？</label>
+      <select id="desired_cta">
+        <option value="">請選擇</option>
+        <option>加 LINE 諮詢</option>
+        <option>立即預約</option>
+        <option>直接下單</option>
+        <option>看案例</option>
+        <option>看影片</option>
+        <option>填表單</option>
+        <option>加入社群</option>
+      </select>
+
+      <label>目前使用哪些工具？</label>
+      <textarea id="current_tool" placeholder="例如：Linktree、Google表單、LINE、IG、FB、蝦皮、官網"></textarea>
+    </section>
+
+    <section class="card">
+      <h2>三、素材與內容狀況</h2>
+
+      <label>是否已經有短影音？</label>
+      <select id="has_video">
+        <option>沒有</option>
+        <option>有一些</option>
+        <option>持續經營中</option>
+      </select>
+
+      <label>是否有客戶見證或案例？</label>
+      <select id="has_testimonials">
+        <option>沒有</option>
+        <option>有，但尚未整理</option>
+        <option>有，且已整理</option>
+      </select>
+
+      <label>是否有照片素材？</label>
+      <select id="has_photos">
+        <option>沒有</option>
+        <option>有一些</option>
+        <option>有完整素材</option>
+      </select>
+
+      <label>是否有 LINE 官方帳號？</label>
+      <select id="has_line_oa">
+        <option>沒有</option>
+        <option>有個人LINE</option>
+        <option>有LINE官方帳號</option>
+      </select>
+    </section>
+
+    <section class="card">
+      <h2>四、合作理念篩選</h2>
+
+      <label>你比較認同哪一種經營方式？</label>
+      <select id="long_term_mindset">
+        <option value="">請選擇</option>
+        <option>我希望建立長期信任與口碑</option>
+        <option>我願意慢慢整理故事與案例</option>
+        <option>我願意學習內容經營與導流</option>
+        <option>我目前只想快速成交</option>
+        <option>我還不確定，想先了解方向</option>
+      </select>
+
+      <div class="notice">
+        我們相信智慧名片不是魔法，而是一套協助願意長期經營、真誠服務、建立信任的人，更有效率被看見與成交的系統。
+      </div>
+
+      <button onclick="submitForm()">送出診斷，產生初步報告</button>
+      <p id="msg" class="muted"></p>
+    </section>
+
+    <section id="result" class="card result">
+      <h2>你的初步診斷報告</h2>
+
+      <h3>診斷結果</h3>
+      <pre id="reportText"></pre>
+
+      <h3>PPT企劃書大綱</h3>
+      <pre id="pptOutline"></pre>
+
+      <h3>AI協作指令</h3>
+      <pre id="aiPrompt"></pre>
+
+      <div class="btn-row">
+        <button onclick="copyText('reportText')">複製診斷報告</button>
+        <button class="secondary" onclick="copyText('pptOutline')">複製PPT大綱</button>
+        <button class="secondary" onclick="copyText('aiPrompt')">複製AI協作指令</button>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbz_iXb-U3WMGXU97mHaq_lt-PyMvDtj1-iJDevT4s4H4s07z5VVZEO-aimgQDiIZ9COmQ/exec";
+
+    function val(id) {
+      return document.getElementById(id).value.trim();
+    }
+
+    async function submitForm() {
+      const msg = document.getElementById("msg");
+
+      if (!val("name") || !val("phone") || !val("email")) {
+        msg.textContent = "請先填寫姓名、電話與 Email。";
+        return;
+      }
+
+      msg.textContent = "診斷產生中，請稍候...";
+
+      const payload = {
+        name: val("name"),
+        phone: val("phone"),
+        email: val("email"),
+        line_id: val("line_id"),
+        business_name: val("business_name"),
+        industry: val("industry"),
+        current_tool: val("current_tool"),
+        main_pain: val("main_pain"),
+        order_source: val("order_source"),
+        improve_goal: val("improve_goal"),
+        desired_cta: val("desired_cta"),
+        has_video: val("has_video"),
+        has_testimonials: val("has_testimonials"),
+        has_photos: val("has_photos"),
+        has_line_oa: val("has_line_oa"),
+        long_term_mindset: val("long_term_mindset")
+      };
+
+      try {
+        const res = await fetch(GAS_URL, {
+          method: "POST",
+          body: JSON.stringify({
+            action: "submitDiagnosis",
+            payload
+          })
+        });
+
+        const data = await res.json();
+
+        if (!data.ok) {
+          msg.textContent = "送出失敗：" + (data.message || "未知錯誤");
+          return;
+        }
+
+        document.getElementById("reportText").textContent = data.report_text || "";
+        document.getElementById("pptOutline").textContent = data.ppt_outline || "";
+        document.getElementById("aiPrompt").textContent = data.ai_plan_prompt || "";
+
+        document.getElementById("result").style.display = "block";
+        msg.textContent = "已完成診斷，也已寫入資料庫。";
+
+        document.getElementById("result").scrollIntoView({
+          behavior: "smooth"
+        });
+
+      } catch (err) {
+        msg.textContent = "送出失敗，請確認 GAS 已部署為任何人可存取。";
+        console.error(err);
+      }
+    }
+
+    function copyText(id) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(function() {
+        alert("已複製");
+      });
+    }
+  </script>
+</body>
+  </html>
