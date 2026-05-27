@@ -3,74 +3,432 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>幸福生態圈 AI 控制台 v3-lite</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>幸福天使經營診斷企劃</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", Arial, sans-serif;
+      background: #fff7ec;
+      color: #2f2a24;
+    }
+
+    .wrap {
+      max-width: 920px;
+      margin: auto;
+      padding: 24px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #fff3dc, #f8dfb9);
+      padding: 36px 24px;
+      border-radius: 28px;
+      box-shadow: 0 10px 30px rgba(120, 80, 30, .12);
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin: 0 0 12px;
+      color: #5b3a16;
+    }
+
+    h2, h3 {
+      color: #6b4318;
+    }
+
+    p {
+      line-height: 1.8;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 24px;
+      margin: 18px 0;
+      box-shadow: 0 8px 22px rgba(80, 50, 20, .08);
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      color: #4a351f;
+    }
+
+    input, select {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 13px 14px;
+      border: 1px solid #e2cba8;
+      border-radius: 14px;
+      font-size: 16px;
+      background: #fffdf8;
+    }
+
+    .checks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .check {
+      background: #fffaf2;
+      border: 1px solid #ead6b9;
+      border-radius: 14px;
+      padding: 12px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 15px;
+    }
+
+    .check input {
+      width: auto;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-size: 16px;
+      font-weight: 700;
+      background: #8b6208;
+      color: white;
+      cursor: pointer;
+      margin-top: 18px;
+    }
+
+    .secondary {
+      background: #2f6f5e;
+    }
+
+    .muted {
+      color: #75685c;
+      font-size: 14px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #f0a04b;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .notice {
+      background: #f5efe3;
+      padding: 16px;
+      border-radius: 18px;
+      line-height: 1.7;
+      margin-top: 16px;
+    }
+
+    .result {
+      display: none;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: #fff9ef;
+      border: 1px solid #ead6b9;
+      padding: 18px;
+      border-radius: 18px;
+      line-height: 1.8;
+      font-family: "Noto Sans TC", Arial, sans-serif;
+      font-size: 16px;
+    }
+
+    .cta-box {
+      background: #fff3dc;
+      border: 1px solid #efd1a3;
+      padding: 20px;
+      border-radius: 22px;
+      margin-top: 20px;
+    }
+  </style>
 </head>
+
 <body>
-  <main class="app">
-    <header class="hero">
-      <p class="eyebrow">Happiness Ecosystem AI Console</p>
-      <h1>幸福生態圈 AI 控制台 v3-lite</h1>
-      <p>輸入一句靈感，系統自動生成內容包、視覺導演 Prompt、Shorts Hook，並可回填 Google Sheets。</p>
-    </header>
+  <div class="wrap">
 
-    <section class="panel">
-      <h2>① 系統設定</h2>
+    <section class="hero">
+      <div class="tag">幸福天使經營診斷企劃</div>
+      <h1>你不是不努力，<br>而是不瞭解卡點</h1>
+      <p>
+        透過診斷，協助你釐清目前需要補強的是曝光、信任、成交、回購、內容、品牌，還是自然流量循環。
+      </p>
+      <p class="muted">
+        送出後，會提供一份初步診斷報告給您參考。
+      </p>
+    </section>
 
-      <label>GAS Web App URL</label>
-      <input id="gasUrl" placeholder="貼上 GAS 部署網址 /exec" />
+    <section class="card">
+      <h2>一、基本資料</h2>
 
-      <div class="grid">
-        <button id="saveConfigBtn">儲存設定</button>
-        <button id="testBtn" class="secondary">測試連線</button>
-        <button id="loadSeriesBtn" class="secondary">讀取系列</button>
+      <label>姓名 *</label>
+      <input id="name" placeholder="請輸入姓名" />
+
+      <label>電話 *</label>
+      <input id="phone" placeholder="請輸入電話" />
+
+      <label>Email *</label>
+      <input id="email" placeholder="請輸入 Email" />
+
+      <label>LINE ID</label>
+      <input id="line_id" placeholder="方便後續聯繫，可不填" />
+
+      <label>品牌／店名</label>
+      <input id="business_name" placeholder="例如：幸福天使智慧名片" />
+
+      <label>產業類型</label>
+      <select id="industry">
+        <option value="">請選擇</option>
+        <option>健康調理</option>
+        <option>美容美甲</option>
+        <option>團購主</option>
+        <option>講師顧問</option>
+        <option>在地店家</option>
+        <option>房仲保險</option>
+        <option>招生教育</option>
+        <option>餐飲烘焙</option>
+        <option>其他</option>
+      </select>
+    </section>
+
+    <section class="card">
+      <h2>二、目前最大的卡點（可多選）</h2>
+
+      <div class="checks" data-group="pain_points">
+        <label class="check"><input type="checkbox" value="缺曝光">缺曝光</label>
+        <label class="check"><input type="checkbox" value="缺成交">缺成交</label>
+        <label class="check"><input type="checkbox" value="缺信任">缺信任</label>
+        <label class="check"><input type="checkbox" value="客戶回購低">客戶回購低</label>
+        <label class="check"><input type="checkbox" value="不知道怎麼做內容">不知道怎麼做內容</label>
+        <label class="check"><input type="checkbox" value="沒有品牌感">沒有品牌感</label>
+        <label class="check"><input type="checkbox" value="不知道怎麼導流">不知道怎麼導流</label>
+        <label class="check"><input type="checkbox" value="不知道怎麼介紹自己">不知道怎麼介紹自己</label>
+        <label class="check"><input type="checkbox" value="招生困難">招生困難</label>
+        <label class="check"><input type="checkbox" value="團隊不好帶">團隊不好帶</label>
+        <label class="check"><input type="checkbox" value="不知道自己問題在哪">不知道自己問題在哪</label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>三、目前接單來源（可多選）</h2>
+
+      <div class="checks" data-group="order_sources">
+        <label class="check"><input type="checkbox" value="LINE">LINE</label>
+        <label class="check"><input type="checkbox" value="Facebook">Facebook</label>
+        <label class="check"><input type="checkbox" value="IG">IG</label>
+        <label class="check"><input type="checkbox" value="Threads">Threads</label>
+        <label class="check"><input type="checkbox" value="社團">社團</label>
+        <label class="check"><input type="checkbox" value="朋友介紹">朋友介紹</label>
+        <label class="check"><input type="checkbox" value="短影音">短影音</label>
+        <label class="check"><input type="checkbox" value="實體店">實體店</label>
+        <label class="check"><input type="checkbox" value="官網">官網</label>
+        <label class="check"><input type="checkbox" value="蝦皮">蝦皮</label>
+        <label class="check"><input type="checkbox" value="幾乎沒有固定來源">幾乎沒有固定來源</label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>四、希望客戶看到後做什麼？（可多選）</h2>
+
+      <div class="checks" data-group="cta_goals">
+        <label class="check"><input type="checkbox" value="加 LINE">加 LINE</label>
+        <label class="check"><input type="checkbox" value="預約">預約</label>
+        <label class="check"><input type="checkbox" value="下單">下單</label>
+        <label class="check"><input type="checkbox" value="看案例">看案例</label>
+        <label class="check"><input type="checkbox" value="看影片">看影片</label>
+        <label class="check"><input type="checkbox" value="加社群">加社群</label>
+        <label class="check"><input type="checkbox" value="填表單">填表單</label>
+        <label class="check"><input type="checkbox" value="看品牌故事">看品牌故事</label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>五、目前已有素材（可多選）</h2>
+
+      <div class="checks" data-group="materials">
+        <label class="check"><input type="checkbox" value="Logo">Logo</label>
+        <label class="check"><input type="checkbox" value="個人照片">個人照片</label>
+        <label class="check"><input type="checkbox" value="商品照片">商品照片</label>
+        <label class="check"><input type="checkbox" value="客戶案例">客戶案例</label>
+        <label class="check"><input type="checkbox" value="客戶見證">客戶見證</label>
+        <label class="check"><input type="checkbox" value="FAQ">FAQ</label>
+        <label class="check"><input type="checkbox" value="短影音">短影音</label>
+        <label class="check"><input type="checkbox" value="品牌故事">品牌故事</label>
+        <label class="check"><input type="checkbox" value="LINE官方帳號">LINE官方帳號</label>
+        <label class="check"><input type="checkbox" value="都還沒有">都還沒有</label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>六、想發展的方向（可多選）</h2>
+
+      <div class="checks" data-group="growth_goals">
+        <label class="check"><input type="checkbox" value="短影音">短影音</label>
+        <label class="check"><input type="checkbox" value="個人品牌">個人品牌</label>
+        <label class="check"><input type="checkbox" value="招生">招生</label>
+        <label class="check"><input type="checkbox" value="團購">團購</label>
+        <label class="check"><input type="checkbox" value="AI內容">AI內容</label>
+        <label class="check"><input type="checkbox" value="社群經營">社群經營</label>
+        <label class="check"><input type="checkbox" value="長期品牌">長期品牌</label>
+        <label class="check"><input type="checkbox" value="在地經營">在地經營</label>
+        <label class="check"><input type="checkbox" value="電商">電商</label>
+        <label class="check"><input type="checkbox" value="課程">課程</label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>七、自然流量循環（可多選）</h2>
+      <p class="muted">
+        希望你的智慧名片未來能形成什麼樣的自然分享效果？
+      </p>
+
+      <div class="checks" data-group="referral_goal">
+        <label class="check"><input type="checkbox" value="分享給朋友">分享給朋友</label>
+        <label class="check"><input type="checkbox" value="幫忙轉介紹">幫忙轉介紹</label>
+        <label class="check"><input type="checkbox" value="收藏名片">收藏名片</label>
+        <label class="check"><input type="checkbox" value="加入社群">加入社群</label>
+        <label class="check"><input type="checkbox" value="主動回來看內容">主動回來看內容</label>
+        <label class="check"><input type="checkbox" value="願意主動推薦">願意主動推薦</label>
+        <label class="check"><input type="checkbox" value="形成口碑擴散">形成口碑擴散</label>
+        <label class="check"><input type="checkbox" value="不知道怎麼讓客戶願意分享">不知道怎麼讓客戶願意分享</label>
       </div>
 
-      <p id="statusText" class="status">尚未連線</p>
-    </section>
-
-    <section class="panel">
-      <h2>② 幸福靈感輸入</h2>
-
-      <label>主題宇宙</label>
-      <select id="unitSelect">
-        <option value="幸福旅居">幸福旅居</option>
-        <option value="幸福教養">幸福教養</option>
-        <option value="健康頻率">健康頻率</option>
-        <option value="生活好物">生活好物</option>
-        <option value="幸福緣手作">幸福緣手作</option>
-        <option value="智慧名片商業系">智慧名片商業系</option>
-      </select>
-
-      <label>系列名稱</label>
-      <select id="seriesSelect">
-        <option value="早安圖">早安圖</option>
-        <option value="晚安圖">晚安圖</option>
-        <option value="生命旅居">生命旅居</option>
-        <option value="慢生活">慢生活</option>
-        <option value="情緒教養">情緒教養</option>
-        <option value="睡眠療癒">睡眠療癒</option>
-        <option value="療癒小物">療癒小物</option>
-        <option value="料理食譜板">料理食譜板</option>
-        <option value="品牌導流">品牌導流</option>
-      </select>
-
-      <label>一句靈感</label>
-      <textarea id="ideaInput" placeholder="例如：今天不用急著變更好"></textarea>
-
-      <div class="grid">
-        <button id="generateBtn">生成內容包</button>
-        <button id="copyBtn" class="secondary">複製 03 TSV</button>
-        <button id="writeBtn" class="accent">寫入 Sheets</button>
+      <div class="notice">
+        我們相信真正有效的智慧名片，不只是讓客戶看見你，而是讓滿意的人願意主動把你分享出去。
       </div>
     </section>
 
-    <section class="panel result">
-      <h2>③ 生成結果</h2>
-      <div id="resultArea" class="empty">尚未生成內容</div>
-    </section>
-  </main>
+    <section class="card">
+      <h2>八、合作理念</h2>
 
-  <script src="app.js"></script>
+      <label>你比較認同哪一種經營方式？</label>
+      <select id="long_term_mindset">
+        <option value="">請選擇</option>
+        <option>長期建立信任</option>
+        <option>穩定經營品牌</option>
+        <option>願意學習與調整</option>
+        <option>先快速賺錢再說</option>
+        <option>我還在摸索方向</option>
+      </select>
+
+      <div class="notice">
+        我們相信智慧名片不是魔法，而是一套協助願意長期經營、真誠服務、建立信任的人，更有效率被看見與成交的系統。
+      </div>
+
+      <button onclick="submitForm()">送出診斷，產生初步報告</button>
+      <p id="msg" class="muted"></p>
+    </section>
+
+    <section id="result" class="card result">
+      <h2>你的初步診斷報告</h2>
+      <pre id="reportText"></pre>
+
+      <div class="cta-box">
+        <h3>下一步建議</h3>
+        <p>
+          這份報告是初步方向。後續我們會依照你的產業、素材與經營目標，
+          協助整理更完整的智慧名片規劃、自然流量循環與成長建議。
+        </p>
+        <p>
+          建議先準備：Logo、個人照片、服務介紹、3個真實案例、常見問題、LINE連結。
+        </p>
+      </div>
+
+      <button class="secondary" onclick="copyText('reportText')">複製診斷報告</button>
+    </section>
+
+  </div>
+
+  <script>
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbz_iXb-U3WMGXU97mHaq_lt-PyMvDtj1-iJDevT4s4H4s07z5VVZEO-aimgQDiIZ9COmQ/exec";
+
+    function val(id) {
+      return document.getElementById(id).value.trim();
+    }
+
+    function checkedValues(groupName) {
+      const box = document.querySelector('[data-group="' + groupName + '"]');
+      if (!box) return [];
+      return Array.from(box.querySelectorAll('input[type="checkbox"]:checked'))
+        .map(function(input) {
+          return input.value;
+        });
+    }
+
+    async function submitForm() {
+      const msg = document.getElementById("msg");
+
+      if (!val("name") || !val("phone") || !val("email")) {
+        msg.textContent = "請先填寫姓名、電話與 Email。";
+        return;
+      }
+
+      msg.textContent = "診斷產生中，請稍候...";
+
+      const payload = {
+        name: val("name"),
+        phone: val("phone"),
+        email: val("email"),
+        line_id: val("line_id"),
+        business_name: val("business_name"),
+        industry: val("industry"),
+
+        pain_points: checkedValues("pain_points"),
+        order_sources: checkedValues("order_sources"),
+        cta_goals: checkedValues("cta_goals"),
+        materials: checkedValues("materials"),
+        growth_goals: checkedValues("growth_goals"),
+        referral_goal: checkedValues("referral_goal"),
+
+        long_term_mindset: val("long_term_mindset")
+      };
+
+      try {
+        const res = await fetch(GAS_URL, {
+          method: "POST",
+          body: JSON.stringify({
+            action: "submitDiagnosis",
+            payload: payload
+          })
+        });
+
+        const data = await res.json();
+
+        if (!data.ok) {
+          msg.textContent = "送出失敗：" + (data.message || "未知錯誤");
+          return;
+        }
+
+        document.getElementById("reportText").textContent = data.report_text || "";
+        document.getElementById("result").style.display = "block";
+        msg.textContent = "已完成診斷，也已送出資料。";
+
+        document.getElementById("result").scrollIntoView({
+          behavior: "smooth"
+        });
+
+      } catch (err) {
+        msg.textContent = "送出失敗，請確認 GAS 已部署為任何人可存取。";
+        console.error(err);
+      }
+    }
+
+    function copyText(id) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(function() {
+        alert("已複製");
+      });
+    }
+  </script>
 </body>
 </html>
