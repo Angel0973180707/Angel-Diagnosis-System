@@ -1,114 +1,444 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>幸福天使｜品牌診斷中心</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --gold: #c8860a; --gold-light: #f0a93a; --gold-pale: #fff7e6;
-      --gold-border: #e8d4a0; --brown-dark: #3d2a0e; --brown-mid: #6b4318;
-      --brown-light: #9a6b3a; --cream: #fffdf7; --cream-2: #fff3dc;
-      --green: #2f6f5e; --line-green: #06c755;
+      --gold: #c8860a;
+      --gold-light: #f0a93a;
+      --gold-pale: #fff7e6;
+      --gold-border: #e8d4a0;
+      --brown-dark: #3d2a0e;
+      --brown-mid: #6b4318;
+      --brown-light: #9a6b3a;
+      --cream: #fffdf7;
+      --cream-2: #fff3dc;
+      --green: #2f6f5e;
+      --shadow: 0 8px 32px rgba(80,50,20,.10);
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: "Noto Sans TC", sans-serif; background: #fdf6e8; color: var(--brown-dark); min-height: 100vh; }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Noto Sans TC", sans-serif;
+      background: #fdf6e8;
+      color: var(--brown-dark);
+      min-height: 100vh;
+    }
+
+    /* ── 頂部品牌區 ── */
     .brand-header {
       background: linear-gradient(160deg, #3d2a0e 0%, #7a4a18 60%, #c8860a 100%);
-      padding: 36px 24px 28px; text-align: center; position: relative; overflow: hidden;
+      padding: 40px 24px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    .brand-header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 30%, rgba(240,169,58,.18) 0%, transparent 65%); }
-    .sun-icon { font-size: 44px; display: block; margin-bottom: 8px; filter: drop-shadow(0 0 16px rgba(240,169,58,.6)); animation: pulse 3s ease-in-out infinite; }
-    @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
-    .brand-title { font-family: "Noto Serif TC", serif; font-size: 26px; font-weight: 900; color: #fff; letter-spacing: 3px; position: relative; }
-    .brand-sub { font-size: 12px; color: rgba(255,255,255,.75); margin-top: 5px; letter-spacing: 1px; position: relative; }
+    .brand-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 30%, rgba(240,169,58,.18) 0%, transparent 65%);
+    }
+    .sun-icon {
+      font-size: 48px;
+      display: block;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 0 16px rgba(240,169,58,.6));
+      animation: pulse 3s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { transform: scale(1); filter: drop-shadow(0 0 16px rgba(240,169,58,.6)); }
+      50% { transform: scale(1.08); filter: drop-shadow(0 0 28px rgba(240,169,58,.9)); }
+    }
+    .brand-title {
+      font-family: "Noto Serif TC", serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 3px;
+      position: relative;
+    }
+    .brand-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,.75);
+      margin-top: 6px;
+      letter-spacing: 2px;
+      position: relative;
+    }
 
-    .tab-nav { display: flex; max-width: 680px; margin: 0 auto; padding: 0 12px; transform: translateY(-1px); }
-    .tab-btn { flex: 1; padding: 12px 4px; font-size: 12px; font-weight: 700; font-family: "Noto Sans TC", sans-serif; border: none; cursor: pointer; transition: all .25s; white-space: nowrap; overflow: hidden; }
-    .tab-btn:first-child { border-radius: 14px 0 0 0; background: #e8d4a0; color: var(--brown-mid); }
-    .tab-btn:nth-child(2) { background: #ddd0a0; color: var(--brown-mid); }
-    .tab-btn:last-child { border-radius: 0 14px 0 0; background: #d4c090; color: var(--brown-mid); }
-    .tab-btn.active { background: var(--cream); color: var(--gold); box-shadow: 0 -3px 0 var(--gold) inset; }
+    /* ── Tab 切換 ── */
+    .tab-nav {
+      display: flex;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 16px;
+      transform: translateY(-1px);
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 16px 12px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: "Noto Sans TC", sans-serif;
+      border: none;
+      cursor: pointer;
+      transition: all .25s;
+      letter-spacing: 1px;
+    }
+    .tab-btn:first-child {
+      border-radius: 18px 0 0 0;
+      background: #e8d4a0;
+      color: var(--brown-mid);
+    }
+    .tab-btn:last-child {
+      border-radius: 0 18px 0 0;
+      background: #d4c090;
+      color: var(--brown-mid);
+    }
+    .tab-btn.active {
+      background: var(--cream);
+      color: var(--gold);
+      box-shadow: 0 -4px 0 var(--gold) inset;
+    }
 
-    .wrap { max-width: 680px; margin: 0 auto; padding: 0 16px 80px; background: var(--cream); min-height: 60vh; }
+    /* ── 主內容區 ── */
+    .wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 16px 60px;
+      background: var(--cream);
+      min-height: 60vh;
+    }
+
     .tab-content { display: none; padding-top: 8px; }
     .tab-content.active { display: block; }
 
-    .hero-card { background: linear-gradient(135deg, var(--cream-2), #fde9bb); border-radius: 0 0 20px 20px; padding: 22px 20px; margin-bottom: 16px; border: 1px solid var(--gold-border); border-top: none; }
-    .hero-card h2 { font-family: "Noto Serif TC", serif; font-size: 20px; font-weight: 900; color: var(--brown-dark); line-height: 1.5; margin-bottom: 8px; }
-    .hero-card p { font-size: 13px; color: var(--brown-light); line-height: 1.9; }
-    .step-pills { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
-    .step-pill { background: var(--gold); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
-
-    .card { background: #fff; border-radius: 18px; padding: 18px; margin: 12px 0; border: 1px solid #f0e4c8; box-shadow: 0 3px 12px rgba(80,50,20,.06); }
-    .card-title { font-family: "Noto Serif TC", serif; font-size: 15px; font-weight: 700; color: var(--brown-dark); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-    .card-title .num { background: var(--gold); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; flex-shrink: 0; }
-
-    label.field-label { display: block; font-size: 13px; font-weight: 700; color: var(--brown-mid); margin: 12px 0 5px; }
-    .field-hint { font-size: 12px; color: var(--brown-light); margin-bottom: 6px; line-height: 1.6; }
-    input[type="text"], input[type="tel"], input[type="email"], input[type="url"], textarea, select {
-      width: 100%; padding: 12px 13px; border: 1.5px solid var(--gold-border); border-radius: 12px;
-      font-size: 14px; font-family: "Noto Sans TC", sans-serif; background: var(--gold-pale);
-      color: var(--brown-dark); outline: none; transition: border-color .2s;
+    /* ── Hero 說明卡 ── */
+    .hero-card {
+      background: linear-gradient(135deg, var(--cream-2), #fde9bb);
+      border-radius: 0 0 24px 24px;
+      padding: 28px 24px;
+      margin-bottom: 20px;
+      border: 1px solid var(--gold-border);
+      border-top: none;
     }
-    input:focus, textarea:focus, select:focus { border-color: var(--gold); }
-    textarea { resize: vertical; min-height: 85px; line-height: 1.7; }
+    .hero-card h2 {
+      font-family: "Noto Serif TC", serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--brown-dark);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .hero-card p {
+      font-size: 14px;
+      color: var(--brown-light);
+      line-height: 1.9;
+    }
+    .step-pills {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .step-pill {
+      background: var(--gold);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 999px;
+      letter-spacing: .5px;
+    }
 
-    .checks { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 7px; margin-top: 8px; }
-    .check-item { background: var(--gold-pale); border: 1.5px solid var(--gold-border); border-radius: 11px; padding: 9px 11px; display: flex; align-items: center; gap: 7px; font-size: 13px; cursor: pointer; transition: all .18s; }
-    .check-item input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--gold); flex-shrink: 0; }
-    .check-item.checked { background: #fff3d0; border-color: var(--gold); }
+    /* ── 卡片 ── */
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 22px 20px;
+      margin: 14px 0;
+      border: 1px solid #f0e4c8;
+      box-shadow: 0 4px 16px rgba(80,50,20,.06);
+    }
+    .card-title {
+      font-family: "Noto Serif TC", serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--brown-dark);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-title .num {
+      background: var(--gold);
+      color: #fff;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
 
-    .radio-group { display: flex; flex-direction: column; gap: 7px; margin-top: 8px; }
-    .radio-item { background: var(--gold-pale); border: 1.5px solid var(--gold-border); border-radius: 11px; padding: 11px 13px; display: flex; align-items: center; gap: 9px; font-size: 13px; cursor: pointer; transition: all .18s; }
-    .radio-item input[type="radio"] { accent-color: var(--gold); width: 15px; height: 15px; flex-shrink: 0; }
-    .radio-item.checked { background: #fff3d0; border-color: var(--gold); }
+    /* ── 表單元素 ── */
+    label.field-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--brown-mid);
+      margin: 14px 0 6px;
+    }
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    select {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1.5px solid var(--gold-border);
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: "Noto Sans TC", sans-serif;
+      background: var(--gold-pale);
+      color: var(--brown-dark);
+      outline: none;
+      transition: border-color .2s;
+    }
+    input:focus, select:focus {
+      border-color: var(--gold);
+    }
 
-    .notice { background: linear-gradient(135deg, #fff8e6, #fff0cc); border-left: 3px solid var(--gold); padding: 12px 14px; border-radius: 0 10px 10px 0; font-size: 12px; color: var(--brown-light); line-height: 1.8; margin-top: 12px; }
+    /* ── Checkbox 格子 ── */
+    .checks {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .check-item {
+      background: var(--gold-pale);
+      border: 1.5px solid var(--gold-border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all .18s;
+    }
+    .check-item:hover { border-color: var(--gold-light); }
+    .check-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--gold);
+      flex-shrink: 0;
+    }
+    .check-item.checked {
+      background: #fff3d0;
+      border-color: var(--gold);
+    }
 
-    .btn-primary { display: block; width: 100%; padding: 15px; background: linear-gradient(135deg, var(--gold), #e09820); color: #fff; border: none; border-radius: 999px; font-size: 15px; font-weight: 700; font-family: "Noto Sans TC", sans-serif; cursor: pointer; margin-top: 18px; letter-spacing: 1px; box-shadow: 0 5px 18px rgba(200,134,10,.3); transition: all .2s; }
-    .btn-primary:hover { transform: translateY(-2px); }
+    /* Radio 選項 */
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .radio-item {
+      background: var(--gold-pale);
+      border: 1.5px solid var(--gold-border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all .18s;
+    }
+    .radio-item input[type="radio"] {
+      accent-color: var(--gold);
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+    .radio-item.checked {
+      background: #fff3d0;
+      border-color: var(--gold);
+    }
 
-    /* 步驟導航（素材收集用） */
-    .step-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid var(--gold-border); padding: 10px 16px; display: none; gap: 10px; max-width: 680px; margin: 0 auto; z-index: 100; }
-    .step-nav.show { display: flex; }
-    .btn-prev { flex: 1; padding: 13px; background: #f0e4c8; color: var(--brown-mid); border: none; border-radius: 999px; font-size: 14px; font-weight: 700; font-family: "Noto Sans TC", sans-serif; cursor: pointer; }
-    .btn-next { flex: 2; padding: 13px; background: linear-gradient(135deg, var(--gold), #e09820); color: #fff; border: none; border-radius: 999px; font-size: 14px; font-weight: 700; font-family: "Noto Sans TC", sans-serif; cursor: pointer; box-shadow: 0 4px 14px rgba(200,134,10,.3); }
-    .btn-submit-mat { flex: 2; padding: 13px; background: var(--green); color: #fff; border: none; border-radius: 999px; font-size: 14px; font-weight: 700; font-family: "Noto Sans TC", sans-serif; cursor: pointer; }
+    /* ── 提示框 ── */
+    .notice {
+      background: linear-gradient(135deg, #fff8e6, #fff0cc);
+      border-left: 3px solid var(--gold);
+      padding: 14px 16px;
+      border-radius: 0 12px 12px 0;
+      font-size: 13px;
+      color: var(--brown-light);
+      line-height: 1.8;
+      margin-top: 14px;
+    }
 
-    .msg { font-size: 13px; color: var(--brown-light); text-align: center; margin-top: 8px; min-height: 18px; }
+    /* ── 按鈕 ── */
+    .btn-primary {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--gold), #e09820);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: "Noto Sans TC", sans-serif;
+      cursor: pointer;
+      margin-top: 20px;
+      letter-spacing: 1px;
+      box-shadow: 0 6px 20px rgba(200,134,10,.35);
+      transition: all .2s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(200,134,10,.45);
+    }
+    .btn-secondary {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: "Noto Sans TC", sans-serif;
+      cursor: pointer;
+      margin-top: 12px;
+      letter-spacing: 1px;
+      transition: all .2s;
+    }
+    .btn-secondary:hover { opacity: .88; }
 
-    /* 結果區 */
+    .msg {
+      font-size: 13px;
+      color: var(--brown-light);
+      text-align: center;
+      margin-top: 10px;
+      min-height: 20px;
+    }
+
+    /* ── 結果區 ── */
     .result-section { display: none; }
     .result-section.show { display: block; }
-    .done-card { background: linear-gradient(135deg, #3d2a0e, #7a4a18); border-radius: 18px; padding: 24px 20px; text-align: center; margin-top: 14px; }
-    .done-icon { font-size: 40px; margin-bottom: 10px; }
-    .done-title { font-family: "Noto Serif TC", serif; font-size: 19px; font-weight: 900; color: #fff; margin-bottom: 7px; }
-    .done-desc { font-size: 13px; color: rgba(255,255,255,.8); line-height: 1.8; }
-    .include-list { font-size: 13px; color: var(--brown-mid); line-height: 2.2; background: #fff; border-radius: 14px; padding: 16px; margin-top: 12px; border: 1px solid #f0e4c8; }
-    .include-list b { color: var(--brown-dark); }
 
-    .plan-result { display: none; }
+    .result-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 24px 20px;
+      margin-top: 16px;
+      border: 1.5px solid var(--gold-border);
+    }
+    .result-card h3 {
+      font-family: "Noto Serif TC", serif;
+      font-size: 18px;
+      color: var(--brown-dark);
+      margin-bottom: 14px;
+    }
+    .report-text {
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: var(--gold-pale);
+      border: 1px solid var(--gold-border);
+      padding: 18px;
+      border-radius: 14px;
+      font-size: 14px;
+      line-height: 1.9;
+      font-family: "Noto Sans TC", sans-serif;
+    }
+
+    /* ── 影音方案結果 ── */
+    .plan-result {
+      display: none;
+    }
     .plan-result.show { display: block; }
-    .plan-box { background: linear-gradient(135deg, var(--cream-2), #fde9bb); border-radius: 18px; padding: 20px; margin-top: 14px; border: 1px solid var(--gold-border); }
-    .plan-box h3 { font-family: "Noto Serif TC", serif; font-size: 17px; color: var(--brown-dark); margin-bottom: 14px; }
-    .plan-item { background: #fff; border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; border: 1px solid #f0e4c8; }
-    .plan-item-label { font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
-    .plan-item-value { font-size: 14px; color: var(--brown-dark); line-height: 1.7; }
 
-    .cta-line-box { background: var(--line-green); border-radius: 16px; padding: 20px; text-align: center; margin-top: 14px; }
-    .cta-line-box p { color: #fff; font-size: 13px; margin-bottom: 12px; line-height: 1.7; }
-    .cta-line-btn { display: inline-block; background: #fff; color: var(--line-green); font-weight: 900; font-size: 15px; padding: 12px 28px; border-radius: 999px; text-decoration: none; letter-spacing: 1px; }
+    .plan-box {
+      background: linear-gradient(135deg, var(--cream-2), #fde9bb);
+      border-radius: 20px;
+      padding: 24px 20px;
+      margin-top: 16px;
+      border: 1px solid var(--gold-border);
+    }
+    .plan-box h3 {
+      font-family: "Noto Serif TC", serif;
+      font-size: 18px;
+      color: var(--brown-dark);
+      margin-bottom: 16px;
+    }
+    .plan-item {
+      background: #fff;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      border: 1px solid #f0e4c8;
+    }
+    .plan-item-label {
+      font-size: 12px;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+    .plan-item-value {
+      font-size: 15px;
+      color: var(--brown-dark);
+      line-height: 1.7;
+    }
 
-    .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--gold-border), transparent); margin: 6px 0 14px; }
-    .step-indicator { text-align: center; font-size: 11px; color: var(--brown-light); padding: 8px 0 2px; }
+    .cta-line-box {
+      background: #06c755;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      margin-top: 16px;
+    }
+    .cta-line-box p {
+      color: #fff;
+      font-size: 14px;
+      margin-bottom: 12px;
+      line-height: 1.7;
+    }
+    .cta-line-btn {
+      display: inline-block;
+      background: #fff;
+      color: #06c755;
+      font-weight: 900;
+      font-size: 16px;
+      padding: 13px 32px;
+      border-radius: 999px;
+      text-decoration: none;
+      letter-spacing: 1px;
+      transition: all .2s;
+    }
+    .cta-line-btn:hover { transform: scale(1.04); }
 
-    /* 素材收集步驟 */
-    .mat-step { display: none; }
-    .mat-step.active { display: block; }
+    /* ── 分隔線 ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-border), transparent);
+      margin: 6px 0 16px;
+    }
 
+    /* RWD */
     @media (max-width: 480px) {
       .brand-title { font-size: 22px; }
       .checks { grid-template-columns: repeat(2, 1fr); }
@@ -117,505 +447,446 @@
 </head>
 <body>
 
+<!-- 品牌頂部 -->
 <div class="brand-header">
   <span class="sun-icon">☀️</span>
   <div class="brand-title">幸福天使</div>
-  <div class="brand-sub">品牌曝光起點</div>
+  <div class="brand-sub">品牌診斷中心 · 找到你的曝光起點</div>
 </div>
 
+<!-- Tab 導航 -->
 <div class="tab-nav">
-  <button class="tab-btn active" onclick="switchTab('diag',this)">🔍 診斷</button>
-  <button class="tab-btn" onclick="switchTab('video',this)">🎬 影音</button>
-  <button class="tab-btn" onclick="switchTab('material',this)">📋 素材</button>
+  <button class="tab-btn active" onclick="switchTab('diag')">🔍 經營診斷</button>
+  <button class="tab-btn" onclick="switchTab('video')">🎬 影音品牌方案</button>
 </div>
 
 <div class="wrap">
 
-<!-- ══ TAB 1｜經營診斷 ══ -->
-<div id="tab-diag" class="tab-content active">
-  <div class="hero-card">
-    <h2>你不是不努力，<br>而是還不瞭解卡點在哪。</h2>
-    <p>填完這份診斷，我們會在24小時內傳送你的初步報告。</p>
-    <div class="step-pills">
-      <span class="step-pill">① 填寫診斷</span>
-      <span class="step-pill">② 收取報告</span>
-      <span class="step-pill">③ 私聊確認方案</span>
-    </div>
-  </div>
+  <!-- ════════════════════════════════
+       TAB 1｜經營診斷
+  ════════════════════════════════ -->
+  <div id="tab-diag" class="tab-content active">
 
-  <div class="card">
-    <div class="card-title"><span class="num">1</span>基本資料</div>
-    <label class="field-label">姓名 *</label>
-    <input type="text" id="d_name" placeholder="請輸入姓名"/>
-    <label class="field-label">電話 *</label>
-    <input type="tel" id="d_phone" placeholder="請輸入電話"/>
-    <label class="field-label">Email *</label>
-    <input type="email" id="d_email" placeholder="請輸入 Email"/>
-    <label class="field-label">LINE ID</label>
-    <input type="text" id="d_line_id" placeholder="方便後續聯繫，可不填"/>
-    <label class="field-label">品牌／店名</label>
-    <input type="text" id="d_business_name" placeholder="例如：幸福天使智慧名片"/>
-    <label class="field-label">產業類型</label>
-    <select id="d_industry">
-      <option value="">請選擇</option>
-      <option>健康調理</option><option>美容美甲</option><option>團購主</option>
-      <option>講師顧問</option><option>在地店家</option><option>房仲保險</option>
-      <option>招生教育</option><option>餐飲烘焙</option><option>小農／手作</option>
-      <option>生活保健用品</option><option>個人品牌</option><option>在家接單</option><option>其他</option>
-    </select>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="num">2</span>目前最大的卡點（可多選）</div>
-    <div class="checks" data-group="d_pain_points">
-      <label class="check-item"><input type="checkbox" value="缺曝光">缺曝光</label>
-      <label class="check-item"><input type="checkbox" value="缺成交">缺成交</label>
-      <label class="check-item"><input type="checkbox" value="缺信任">缺信任</label>
-      <label class="check-item"><input type="checkbox" value="客戶回購低">客戶回購低</label>
-      <label class="check-item"><input type="checkbox" value="不知道怎麼做內容">不知道做內容</label>
-      <label class="check-item"><input type="checkbox" value="沒有品牌感">沒有品牌感</label>
-      <label class="check-item"><input type="checkbox" value="不知道怎麼導流">不知道導流</label>
-      <label class="check-item"><input type="checkbox" value="不知道怎麼介紹自己">不知道介紹自己</label>
-      <label class="check-item"><input type="checkbox" value="招生困難">招生困難</label>
-      <label class="check-item"><input type="checkbox" value="團隊不好帶">團隊不好帶</label>
-      <label class="check-item"><input type="checkbox" value="不知道自己問題在哪">不知道問題在哪</label>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="num">3</span>目前接單來源（可多選）</div>
-    <div class="checks" data-group="d_order_sources">
-      <label class="check-item"><input type="checkbox" value="LINE">LINE</label>
-      <label class="check-item"><input type="checkbox" value="Facebook">Facebook</label>
-      <label class="check-item"><input type="checkbox" value="IG">IG</label>
-      <label class="check-item"><input type="checkbox" value="Threads">Threads</label>
-      <label class="check-item"><input type="checkbox" value="社團">社團</label>
-      <label class="check-item"><input type="checkbox" value="朋友介紹">朋友介紹</label>
-      <label class="check-item"><input type="checkbox" value="短影音">短影音</label>
-      <label class="check-item"><input type="checkbox" value="實體店">實體店</label>
-      <label class="check-item"><input type="checkbox" value="官網">官網</label>
-      <label class="check-item"><input type="checkbox" value="蝦皮">蝦皮</label>
-      <label class="check-item"><input type="checkbox" value="幾乎沒有固定來源">幾乎沒固定來源</label>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="num">4</span>希望客戶看到後做什麼？（可多選）</div>
-    <div class="checks" data-group="d_cta_goals">
-      <label class="check-item"><input type="checkbox" value="加 LINE">加 LINE</label>
-      <label class="check-item"><input type="checkbox" value="預約">預約</label>
-      <label class="check-item"><input type="checkbox" value="下單">下單</label>
-      <label class="check-item"><input type="checkbox" value="看案例">看案例</label>
-      <label class="check-item"><input type="checkbox" value="看影片">看影片</label>
-      <label class="check-item"><input type="checkbox" value="加社群">加社群</label>
-      <label class="check-item"><input type="checkbox" value="填表單">填表單</label>
-      <label class="check-item"><input type="checkbox" value="看品牌故事">看品牌故事</label>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="num">5</span>目前已有素材（可多選）</div>
-    <div class="checks" data-group="d_materials">
-      <label class="check-item"><input type="checkbox" value="Logo">Logo</label>
-      <label class="check-item"><input type="checkbox" value="個人照片">個人照片</label>
-      <label class="check-item"><input type="checkbox" value="商品照片">商品照片</label>
-      <label class="check-item"><input type="checkbox" value="客戶案例">客戶案例</label>
-      <label class="check-item"><input type="checkbox" value="客戶見證">客戶見證</label>
-      <label class="check-item"><input type="checkbox" value="FAQ">FAQ</label>
-      <label class="check-item"><input type="checkbox" value="短影音">短影音</label>
-      <label class="check-item"><input type="checkbox" value="品牌故事">品牌故事</label>
-      <label class="check-item"><input type="checkbox" value="LINE官方帳號">LINE官方帳號</label>
-      <label class="check-item"><input type="checkbox" value="都還沒有">都還沒有</label>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="num">6</span>想發展的方向（可多選）</div>
-    <div class="checks" data-group="d_growth_goals">
-      <label class="check-item"><input type="checkbox" value="短影音">短影音</label>
-      <label class="check-item"><input type="checkbox" value="個人品牌">個人品牌</label>
-      <label class="check-item"><input type="checkbox" value="招生">招生</label>
-      <label class="check-item"><input type="checkbox" value="團購">團購</label>
-      <label class="check-item"><input type="checkbox" value="AI內容">AI內容</label>
-      <label class="check-item"><input type="checkbox" value="社群經營">社群經營</label>
-      <label class="check-item"><input type="checkbox" value="長期品牌">長期品牌</label>
-      <label class="check-item"><input type="checkbox" value="在地經營">在地經營</label>
-      <label class="check-item"><input type="checkbox" value="電商">電商</label>
-      <label class="check-item"><input type="checkbox" value="課程">課程</label>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="num">7</span>希望形成什麼樣的自然流量？（可多選）</div>
-    <div class="checks" data-group="d_referral_goal">
-      <label class="check-item"><input type="checkbox" value="分享給朋友">分享給朋友</label>
-      <label class="check-item"><input type="checkbox" value="幫忙轉介紹">轉介紹</label>
-      <label class="check-item"><input type="checkbox" value="收藏名片">收藏名片</label>
-      <label class="check-item"><input type="checkbox" value="加入社群">加入社群</label>
-      <label class="check-item"><input type="checkbox" value="主動回來看內容">主動回訪</label>
-      <label class="check-item"><input type="checkbox" value="願意主動推薦">主動推薦</label>
-      <label class="check-item"><input type="checkbox" value="形成口碑擴散">口碑擴散</label>
-      <label class="check-item"><input type="checkbox" value="不知道怎麼讓客戶願意分享">不知道怎麼做</label>
-    </div>
-    <div class="notice">真正有效的智慧名片，不只讓客戶看見你，而是讓滿意的人願意主動把你分享出去。</div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="num">8</span>你比較認同哪一種經營方式？</div>
-    <div class="radio-group" data-group="d_mindset">
-      <label class="radio-item"><input type="radio" name="d_mindset" value="長期建立信任">長期建立信任</label>
-      <label class="radio-item"><input type="radio" name="d_mindset" value="穩定經營品牌">穩定經營品牌</label>
-      <label class="radio-item"><input type="radio" name="d_mindset" value="願意學習與調整">願意學習與調整</label>
-      <label class="radio-item"><input type="radio" name="d_mindset" value="先快速賺錢再說">先快速賺錢再說</label>
-      <label class="radio-item"><input type="radio" name="d_mindset" value="我還在摸索方向">我還在摸索方向</label>
-    </div>
-    <div class="notice">智慧名片不是魔法，而是協助願意長期經營、真誠服務的人，更有效率被看見與成交的系統。</div>
-    <button class="btn-primary" onclick="submitDiag()">送出診斷 →</button>
-    <p id="diag_msg" class="msg"></p>
-  </div>
-
-  <div id="diag_result" class="result-section">
-    <div class="done-card">
-      <div class="done-icon">☀️</div>
-      <div class="done-title">診斷資料已收到！</div>
-      <div class="done-desc">我們會在 24 小時內完成分析<br>並把你的初步診斷報告透過LINE傳給你</div>
-    </div>
-    <div class="include-list">
-      你的診斷報告將包含：<br><br>
-      📊 <b>目前經營卡點分析</b><br>
-      🎯 <b>最需要補強的方向</b><br>
-      💡 <b>建議下一步行動</b><br>
-      📋 <b>智慧名片規劃建議</b><br>
-      🎬 <b>影音曝光方向建議</b>
-    </div>
-    <div class="notice" style="margin-top:12px">先加入LINE官方帳號，才能收到你的診斷報告與後續建議。</div>
-    <div class="cta-line-box">
-      <p>加入LINE官方帳號<br>接收你的專屬診斷報告</p>
-      <a class="cta-line-btn" href="https://lin.ee/UoF8eYY" target="_blank">＋ 加入 LINE 官方帳號</a>
-    </div>
-  </div>
-</div><!-- /tab-diag -->
-
-<!-- ══ TAB 2｜影音方案 ══ -->
-<div id="tab-video" class="tab-content">
-  <div class="hero-card">
-    <h2>名片是門面，<br>影音是讓客戶主動找上你的路。</h2>
-    <p>填完7題，系統自動分析你適合的平台、內容風格與服務方案。</p>
-    <div class="step-pills">
-      <span class="step-pill">① 填7題</span>
-      <span class="step-pill">② 看建議方案</span>
-      <span class="step-pill">③ 私聊確認報價</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="num">1</span>你主要在賣什麼？</div>
-    <div class="radio-group">
-      <label class="radio-item"><input type="radio" name="v_sell_type" value="product">🛍 產品（實體商品、食品、保健品、手作）</label>
-      <label class="radio-item"><input type="radio" name="v_sell_type" value="service">👤 服務／你這個人（美業、房仲、教練、顧問）</label>
-      <label class="radio-item"><input type="radio" name="v_sell_type" value="both">✨ 兩者都有</label>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="num">2</span>你的客戶主要是？</div>
-    <div class="radio-group">
-      <label class="radio-item"><input type="radio" name="v_customer_type" value="b2c">一般消費者（B2C）</label>
-      <label class="radio-item"><input type="radio" name="v_customer_type" value="b2b">企業／店家（B2B）</label>
-      <label class="radio-item"><input type="radio" name="v_customer_type" value="both">都有</label>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="num">3</span>目前已在使用的平台（可多選）</div>
-    <div class="checks" data-group="v_platforms">
-      <label class="check-item"><input type="checkbox" value="none">剛開始／沒有</label>
-      <label class="check-item"><input type="checkbox" value="ig">IG</label>
-      <label class="check-item"><input type="checkbox" value="fb">Facebook</label>
-      <label class="check-item"><input type="checkbox" value="youtube">YouTube</label>
-      <label class="check-item"><input type="checkbox" value="tiktok">TikTok</label>
-      <label class="check-item"><input type="checkbox" value="xiaohongshu">小紅書</label>
-      <label class="check-item"><input type="checkbox" value="line_oa">LINE官方帳號</label>
-      <label class="check-item"><input type="checkbox" value="google_map">Google地圖</label>
-      <label class="check-item"><input type="checkbox" value="threads">Threads</label>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="num">4</span>你願意在影片中露臉嗎？</div>
-    <div class="radio-group">
-      <label class="radio-item"><input type="radio" name="v_face" value="yes">✅ 願意，可以出鏡說話</label>
-      <label class="radio-item"><input type="radio" name="v_face" value="partial">👋 只願意局部出現（手、背影）</label>
-      <label class="radio-item"><input type="radio" name="v_face" value="no">🚫 不願意，純圖文或旁白</label>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="num">5</span>每週能投入內容的時間？</div>
-    <div class="radio-group">
-      <label class="radio-item"><input type="radio" name="v_time" value="none">⚡ 幾乎沒時間，需要全自動</label>
-      <label class="radio-item"><input type="radio" name="v_time" value="low">🕐 每週 1–2 小時可以配合</label>
-      <label class="radio-item"><input type="radio" name="v_time" value="high">🕒 每週 3 小時以上</label>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="num">6</span>預算範圍？</div>
-    <div class="radio-group">
-      <label class="radio-item"><input type="radio" name="v_budget" value="low">💡 入門｜想先了解，自己來操作</label>
-      <label class="radio-item"><input type="radio" name="v_budget" value="mid">📱 中階｜需要有人幫我產出內容</label>
-      <label class="radio-item"><input type="radio" name="v_budget" value="high">🚀 全包｜交給專業，我只要看成果</label>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="num">7</span>你有實體據點嗎？</div>
-    <div class="radio-group">
-      <label class="radio-item"><input type="radio" name="v_location" value="yes">🏪 有店面／工作室／辦公室</label>
-      <label class="radio-item"><input type="radio" name="v_location" value="home">🏠 在家接單／無固定地點</label>
-      <label class="radio-item"><input type="radio" name="v_location" value="online">💻 線上為主</label>
-    </div>
-    <button class="btn-primary" onclick="submitVideo()">查看我的專屬影音方案 →</button>
-    <p id="video_msg" class="msg"></p>
-  </div>
-
-  <div id="video_result" class="plan-result">
-    <div class="plan-box">
-      <h3>☀️ 你的專屬影音品牌方案</h3>
-      <div class="divider"></div>
-      <div class="plan-item"><div class="plan-item-label">建議平台</div><div class="plan-item-value" id="plan_platforms_val">—</div></div>
-      <div class="plan-item"><div class="plan-item-label">內容風格方向</div><div class="plan-item-value" id="plan_style_val">—</div></div>
-      <div class="plan-item"><div class="plan-item-label">建議服務方案</div><div class="plan-item-value" id="plan_service_val">—</div></div>
-      <div class="plan-item"><div class="plan-item-label">建議內容量</div><div class="plan-item-value" id="plan_content_val">—</div></div>
-      <div class="plan-item" id="plan_google" style="display:none"><div class="plan-item-label">加購建議</div><div class="plan-item-value">Google 地圖在地曝光優化，讓附近的人更容易找到你</div></div>
-      <div class="notice" style="margin-top:4px">以上是初步建議。實際方案與報價依需求客製，透過私聊確認。</div>
-    </div>
-    <div class="cta-line-box">
-      <p>方案看完了，心動了嗎？<br>報價不公開，加LINE一對一談。</p>
-      <a class="cta-line-btn" href="https://line.me/ti/p/bYRY2mgJec" target="_blank">＋ 加LINE私聊報價</a>
-    </div>
-  </div>
-</div><!-- /tab-video -->
-
-<!-- ══ TAB 3｜品牌素材收集 ══ -->
-<div id="tab-material" class="tab-content">
-  <div class="step-indicator" id="mat_indicator">第 1 步，共 5 步</div>
-
-  <div class="mat-step active" id="mat1">
     <div class="hero-card">
-      <div style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:2px;margin-bottom:3px">STEP 1 / 5</div>
-      <h2>你的行業與目標</h2>
-      <p>先告訴我你在做什麼，才能給出最適合你的建議。</p>
-    </div>
-    <div class="card">
-      <div class="card-title">行業類型 *</div>
-      <select id="m_industry">
-        <option value="">請選擇</option>
-        <option>健康食品／保健品</option><option>美業／美容／美甲</option>
-        <option>小農／手作／烘焙</option><option>講師／顧問／教練</option>
-        <option>房仲／保險／金融</option><option>餐飲／在地店家</option>
-        <option>生活用品／居家</option><option>個人品牌／自媒體</option>
-        <option>在家接單／服務業</option><option>招生／教育</option><option>其他</option>
-      </select>
-      <div class="card-title" style="margin-top:16px">最希望客戶看完後做什麼？ *</div>
-      <div class="radio-group">
-        <label class="radio-item"><input type="radio" name="m_cta_goal" value="加LINE諮詢">💬 加LINE諮詢</label>
-        <label class="radio-item"><input type="radio" name="m_cta_goal" value="立即預約">📅 立即預約</label>
-        <label class="radio-item"><input type="radio" name="m_cta_goal" value="直接下單購買">🛍 直接下單購買</label>
-        <label class="radio-item"><input type="radio" name="m_cta_goal" value="填問卷了解需求">📋 填問卷了解需求</label>
-        <label class="radio-item"><input type="radio" name="m_cta_goal" value="看更多案例作品">🖼 看更多案例作品</label>
-        <label class="radio-item"><input type="radio" name="m_cta_goal" value="加入社群">👥 加入社群</label>
+      <h2>你不是不努力，<br>而是還不瞭解卡點在哪。</h2>
+      <p>填完這份診斷，系統會產生你的初步報告，幫你看清楚現在最需要補強的方向。</p>
+      <div class="step-pills">
+        <span class="step-pill">① 填寫診斷</span>
+        <span class="step-pill">② 取得報告</span>
+        <span class="step-pill">③ 私聊確認方案</span>
       </div>
     </div>
-  </div>
 
-  <div class="mat-step" id="mat2">
-    <div class="hero-card">
-      <div style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:2px;margin-bottom:3px">STEP 2 / 5</div>
-      <h2>你是誰</h2>
-      <p>名片上的基本身份資訊，也是AI理解你的第一步。</p>
-    </div>
+    <!-- 基本資料 -->
     <div class="card">
-      <label class="field-label">姓名／品牌名稱 *</label>
-      <input type="text" id="m_name" placeholder="例：王小明 ／ 幸福烘焙坊">
-      <label class="field-label">職稱／副標</label>
-      <input type="text" id="m_title" placeholder="例：健康烘焙師 ／ 幸福生活顧問">
-      <label class="field-label">單位／公司</label>
-      <input type="text" id="m_company" placeholder="例：天使幸福股份有限公司">
-    </div>
-  </div>
-
-  <div class="mat-step" id="mat3">
-    <div class="hero-card">
-      <div style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:2px;margin-bottom:3px">STEP 3 / 5</div>
-      <h2>你的核心故事</h2>
-      <p>這是品牌DNA最重要的原料。說真話就好。</p>
-    </div>
-    <div class="card">
-      <div class="card-title">為什麼做這件事？ *</div>
-      <span class="field-hint">有沒有一個轉折或經歷，讓你走到現在這條路？</span>
-      <textarea id="m_core_story" placeholder="例：我媽媽生病的時候，我才發現原來健康不能等……"></textarea>
-    </div>
-    <div class="card">
-      <div class="card-title">目標客群是誰？他們的痛點是什麼？ *</div>
-      <span class="field-hint">你最想幫助的人是誰？他們在煩惱什麼？</span>
-      <textarea id="m_target_audience" placeholder="例：35-55歲的媽媽，工作忙碌，想照顧家人健康但不知道從哪裡開始……"></textarea>
-    </div>
-  </div>
-
-  <div class="mat-step" id="mat4">
-    <div class="hero-card">
-      <div style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:2px;margin-bottom:3px">STEP 4 / 5</div>
-      <h2>品牌風格偏好</h2>
-      <p>幫AI理解你想呈現的感覺。</p>
-    </div>
-    <div class="card">
-      <div class="card-title">你希望客戶感受到什麼？ *</div>
-      <div class="radio-group">
-        <label class="radio-item"><input type="radio" name="m_style" value="溫暖療癒，像朋友一樣">🌸 溫暖療癒，像朋友一樣</label>
-        <label class="radio-item"><input type="radio" name="m_style" value="專業權威，讓人信任放心">📚 專業權威，讓人信任放心</label>
-        <label class="radio-item"><input type="radio" name="m_style" value="活潑有趣，有能量有感染力">✨ 活潑有趣，有能量有感染力</label>
-        <label class="radio-item"><input type="radio" name="m_style" value="質感生活，慢活精緻有品味">🏡 質感生活，慢活精緻有品味</label>
-        <label class="radio-item"><input type="radio" name="m_style" value="真實親切，說真話有溫度">💬 真實親切，說真話有溫度</label>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-title">不想要的感覺</div>
-      <textarea id="m_avoid_style" placeholder="例：不要太推銷感、不要太正式"></textarea>
-    </div>
-  </div>
-
-  <div class="mat-step" id="mat5">
-    <div class="hero-card">
-      <div style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:2px;margin-bottom:3px">STEP 5 / 5</div>
-      <h2>聯繫與平台</h2>
-      <p>最後一步！填完送出，我們24小時內把品牌建議傳給你。</p>
-    </div>
-    <div class="card">
+      <div class="card-title"><span class="num">1</span>基本資料</div>
+      <label class="field-label">姓名 *</label>
+      <input type="text" id="d_name" placeholder="請輸入姓名" />
       <label class="field-label">電話 *</label>
-      <input type="tel" id="m_phone" placeholder="例：0912-345-678">
-      <label class="field-label">Email</label>
-      <input type="email" id="m_email" placeholder="example@mail.com">
-      <label class="field-label">LINE 個人連結</label>
-      <input type="url" id="m_line_personal" placeholder="https://line.me/ti/p/yourID">
-      <label class="field-label">LINE 官方帳號</label>
-      <input type="url" id="m_line_oa" placeholder="https://lin.ee/yourOA">
-      <label class="field-label">地址（有實體據點才填）</label>
-      <input type="text" id="m_address" placeholder="例：台南市東區勝利路1號">
+      <input type="tel" id="d_phone" placeholder="請輸入電話" />
+      <label class="field-label">Email *</label>
+      <input type="email" id="d_email" placeholder="請輸入 Email" />
+      <label class="field-label">LINE ID</label>
+      <input type="text" id="d_line_id" placeholder="方便後續聯繫，可不填" />
+      <label class="field-label">品牌／店名</label>
+      <input type="text" id="d_business_name" placeholder="例如：幸福天使智慧名片" />
+      <label class="field-label">產業類型</label>
+      <select id="d_industry">
+        <option value="">請選擇</option>
+        <option>健康調理</option>
+        <option>美容美甲</option>
+        <option>團購主</option>
+        <option>講師顧問</option>
+        <option>在地店家</option>
+        <option>房仲保險</option>
+        <option>招生教育</option>
+        <option>餐飲烘焙</option>
+        <option>小農／手作</option>
+        <option>生活保健用品</option>
+        <option>個人品牌</option>
+        <option>在家接單</option>
+        <option>其他</option>
+      </select>
     </div>
+
+    <!-- 卡點 -->
     <div class="card">
-      <div class="card-title">現有平台（有哪些填哪些）</div>
-      <label class="field-label">YouTube</label>
-      <input type="url" id="m_youtube" placeholder="https://www.youtube.com/@yourchannel">
-      <label class="field-label">Facebook</label>
-      <input type="url" id="m_facebook" placeholder="https://www.facebook.com/yourpage">
-      <label class="field-label">Instagram</label>
-      <input type="url" id="m_instagram" placeholder="https://www.instagram.com/yourid">
-      <label class="field-label">其他平台</label>
-      <input type="url" id="m_other_platform" placeholder="TikTok / 小紅書 / Threads…">
+      <div class="card-title"><span class="num">2</span>目前最大的卡點（可多選）</div>
+      <div class="checks" data-group="d_pain_points">
+        <label class="check-item"><input type="checkbox" value="缺曝光">缺曝光</label>
+        <label class="check-item"><input type="checkbox" value="缺成交">缺成交</label>
+        <label class="check-item"><input type="checkbox" value="缺信任">缺信任</label>
+        <label class="check-item"><input type="checkbox" value="客戶回購低">客戶回購低</label>
+        <label class="check-item"><input type="checkbox" value="不知道怎麼做內容">不知道做內容</label>
+        <label class="check-item"><input type="checkbox" value="沒有品牌感">沒有品牌感</label>
+        <label class="check-item"><input type="checkbox" value="不知道怎麼導流">不知道怎麼導流</label>
+        <label class="check-item"><input type="checkbox" value="不知道怎麼介紹自己">不知道介紹自己</label>
+        <label class="check-item"><input type="checkbox" value="招生困難">招生困難</label>
+        <label class="check-item"><input type="checkbox" value="團隊不好帶">團隊不好帶</label>
+        <label class="check-item"><input type="checkbox" value="不知道自己問題在哪">不知道問題在哪</label>
+      </div>
     </div>
-    <p id="mat_msg" class="msg"></p>
-  </div>
 
-  <div id="mat_result" class="result-section">
-    <div class="done-card">
-      <div class="done-icon">☀️</div>
-      <div class="done-title">資料已收到！</div>
-      <div class="done-desc">我們會在 24 小時內完成品牌分析<br>並把你的專屬建議透過LINE傳給你</div>
+    <!-- 接單來源 -->
+    <div class="card">
+      <div class="card-title"><span class="num">3</span>目前接單來源（可多選）</div>
+      <div class="checks" data-group="d_order_sources">
+        <label class="check-item"><input type="checkbox" value="LINE">LINE</label>
+        <label class="check-item"><input type="checkbox" value="Facebook">Facebook</label>
+        <label class="check-item"><input type="checkbox" value="IG">IG</label>
+        <label class="check-item"><input type="checkbox" value="Threads">Threads</label>
+        <label class="check-item"><input type="checkbox" value="社團">社團</label>
+        <label class="check-item"><input type="checkbox" value="朋友介紹">朋友介紹</label>
+        <label class="check-item"><input type="checkbox" value="短影音">短影音</label>
+        <label class="check-item"><input type="checkbox" value="實體店">實體店</label>
+        <label class="check-item"><input type="checkbox" value="官網">官網</label>
+        <label class="check-item"><input type="checkbox" value="蝦皮">蝦皮</label>
+        <label class="check-item"><input type="checkbox" value="幾乎沒有固定來源">幾乎沒固定來源</label>
+      </div>
     </div>
-    <div class="include-list">
-      你將收到的品牌建議包含：<br><br>
-      📇 <b>智慧名片建議</b>（品牌故事、一句話理念×3、跑馬燈、照片牆、CTA）<br>
-      🎬 <b>影音品牌DNA＋製作建議</b>（發布平台、內容主題、第一支影音指令、AI產圖指令）
-    </div>
-    <div class="notice" style="margin-top:12px">先加入LINE官方帳號，才能收到你的品牌建議與建卡通知。</div>
-    <div class="cta-line-box">
-      <p>最後一步！<br>加入LINE官方帳號<br>收取品牌建議＋完成建卡申請</p>
-      <a class="cta-line-btn" href="https://lin.ee/UoF8eYY" target="_blank">＋ 加入 LINE 官方帳號</a>
-    </div>
-  </div>
 
-</div><!-- /tab-material -->
+    <!-- CTA目標 -->
+    <div class="card">
+      <div class="card-title"><span class="num">4</span>希望客戶看到後做什麼？（可多選）</div>
+      <div class="checks" data-group="d_cta_goals">
+        <label class="check-item"><input type="checkbox" value="加 LINE">加 LINE</label>
+        <label class="check-item"><input type="checkbox" value="預約">預約</label>
+        <label class="check-item"><input type="checkbox" value="下單">下單</label>
+        <label class="check-item"><input type="checkbox" value="看案例">看案例</label>
+        <label class="check-item"><input type="checkbox" value="看影片">看影片</label>
+        <label class="check-item"><input type="checkbox" value="加社群">加社群</label>
+        <label class="check-item"><input type="checkbox" value="填表單">填表單</label>
+        <label class="check-item"><input type="checkbox" value="看品牌故事">看品牌故事</label>
+      </div>
+    </div>
+
+    <!-- 現有素材 -->
+    <div class="card">
+      <div class="card-title"><span class="num">5</span>目前已有素材（可多選）</div>
+      <div class="checks" data-group="d_materials">
+        <label class="check-item"><input type="checkbox" value="Logo">Logo</label>
+        <label class="check-item"><input type="checkbox" value="個人照片">個人照片</label>
+        <label class="check-item"><input type="checkbox" value="商品照片">商品照片</label>
+        <label class="check-item"><input type="checkbox" value="客戶案例">客戶案例</label>
+        <label class="check-item"><input type="checkbox" value="客戶見證">客戶見證</label>
+        <label class="check-item"><input type="checkbox" value="FAQ">FAQ</label>
+        <label class="check-item"><input type="checkbox" value="短影音">短影音</label>
+        <label class="check-item"><input type="checkbox" value="品牌故事">品牌故事</label>
+        <label class="check-item"><input type="checkbox" value="LINE官方帳號">LINE官方帳號</label>
+        <label class="check-item"><input type="checkbox" value="都還沒有">都還沒有</label>
+      </div>
+    </div>
+
+    <!-- 發展方向 -->
+    <div class="card">
+      <div class="card-title"><span class="num">6</span>想發展的方向（可多選）</div>
+      <div class="checks" data-group="d_growth_goals">
+        <label class="check-item"><input type="checkbox" value="短影音">短影音</label>
+        <label class="check-item"><input type="checkbox" value="個人品牌">個人品牌</label>
+        <label class="check-item"><input type="checkbox" value="招生">招生</label>
+        <label class="check-item"><input type="checkbox" value="團購">團購</label>
+        <label class="check-item"><input type="checkbox" value="AI內容">AI內容</label>
+        <label class="check-item"><input type="checkbox" value="社群經營">社群經營</label>
+        <label class="check-item"><input type="checkbox" value="長期品牌">長期品牌</label>
+        <label class="check-item"><input type="checkbox" value="在地經營">在地經營</label>
+        <label class="check-item"><input type="checkbox" value="電商">電商</label>
+        <label class="check-item"><input type="checkbox" value="課程">課程</label>
+      </div>
+    </div>
+
+    <!-- 自然流量 -->
+    <div class="card">
+      <div class="card-title"><span class="num">7</span>希望形成什麼樣的自然流量？（可多選）</div>
+      <div class="checks" data-group="d_referral_goal">
+        <label class="check-item"><input type="checkbox" value="分享給朋友">分享給朋友</label>
+        <label class="check-item"><input type="checkbox" value="幫忙轉介紹">轉介紹</label>
+        <label class="check-item"><input type="checkbox" value="收藏名片">收藏名片</label>
+        <label class="check-item"><input type="checkbox" value="加入社群">加入社群</label>
+        <label class="check-item"><input type="checkbox" value="主動回來看內容">主動回訪</label>
+        <label class="check-item"><input type="checkbox" value="願意主動推薦">主動推薦</label>
+        <label class="check-item"><input type="checkbox" value="形成口碑擴散">口碑擴散</label>
+        <label class="check-item"><input type="checkbox" value="不知道怎麼讓客戶願意分享">不知道怎麼做</label>
+      </div>
+      <div class="notice">真正有效的智慧名片，不只讓客戶看見你，而是讓滿意的人願意主動把你分享出去。</div>
+    </div>
+
+    <!-- 合作理念 -->
+    <div class="card">
+      <div class="card-title"><span class="num">8</span>你比較認同哪一種經營方式？</div>
+      <div class="radio-group" data-group="d_mindset">
+        <label class="radio-item"><input type="radio" name="d_mindset" value="長期建立信任">長期建立信任</label>
+        <label class="radio-item"><input type="radio" name="d_mindset" value="穩定經營品牌">穩定經營品牌</label>
+        <label class="radio-item"><input type="radio" name="d_mindset" value="願意學習與調整">願意學習與調整</label>
+        <label class="radio-item"><input type="radio" name="d_mindset" value="先快速賺錢再說">先快速賺錢再說</label>
+        <label class="radio-item"><input type="radio" name="d_mindset" value="我還在摸索方向">我還在摸索方向</label>
+      </div>
+      <div class="notice">智慧名片不是魔法，而是協助願意長期經營、真誠服務的人，更有效率被看見與成交的系統。</div>
+      <button class="btn-primary" onclick="submitDiag()">送出診斷，產生初步報告 →</button>
+      <p id="diag_msg" class="msg"></p>
+    </div>
+
+    <!-- 診斷結果 -->
+    <div id="diag_result" class="result-section">
+      <div class="result-card">
+        <h3>☀️ 你的初步診斷報告</h3>
+        <div class="divider"></div>
+        <pre id="diag_report_text" class="report-text"></pre>
+        <div class="notice" style="margin-top:16px">
+          這份報告是初步方向。後續我們會依你的產業、素材與目標，協助整理更完整的品牌規劃與成長建議。<br><br>
+          建議先準備：Logo、個人照片、服務介紹、3個真實案例、常見問題、LINE連結。
+        </div>
+        <button class="btn-secondary" onclick="copyText('diag_report_text')">複製診斷報告</button>
+      </div>
+      <div class="cta-line-box" style="margin-top:16px">
+        <p>報告只是起點。<br>想知道接下來怎麼做？加LINE私聊，我幫你規劃完整方案。</p>
+        <a class="cta-line-btn" href="https://line.me/ti/p/YOUR_LINE_ID" target="_blank">＋ 加LINE私聊方案</a>
+      </div>
+    </div>
+
+  </div><!-- /tab-diag -->
+
+
+  <!-- ════════════════════════════════
+       TAB 2｜影音品牌方案
+  ════════════════════════════════ -->
+  <div id="tab-video" class="tab-content">
+
+    <div class="hero-card">
+      <h2>名片是門面，<br>影音是讓客戶主動找上你的路。</h2>
+      <p>填完7題，系統自動分析你適合的平台、內容風格與服務方案。不用猜，對號入座就好。</p>
+      <div class="step-pills">
+        <span class="step-pill">① 填7題</span>
+        <span class="step-pill">② 看建議方案</span>
+        <span class="step-pill">③ 私聊確認報價</span>
+      </div>
+    </div>
+
+    <!-- Q1 賣什麼 -->
+    <div class="card">
+      <div class="card-title"><span class="num">1</span>你主要在賣什麼？</div>
+      <div class="radio-group" data-group="v_sell_type">
+        <label class="radio-item"><input type="radio" name="v_sell_type" value="product">🛍 產品（實體商品、食品、保健品、手作）</label>
+        <label class="radio-item"><input type="radio" name="v_sell_type" value="service">👤 服務／你這個人（美業、房仲、教練、顧問）</label>
+        <label class="radio-item"><input type="radio" name="v_sell_type" value="both">✨ 兩者都有</label>
+      </div>
+    </div>
+
+    <!-- Q2 客戶是誰 -->
+    <div class="card">
+      <div class="card-title"><span class="num">2</span>你的客戶主要是？</div>
+      <div class="radio-group" data-group="v_customer_type">
+        <label class="radio-item"><input type="radio" name="v_customer_type" value="b2c">一般消費者（B2C）</label>
+        <label class="radio-item"><input type="radio" name="v_customer_type" value="b2b">企業／店家（B2B）</label>
+        <label class="radio-item"><input type="radio" name="v_customer_type" value="both">都有</label>
+      </div>
+    </div>
+
+    <!-- Q3 現有平台 -->
+    <div class="card">
+      <div class="card-title"><span class="num">3</span>目前已在使用的平台（可多選）</div>
+      <div class="checks" data-group="v_platforms">
+        <label class="check-item"><input type="checkbox" value="none">剛開始／沒有</label>
+        <label class="check-item"><input type="checkbox" value="ig">IG</label>
+        <label class="check-item"><input type="checkbox" value="fb">Facebook</label>
+        <label class="check-item"><input type="checkbox" value="youtube">YouTube</label>
+        <label class="check-item"><input type="checkbox" value="tiktok">TikTok</label>
+        <label class="check-item"><input type="checkbox" value="xiaohongshu">小紅書</label>
+        <label class="check-item"><input type="checkbox" value="line_oa">LINE官方帳號</label>
+        <label class="check-item"><input type="checkbox" value="google_map">Google地圖商家</label>
+        <label class="check-item"><input type="checkbox" value="threads">Threads</label>
+      </div>
+    </div>
+
+    <!-- Q4 露臉意願 -->
+    <div class="card">
+      <div class="card-title"><span class="num">4</span>你願意在影片中露臉嗎？</div>
+      <div class="radio-group" data-group="v_face">
+        <label class="radio-item"><input type="radio" name="v_face" value="yes">✅ 願意，可以出鏡說話</label>
+        <label class="radio-item"><input type="radio" name="v_face" value="partial">👋 只願意局部出現（手、背影、側面）</label>
+        <label class="radio-item"><input type="radio" name="v_face" value="no">🚫 不願意，純圖文或旁白</label>
+      </div>
+    </div>
+
+    <!-- Q5 時間 -->
+    <div class="card">
+      <div class="card-title"><span class="num">5</span>每週能投入內容的時間？</div>
+      <div class="radio-group" data-group="v_time">
+        <label class="radio-item"><input type="radio" name="v_time" value="none">⚡ 幾乎沒時間，需要全自動</label>
+        <label class="radio-item"><input type="radio" name="v_time" value="low">🕐 每週 1–2 小時可以配合</label>
+        <label class="radio-item"><input type="radio" name="v_time" value="high">🕒 每週 3 小時以上，願意深度參與</label>
+      </div>
+    </div>
+
+    <!-- Q6 預算 -->
+    <div class="card">
+      <div class="card-title"><span class="num">6</span>預算範圍？</div>
+      <div class="radio-group" data-group="v_budget">
+        <label class="radio-item"><input type="radio" name="v_budget" value="low">💡 入門｜想先了解，自己來操作</label>
+        <label class="radio-item"><input type="radio" name="v_budget" value="mid">📱 中階｜需要有人幫我產出內容</label>
+        <label class="radio-item"><input type="radio" name="v_budget" value="high">🚀 全包｜交給專業，我只要看成果</label>
+      </div>
+    </div>
+
+    <!-- Q7 實體 -->
+    <div class="card">
+      <div class="card-title"><span class="num">7</span>你有實體據點嗎？</div>
+      <div class="radio-group" data-group="v_location">
+        <label class="radio-item"><input type="radio" name="v_location" value="yes">🏪 有店面／工作室／辦公室</label>
+        <label class="radio-item"><input type="radio" name="v_location" value="home">🏠 在家接單／無固定地點</label>
+        <label class="radio-item"><input type="radio" name="v_location" value="online">💻 線上為主</label>
+      </div>
+
+      <button class="btn-primary" onclick="submitVideo()">查看我的專屬影音方案 →</button>
+      <p id="video_msg" class="msg"></p>
+    </div>
+
+    <!-- 影音方案結果 -->
+    <div id="video_result" class="plan-result">
+      <div class="plan-box">
+        <h3>☀️ 你的專屬影音品牌方案</h3>
+        <div class="divider"></div>
+        <div id="plan_platforms" class="plan-item">
+          <div class="plan-item-label">建議平台</div>
+          <div class="plan-item-value" id="plan_platforms_val">—</div>
+        </div>
+        <div id="plan_style" class="plan-item">
+          <div class="plan-item-label">內容風格方向</div>
+          <div class="plan-item-value" id="plan_style_val">—</div>
+        </div>
+        <div id="plan_service" class="plan-item">
+          <div class="plan-item-label">建議服務方案</div>
+          <div class="plan-item-value" id="plan_service_val">—</div>
+        </div>
+        <div id="plan_content" class="plan-item">
+          <div class="plan-item-label">建議內容量</div>
+          <div class="plan-item-value" id="plan_content_val">—</div>
+        </div>
+        <div id="plan_google" class="plan-item" style="display:none">
+          <div class="plan-item-label">加購建議</div>
+          <div class="plan-item-value">Google 地圖在地曝光優化，讓附近的人更容易找到你</div>
+        </div>
+        <div class="notice" style="margin-top:4px">
+          以上是系統根據你的填答給出的初步建議。實際方案與報價依需求客製，透過私聊確認。
+        </div>
+      </div>
+
+      <div class="cta-line-box">
+        <p>方案看完了，心動了嗎？<br>報價不公開，加LINE一對一談，找到最適合你的方案。</p>
+        <a class="cta-line-btn" href="https://line.me/ti/p/YOUR_LINE_ID" target="_blank">＋ 加LINE私聊報價</a>
+      </div>
+    </div>
+
+  </div><!-- /tab-video -->
 
 </div><!-- /wrap -->
 
-<!-- 素材收集步驟導航 -->
-<div class="step-nav" id="matNav">
-  <button class="btn-prev" id="matPrev" onclick="matPrevStep()" style="display:none">← 上一步</button>
-  <button class="btn-next" id="matNext" onclick="matNextStep()">下一步 →</button>
-  <button class="btn-submit-mat" id="matSubmit" onclick="submitMaterial()" style="display:none">送出取得建議 ✦</button>
-</div>
-
 <script>
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbxpxXKX-rE3VfqYiRqjoDGtruYI0Q1CjOk3jGyBCcAwMR0Erf__TmL5snJikX3KMDYZ/exec';
-  const MAT_TOTAL = 5;
-  let matStep = 1;
+  const GAS_URL = "https://script.google.com/macros/s/AKfycbz_iXb-U3WMGXU97mHaq_lt-PyMvDtj1-iJDevT4s4H4s07z5VVZEO-aimgQDiIZ9COmQ/exec";
 
-  function switchTab(tab, el) {
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  /* ── Tab 切換 ── */
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
     document.getElementById('tab-' + tab).classList.add('active');
-    el.classList.add('active');
-    document.getElementById('matNav').classList.toggle('show', tab === 'material');
-    if (tab === 'material') updateMatNav();
+    event.target.classList.add('active');
   }
 
+  /* ── checkbox 視覺 ── */
   document.addEventListener('change', function(e) {
-    if (e.target.type === 'checkbox') e.target.closest('.check-item').classList.toggle('checked', e.target.checked);
+    if (e.target.type === 'checkbox') {
+      e.target.closest('.check-item').classList.toggle('checked', e.target.checked);
+    }
     if (e.target.type === 'radio') {
-      document.querySelectorAll('input[name="' + e.target.name + '"]').forEach(r => r.closest('.radio-item').classList.toggle('checked', r.checked));
+      const group = e.target.name;
+      document.querySelectorAll('input[name="' + group + '"]').forEach(function(r) {
+        r.closest('.radio-item').classList.toggle('checked', r.checked);
+      });
     }
   });
 
-  function v(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
-  function checkedValues(group) { return Array.from(document.querySelectorAll('[data-group="' + group + '"] input:checked')).map(i => i.value); }
-  function radioValue(name) { const el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ''; }
+  /* ── 工具函數 ── */
+  function val(id) { return document.getElementById(id).value.trim(); }
+  function checkedValues(group) {
+    return Array.from(document.querySelectorAll('[data-group="' + group + '"] input:checked')).map(i => i.value);
+  }
+  function radioValue(name) {
+    const el = document.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : '';
+  }
 
-  // ── 經營診斷 ──
+  /* ── 診斷送出 ── */
   async function submitDiag() {
     const msg = document.getElementById('diag_msg');
-    if (!v('d_name') || !v('d_phone') || !v('d_email')) { msg.textContent = '請先填寫姓名、電話與 Email。'; return; }
-    msg.textContent = '送出中，請稍候...';
+    if (!val('d_name') || !val('d_phone') || !val('d_email')) {
+      msg.textContent = '請先填寫姓名、電話與 Email。'; return;
+    }
+    msg.textContent = '診斷產生中，請稍候...';
     const payload = {
-      name: v('d_name'), phone: v('d_phone'), email: v('d_email'),
-      line_id: v('d_line_id'), business_name: v('d_business_name'), industry: v('d_industry'),
+      name: val('d_name'), phone: val('d_phone'), email: val('d_email'),
+      line_id: val('d_line_id'), business_name: val('d_business_name'), industry: val('d_industry'),
       pain_points: checkedValues('d_pain_points'), order_sources: checkedValues('d_order_sources'),
       cta_goals: checkedValues('d_cta_goals'), materials: checkedValues('d_materials'),
       growth_goals: checkedValues('d_growth_goals'), referral_goal: checkedValues('d_referral_goal'),
       long_term_mindset: radioValue('d_mindset')
     };
-    try { await fetch(GAS_URL, { method: 'POST', body: JSON.stringify({ action: 'submitDiagnosis', payload }) }); } catch(e) {}
-    document.getElementById('diag_result').classList.add('show');
-    msg.textContent = '';
-    document.getElementById('diag_result').scrollIntoView({ behavior: 'smooth' });
+    try {
+      const res = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify({ action: 'submitDiagnosis', payload }) });
+      const data = await res.json();
+      if (!data.ok) { msg.textContent = '送出失敗：' + (data.message || '未知錯誤'); return; }
+      document.getElementById('diag_report_text').textContent = data.report_text || '';
+      document.getElementById('diag_result').classList.add('show');
+      msg.textContent = '診斷完成，報告已產生。';
+      document.getElementById('diag_result').scrollIntoView({ behavior: 'smooth' });
+    } catch (err) {
+      msg.textContent = '送出失敗，請確認網路連線。';
+    }
   }
 
-  // ── 影音方案 ──
-  async function submitVideo() {
+  /* ── 影音方案邏輯 ── */
+  function submitVideo() {
     const msg = document.getElementById('video_msg');
-    const sellType = radioValue('v_sell_type'), custType = radioValue('v_customer_type');
-    const face = radioValue('v_face'), time = radioValue('v_time');
-    const budget = radioValue('v_budget'), location = radioValue('v_location');
+    const sellType = radioValue('v_sell_type');
+    const custType = radioValue('v_customer_type');
+    const face = radioValue('v_face');
+    const time = radioValue('v_time');
+    const budget = radioValue('v_budget');
+    const location = radioValue('v_location');
     const platforms = checkedValues('v_platforms');
-    if (!sellType || !face || !time || !budget || !location) { msg.textContent = '請完整填寫所有題目。'; return; }
+
+    if (!sellType || !face || !time || !budget || !location) {
+      msg.textContent = '請完整填寫所有題目。'; return;
+    }
     msg.textContent = '';
 
+    // ── 推薦平台 ──
     let plats = [];
     if (location === 'yes') plats.push('Google 地圖（在地曝光必備）');
     if (face === 'yes') { plats.push('YouTube Shorts'); plats.push('TikTok'); plats.push('IG Reels'); }
     else if (face === 'partial') { plats.push('IG 圖文'); plats.push('YouTube Shorts（旁白型）'); }
     else { plats.push('IG 圖文輪播'); plats.push('Facebook'); plats.push('小紅書'); }
-    if (custType === 'b2b') plats = ['Facebook', 'LINE 官方帳號'];
+    if (custType === 'b2b') { plats = ['Facebook', 'LINE 官方帳號']; }
     if (time === 'none') plats = plats.slice(0, 2);
 
-    let style = sellType === 'product' ? '生活場景展示＋產品使用畫面＋真實故事感' : sellType === 'service' ? '個人故事＋專業知識短影音＋信任感建立' : '個人品牌故事＋產品生活感應用＋客戶見證';
+    // ── 內容風格 ──
+    let style = '';
+    if (sellType === 'product') style = '生活場景展示＋產品使用畫面＋真實故事感';
+    else if (sellType === 'service') style = '個人故事＋專業知識短影音＋信任感建立';
+    else style = '個人品牌故事＋產品生活感應用＋客戶見證';
     if (face === 'no') style += '（旁白型，不需露臉）';
     if (location === 'yes') style += '｜加入實體環境展示＋在地生活感';
 
+    // ── 服務方案 ──
     let service = '', contentVol = '';
-    if (budget === 'low') { service = '基礎方案｜專屬內容指令包＋操作教學'; contentVol = '每月 4–6 篇圖文 ＋ 2 支短影音腳本'; }
-    else if (budget === 'mid') { service = '中階方案｜半代工｜我幫你產出，你來發布'; contentVol = '每月 8–10 篇圖文 ＋ 4 支短影音'; }
-    else { service = '全包方案｜代操｜從產出到排程全部交給我'; contentVol = '每月 12 篇以上 ＋ 6–8 支短影音 ＋ 排程發布 ＋ 月報'; }
+    if (budget === 'low') {
+      service = '基礎方案｜專屬內容指令包＋操作教學';
+      contentVol = '每月 4–6 篇圖文 ＋ 2 支短影音腳本（自行發布）';
+    } else if (budget === 'mid') {
+      service = '中階方案｜半代工｜我幫你產出，你來發布';
+      contentVol = '每月 8–10 篇圖文 ＋ 4 支短影音';
+    } else {
+      service = '全包方案｜代操｜從內容產出到排程發布全部交給我';
+      contentVol = '每月 12 篇以上 ＋ 6–8 支短影音 ＋ 排程發布 ＋ 月報';
+    }
 
     document.getElementById('plan_platforms_val').textContent = plats.join('、');
     document.getElementById('plan_style_val').textContent = style;
@@ -623,71 +894,13 @@
     document.getElementById('plan_content_val').textContent = contentVol;
     if (location === 'yes') document.getElementById('plan_google').style.display = 'block';
 
-    // 存試算表
-    try {
-      await fetch(GAS_URL, { method: 'POST', body: JSON.stringify({ action: 'submitVideo', payload: { sell_type: sellType, customer_type: custType, platforms: platforms, face, time, budget, location, suggested_platforms: plats.join('、'), suggested_style: style, suggested_service: service } }) });
-    } catch(e) {}
-
     document.getElementById('video_result').classList.add('show');
     document.getElementById('video_result').scrollIntoView({ behavior: 'smooth' });
   }
 
-  // ── 素材收集步驟 ──
-  function updateMatNav() {
-    const pct = (matStep / MAT_TOTAL) * 100;
-    document.getElementById('mat_indicator').textContent = '第 ' + matStep + ' 步，共 ' + MAT_TOTAL + ' 步';
-    document.getElementById('matPrev').style.display = matStep > 1 ? 'block' : 'none';
-    document.getElementById('matNext').style.display = matStep < MAT_TOTAL ? 'block' : 'none';
-    document.getElementById('matSubmit').style.display = matStep === MAT_TOTAL ? 'block' : 'none';
-  }
-
-  function matNextStep() {
-    if (!validateMatStep(matStep)) return;
-    document.getElementById('mat' + matStep).classList.remove('active');
-    matStep++;
-    document.getElementById('mat' + matStep).classList.add('active');
-    updateMatNav();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function matPrevStep() {
-    document.getElementById('mat' + matStep).classList.remove('active');
-    matStep--;
-    document.getElementById('mat' + matStep).classList.add('active');
-    updateMatNav();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function validateMatStep(step) {
-    if (step === 1) { if (!v('m_industry')) { alert('請選擇行業類型'); return false; } if (!radioValue('m_cta_goal')) { alert('請選擇希望客戶做什麼'); return false; } }
-    if (step === 2) { if (!v('m_name')) { alert('請填寫姓名／品牌名稱'); return false; } }
-    if (step === 3) { if (!v('m_core_story')) { alert('請填寫核心故事'); return false; } if (!v('m_target_audience')) { alert('請填寫目標客群'); return false; } }
-    if (step === 4) { if (!radioValue('m_style')) { alert('請選擇品牌風格'); return false; } }
-    if (step === 5) { if (!v('m_phone')) { alert('請填寫電話'); return false; } }
-    return true;
-  }
-
-  async function submitMaterial() {
-    if (!validateMatStep(5)) return;
-    const msg = document.getElementById('mat_msg');
-    msg.textContent = '送出中，請稍候...';
-    const payload = {
-      industry: v('m_industry'), cta_goal: radioValue('m_cta_goal'),
-      name: v('m_name'), title: v('m_title'), company: v('m_company'),
-      core_story: v('m_core_story'), target_audience: v('m_target_audience'),
-      style: radioValue('m_style'), avoid_style: v('m_avoid_style'),
-      phone: v('m_phone'), email: v('m_email'),
-      line_personal: v('m_line_personal'), line_oa: v('m_line_oa'), address: v('m_address'),
-      youtube: v('m_youtube'), facebook: v('m_facebook'),
-      instagram: v('m_instagram'), other_platform: v('m_other_platform')
-    };
-    try { await fetch(GAS_URL, { method: 'POST', body: JSON.stringify({ action: 'submitMaterial', payload }) }); } catch(e) {}
-    for (let i = 1; i <= MAT_TOTAL; i++) document.getElementById('mat' + i).classList.remove('active');
-    document.getElementById('mat_result').classList.add('show');
-    document.getElementById('matNav').classList.remove('show');
-    document.getElementById('mat_indicator').style.display = 'none';
-    msg.textContent = '';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  function copyText(id) {
+    const text = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(text).then(() => alert('已複製'));
   }
 </script>
 </body>
