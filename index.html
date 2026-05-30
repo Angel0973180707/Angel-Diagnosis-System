@@ -17,134 +17,156 @@
     html { scroll-behavior: smooth; }
     body { font-family: "Noto Sans TC", sans-serif; background: var(--cream); color: var(--brown-dark); }
 
-    /* 頂部 */
+    /* Hero */
     .hero {
       background: linear-gradient(160deg, var(--dark) 0%, #2e1f0a 50%, #4a2e0e 100%);
-      padding: 40px 24px 36px; text-align: center;
-      position: relative; overflow: hidden;
+      padding: 36px 24px 30px; text-align: center; position: relative; overflow: hidden;
     }
-    .hero::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 30% 30%, rgba(184,134,11,.25) 0%, transparent 55%);
-    }
+    .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 30% 30%, rgba(184,134,11,.25) 0%, transparent 55%); }
     .hero-content { position: relative; }
-    .hero-sun { font-size: 48px; display: block; margin-bottom: 10px; filter: drop-shadow(0 0 20px rgba(212,160,23,.8)); animation: sp 4s ease-in-out infinite; }
+    .hero-sun { font-size: 44px; display: block; margin-bottom: 8px; filter: drop-shadow(0 0 20px rgba(212,160,23,.8)); animation: sp 4s ease-in-out infinite; }
     @keyframes sp { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
-    .hero-tag { display: inline-block; background: rgba(184,134,11,.2); border: 1px solid rgba(184,134,11,.4); color: var(--gold-bright); font-size: 11px; font-weight: 700; padding: 5px 14px; border-radius: 999px; letter-spacing: 2px; margin-bottom: 14px; }
-    .hero h1 { font-family: "Noto Serif TC", serif; font-size: 24px; font-weight: 900; color: #fff; line-height: 1.5; margin-bottom: 10px; }
-    .hero h1 em { color: var(--gold-bright); font-style: normal; }
-    .hero-sub { font-size: 13px; color: rgba(255,255,255,.6); line-height: 1.8; }
+    .hero-tag { display:inline-block; background:rgba(184,134,11,.2); border:1px solid rgba(184,134,11,.4); color:var(--gold-bright); font-size:11px; font-weight:700; padding:5px 14px; border-radius:999px; letter-spacing:2px; margin-bottom:12px; }
+    .hero h1 { font-family:"Noto Serif TC",serif; font-size:22px; font-weight:900; color:#fff; line-height:1.5; margin-bottom:8px; }
+    .hero h1 em { color:var(--gold-bright); font-style:normal; }
+    .hero-sub { font-size:12px; color:rgba(255,255,255,.6); line-height:1.8; }
 
-    /* 進度條 */
-    .prog-wrap { background: rgba(255,255,255,.1); height: 3px; position: relative; }
-    .prog-bar { background: linear-gradient(90deg, var(--gold), var(--gold-bright)); height: 3px; transition: width .4s ease; }
-    .prog-label { text-align: center; font-size: 11px; color: var(--brown-light); padding: 8px 0 2px; letter-spacing: .5px; }
+    /* 進度 */
+    .prog-wrap { background:rgba(0,0,0,.08); height:3px; }
+    .prog-bar { background:linear-gradient(90deg,var(--gold),var(--gold-bright)); height:3px; transition:width .4s ease; }
+    .prog-label { text-align:center; font-size:11px; color:var(--brown-light); padding:7px 0 2px; letter-spacing:.5px; }
 
     /* 主體 */
-    .wrap { max-width: 580px; margin: 0 auto; padding: 0 16px 100px; }
+    .wrap { max-width:580px; margin:0 auto; padding:0 16px 110px; }
 
     /* Step */
-    .step { display: none; }
-    .step.on { display: block; }
+    .step { display:none; }
+    .step.on { display:block; }
 
     .step-hero {
-      background: linear-gradient(135deg, var(--gold-pale), #fde9bb);
-      border-radius: 0 0 20px 20px;
-      padding: 18px 20px 16px; margin-bottom: 14px;
-      border: 1px solid var(--gold-border); border-top: none;
+      background:linear-gradient(135deg,var(--gold-pale),#fde9bb);
+      border-radius:0 0 20px 20px; padding:16px 20px 14px; margin-bottom:12px;
+      border:1px solid var(--gold-border); border-top:none;
     }
-    .step-eyebrow { font-size: 10px; font-weight: 700; color: var(--gold); letter-spacing: 2px; margin-bottom: 4px; }
-    .step-title { font-family: "Noto Serif TC", serif; font-size: 19px; font-weight: 900; color: var(--brown-dark); line-height: 1.5; }
-    .step-desc { font-size: 12px; color: var(--brown-light); margin-top: 5px; line-height: 1.7; }
+    .step-eyebrow { font-size:10px; font-weight:700; color:var(--gold); letter-spacing:2px; margin-bottom:3px; }
+    .step-title { font-family:"Noto Serif TC",serif; font-size:18px; font-weight:900; color:var(--brown-dark); line-height:1.5; }
+    .step-desc { font-size:12px; color:var(--brown-light); margin-top:4px; line-height:1.7; }
 
     /* 卡片 */
-    .card { background: #fff; border-radius: 16px; padding: 16px; margin: 10px 0; border: 1px solid var(--gold-border); box-shadow: 0 2px 10px rgba(80,50,20,.05); }
-    .card-q { font-size: 14px; font-weight: 700; color: var(--brown-dark); margin-bottom: 10px; }
-    .req { color: var(--gold); }
+    .card { background:#fff; border-radius:16px; padding:16px; margin:10px 0; border:1px solid var(--gold-border); box-shadow:0 2px 10px rgba(80,50,20,.05); }
+    .card-q { font-size:14px; font-weight:700; color:var(--brown-dark); margin-bottom:10px; }
+    .req { color:var(--gold); }
 
-    /* Radio選項 */
-    .opts { display: flex; flex-direction: column; gap: 7px; }
-    .opt {
-      background: var(--gold-pale); border: 1.5px solid var(--gold-border);
-      border-radius: 12px; padding: 11px 14px;
-      display: flex; align-items: center; gap: 10px;
-      font-size: 14px; cursor: pointer; transition: all .18s;
-    }
-    .opt input { accent-color: var(--gold); width: 15px; height: 15px; flex-shrink: 0; }
-    .opt.sel { background: #fff3d0; border-color: var(--gold); }
-    .opt-icon { font-size: 16px; flex-shrink: 0; }
+    /* Radio */
+    .opts { display:flex; flex-direction:column; gap:7px; }
+    .opt { background:var(--gold-pale); border:1.5px solid var(--gold-border); border-radius:12px; padding:11px 14px; display:flex; align-items:center; gap:10px; font-size:13px; cursor:pointer; transition:all .18s; }
+    .opt input { accent-color:var(--gold); width:15px; height:15px; flex-shrink:0; }
+    .opt.sel { background:#fff3d0; border-color:var(--gold); }
+    .opt-icon { font-size:16px; flex-shrink:0; }
 
     /* Checkbox */
-    .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-top: 4px; }
-    .chk {
-      background: var(--gold-pale); border: 1.5px solid var(--gold-border);
-      border-radius: 11px; padding: 9px 11px;
-      display: flex; align-items: center; gap: 7px;
-      font-size: 13px; cursor: pointer; transition: all .18s;
-    }
-    .chk input { accent-color: var(--gold); width: 14px; height: 14px; flex-shrink: 0; }
-    .chk.sel { background: #fff3d0; border-color: var(--gold); }
+    .checks { display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:4px; }
+    .chk { background:var(--gold-pale); border:1.5px solid var(--gold-border); border-radius:11px; padding:9px 11px; display:flex; align-items:center; gap:7px; font-size:13px; cursor:pointer; transition:all .18s; }
+    .chk input { accent-color:var(--gold); width:14px; height:14px; flex-shrink:0; }
+    .chk.sel { background:#fff3d0; border-color:var(--gold); }
 
-    /* 文字輸入 */
-    .fl { display: block; font-size: 12px; font-weight: 700; color: var(--brown-mid); margin: 10px 0 4px; }
-    .fh { font-size: 11px; color: var(--brown-light); margin-bottom: 5px; line-height: 1.6; }
-    input[type="text"], input[type="tel"], input[type="email"], input[type="url"], textarea, select {
-      width: 100%; padding: 11px 13px;
-      border: 1.5px solid var(--gold-border); border-radius: 11px;
-      font-size: 14px; font-family: "Noto Sans TC", sans-serif;
-      background: var(--gold-pale); color: var(--brown-dark);
-      outline: none; transition: border-color .2s;
+    /* 輸入 */
+    .fl { display:block; font-size:12px; font-weight:700; color:var(--brown-mid); margin:10px 0 4px; }
+    .fh { font-size:11px; color:var(--brown-light); margin-bottom:5px; line-height:1.6; }
+    input[type="text"],input[type="tel"],input[type="email"],input[type="url"],textarea,select {
+      width:100%; padding:11px 13px; border:1.5px solid var(--gold-border); border-radius:11px;
+      font-size:14px; font-family:"Noto Sans TC",sans-serif;
+      background:var(--gold-pale); color:var(--brown-dark); outline:none; transition:border-color .2s;
     }
-    input:focus, textarea:focus, select:focus { border-color: var(--gold); }
-    textarea { resize: vertical; min-height: 80px; line-height: 1.7; }
+    input:focus,textarea:focus,select:focus { border-color:var(--gold); }
+    textarea { resize:vertical; min-height:80px; line-height:1.7; }
 
     /* 底部導航 */
     .nav {
-      position: fixed; bottom: 0; left: 0; right: 0;
-      background: #fff; border-top: 1px solid var(--gold-border);
-      padding: 10px 16px; display: flex; gap: 10px;
-      max-width: 580px; margin: 0 auto; z-index: 100;
+      position:fixed; bottom:0; left:0; right:0;
+      background:#fff; border-top:1px solid var(--gold-border);
+      padding:10px 16px; display:flex; gap:10px;
+      max-width:580px; margin:0 auto; z-index:100;
+      left:50%; transform:translateX(-50%); width:100%;
     }
-    .btn-prev { flex: 1; padding: 13px; background: #f0e4c8; color: var(--brown-mid); border: none; border-radius: 12px; font-size: 14px; font-weight: 700; font-family: "Noto Sans TC", sans-serif; cursor: pointer; }
-    .btn-next { flex: 2; padding: 13px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: #fff; border: none; border-radius: 12px; font-size: 14px; font-weight: 700; font-family: "Noto Sans TC", sans-serif; cursor: pointer; box-shadow: 0 4px 14px rgba(184,134,11,.3); }
-    .btn-submit { flex: 2; padding: 13px; background: var(--brown-dark); color: #fff; border: none; border-radius: 12px; font-size: 14px; font-weight: 700; font-family: "Noto Sans TC", sans-serif; cursor: pointer; }
-    .msg { font-size: 12px; color: var(--brown-light); text-align: center; margin-top: 6px; min-height: 16px; }
+    .btn-prev { flex:1; padding:13px; background:#f0e4c8; color:var(--brown-mid); border:none; border-radius:12px; font-size:14px; font-weight:700; font-family:"Noto Sans TC",sans-serif; cursor:pointer; }
+    .btn-next { flex:2; padding:13px; background:linear-gradient(135deg,var(--gold),var(--gold-light)); color:#fff; border:none; border-radius:12px; font-size:14px; font-weight:700; font-family:"Noto Sans TC",sans-serif; cursor:pointer; box-shadow:0 4px 14px rgba(184,134,11,.3); }
+    .btn-submit { flex:2; padding:13px; background:var(--brown-dark); color:#fff; border:none; border-radius:12px; font-size:14px; font-weight:700; font-family:"Noto Sans TC",sans-serif; cursor:pointer; }
+    .msg { font-size:12px; color:var(--brown-light); text-align:center; margin-top:6px; min-height:16px; }
 
     /* 結果頁 */
-    .result { display: none; padding-top: 8px; }
-    .result.on { display: block; }
+    .result { display:none; padding-top:8px; }
+    .result.on { display:block; }
 
-    .result-hero {
-      background: linear-gradient(135deg, var(--dark), #2e1f0a);
-      border-radius: 20px; padding: 28px 20px; text-align: center; margin-bottom: 14px;
+    .result-hero { background:linear-gradient(135deg,var(--dark),#2e1f0a); border-radius:20px; padding:26px 20px; text-align:center; margin-bottom:14px; }
+    .result-sun { font-size:42px; margin-bottom:8px; filter:drop-shadow(0 0 16px rgba(212,160,23,.8)); }
+    .result-title { font-family:"Noto Serif TC",serif; font-size:20px; font-weight:900; color:#fff; margin-bottom:6px; }
+    .result-desc { font-size:13px; color:rgba(255,255,255,.65); line-height:1.8; }
+
+    /* 代碼顯示 */
+    .code-box {
+      background:linear-gradient(135deg,#fff8e6,#fff0cc);
+      border:2px solid var(--gold); border-radius:18px;
+      padding:20px; text-align:center; margin:12px 0;
     }
-    .result-sun { font-size: 44px; margin-bottom: 10px; filter: drop-shadow(0 0 16px rgba(212,160,23,.8)); }
-    .result-title { font-family: "Noto Serif TC", serif; font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 8px; }
-    .result-desc { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.8; }
+    .code-label { font-size:11px; font-weight:700; color:var(--brown-mid); letter-spacing:2px; margin-bottom:8px; }
+    .code-num { font-size:44px; font-weight:900; color:var(--brown-dark); letter-spacing:8px; font-family:"Noto Serif TC",serif; line-height:1.2; }
+    .code-hint { font-size:12px; color:var(--brown-light); margin-top:8px; line-height:1.7; }
+    .code-screenshot { display:inline-block; margin-top:10px; background:var(--gold); color:#fff; font-size:12px; font-weight:700; padding:7px 16px; border-radius:999px; }
 
-    .insight-box {
-      background: #fff; border-radius: 16px; padding: 18px; margin: 10px 0;
-      border: 1px solid var(--gold-border); box-shadow: 0 2px 10px rgba(80,50,20,.05);
-    }
-    .insight-label { font-size: 10px; font-weight: 700; color: var(--gold); letter-spacing: 1px; margin-bottom: 8px; }
-    .insight-title { font-family: "Noto Serif TC", serif; font-size: 15px; font-weight: 900; color: var(--brown-dark); margin-bottom: 6px; }
-    .insight-desc { font-size: 13px; color: var(--brown-light); line-height: 1.8; }
+    /* 診斷洞察 */
+    .insight-box { background:#fff; border-radius:16px; padding:18px; margin:10px 0; border:1px solid var(--gold-border); box-shadow:0 2px 10px rgba(80,50,20,.05); }
+    .insight-label { font-size:10px; font-weight:700; color:var(--gold); letter-spacing:1px; margin-bottom:8px; }
+    .insight-title { font-family:"Noto Serif TC",serif; font-size:15px; font-weight:900; color:var(--brown-dark); margin-bottom:6px; }
+    .insight-desc { font-size:13px; color:var(--brown-light); line-height:1.8; }
 
-    .next-steps { background: var(--gold-pale); border: 1px solid var(--gold-border); border-radius: 16px; padding: 18px; margin: 10px 0; }
-    .next-steps-title { font-size: 13px; font-weight: 700; color: var(--brown-dark); margin-bottom: 10px; }
-    .next-step-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 8px; font-size: 13px; color: var(--brown-mid); line-height: 1.6; }
-    .next-step-item:last-child { margin-bottom: 0; }
-    .ns-num { background: var(--gold); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; flex-shrink: 0; margin-top: 1px; }
+    /* 影音建議 */
+    .video-box { background:linear-gradient(135deg,#1a1008,#2e1f0a); border-radius:16px; padding:18px; margin:10px 0; border:1px solid rgba(184,134,11,.3); }
+    .video-label { font-size:10px; font-weight:700; color:var(--gold-bright); letter-spacing:1px; margin-bottom:8px; }
+    .video-title { font-size:15px; font-weight:900; color:#fff; margin-bottom:6px; }
+    .video-desc { font-size:13px; color:rgba(255,255,255,.65); line-height:1.8; }
 
-    .notice { background: linear-gradient(135deg, #fff8e6, #fff0cc); border-left: 3px solid var(--gold); padding: 12px 14px; border-radius: 0 10px 10px 0; font-size: 12px; color: var(--brown-light); line-height: 1.8; margin: 10px 0; }
+    /* 下一步 */
+    .next-steps { background:var(--gold-pale); border:1px solid var(--gold-border); border-radius:16px; padding:18px; margin:10px 0; }
+    .next-steps-title { font-size:13px; font-weight:700; color:var(--brown-dark); margin-bottom:10px; }
+    .next-step-item { display:flex; gap:10px; align-items:flex-start; margin-bottom:8px; font-size:13px; color:var(--brown-mid); line-height:1.6; }
+    .next-step-item:last-child { margin-bottom:0; }
+    .ns-num { background:var(--gold); color:#fff; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:900; flex-shrink:0; margin-top:1px; }
 
-    .line-box { background: var(--green); border-radius: 18px; padding: 22px 20px; text-align: center; margin-top: 14px; }
-    .line-box p { color: #fff; font-size: 13px; line-height: 1.8; margin-bottom: 14px; }
-    .line-btn { display: inline-block; background: #fff; color: var(--green); font-weight: 900; font-size: 15px; padding: 13px 28px; border-radius: 999px; text-decoration: none; letter-spacing: .5px; font-family: "Noto Sans TC", sans-serif; }
+    .notice { background:linear-gradient(135deg,#fff8e6,#fff0cc); border-left:3px solid var(--gold); padding:12px 14px; border-radius:0 10px 10px 0; font-size:12px; color:var(--brown-light); line-height:1.8; margin:10px 0; }
 
-    @media (max-width: 380px) {
-      .checks { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 20px; }
+    /* 複製區 */
+    .copy-area { background:#fff; border:1px solid var(--gold-border); border-radius:18px; padding:18px; margin:12px 0; }
+    .copy-area-label { font-size:12px; font-weight:700; color:var(--brown-dark); margin-bottom:8px; }
+    .copy-text { background:var(--gold-pale); border:1px solid var(--gold-border); border-radius:10px; padding:12px 14px; font-size:13px; color:var(--brown-dark); line-height:1.8; }
+    .copy-btn-full { display:block; width:100%; margin-top:10px; padding:12px; background:linear-gradient(135deg,var(--gold),var(--gold-light)); color:#fff; border:none; border-radius:10px; font-size:14px; font-weight:900; font-family:"Noto Sans TC",sans-serif; cursor:pointer; }
+
+    /* LINE */
+    .line-box { background:var(--green); border-radius:18px; padding:20px; text-align:center; margin-top:12px; }
+    .line-box p { color:#fff; font-size:13px; line-height:1.8; margin-bottom:12px; }
+    .line-btn { display:inline-block; background:#fff; color:var(--green); font-weight:900; font-size:15px; padding:12px 28px; border-radius:999px; text-decoration:none; font-family:"Noto Sans TC",sans-serif; }
+
+    /* 素材收集觸發 */
+    .material-trigger { background:linear-gradient(135deg,var(--dark),#2e1f0a); border-radius:18px; padding:22px 20px; text-align:center; margin-top:16px; }
+    .material-trigger-tag { font-size:11px; font-weight:700; color:var(--gold-bright); letter-spacing:2px; margin-bottom:8px; }
+    .material-trigger-title { font-family:"Noto Serif TC",serif; font-size:18px; font-weight:900; color:#fff; margin-bottom:8px; }
+    .material-trigger-desc { font-size:12px; color:rgba(255,255,255,.6); line-height:1.8; margin-bottom:16px; }
+    .material-trigger-btn { display:block; width:100%; padding:15px; background:linear-gradient(135deg,var(--gold),var(--gold-light)); color:#fff; border:none; border-radius:12px; font-size:15px; font-weight:900; font-family:"Noto Sans TC",sans-serif; cursor:pointer; box-shadow:0 4px 16px rgba(184,134,11,.4); }
+
+    /* 素材收集區 */
+    #materialSection { display:none; margin-top:8px; }
+
+    /* 素材導航 */
+    #matNav { display:none; }
+
+    /* 素材完成頁 */
+    .mat-done { display:none; }
+    .mat-done.on { display:block; }
+
+    @media (max-width:380px) {
+      .checks { grid-template-columns:1fr; }
+      .hero h1 { font-size:19px; }
+      .code-num { font-size:36px; }
     }
   </style>
 </head>
@@ -155,21 +177,21 @@
     <span class="hero-sun">☀️</span>
     <div class="hero-tag">幸福天使｜免費品牌診斷</div>
     <h1>你不是不努力，<br>你只是還不知道<br><em>卡點在哪裡。</em></h1>
-    <p class="hero-sub">填完4步，立即看到品牌分析<br>24小時內收到完整建議</p>
+    <p class="hero-sub">填完5步，立即看到品牌診斷＋影音建議</p>
   </div>
 </div>
 
-<div class="prog-wrap"><div class="prog-bar" id="progBar" style="width:25%"></div></div>
-<div class="prog-label" id="progLabel">第 1 步，共 4 步</div>
+<div class="prog-wrap"><div class="prog-bar" id="progBar" style="width:20%"></div></div>
+<div class="prog-label" id="progLabel">第 1 步，共 5 步</div>
 
 <div class="wrap">
 
-  <!-- STEP 1｜行業與困境 -->
+  <!-- ═══ STEP 1｜行業與卡點 ═══ -->
   <div class="step on" id="s1">
     <div class="step-hero">
-      <div class="step-eyebrow">STEP 1 / 4</div>
+      <div class="step-eyebrow">STEP 1 / 5</div>
       <div class="step-title">你做什麼，卡在哪？</div>
-      <div class="step-desc">30秒填完，系統馬上幫你分析。</div>
+      <div class="step-desc">30秒填完，馬上幫你分析。</div>
     </div>
 
     <div class="card">
@@ -190,7 +212,7 @@
     </div>
 
     <div class="card">
-      <div class="card-q">目前最大的困境是？（可多選） <span class="req">*</span></div>
+      <div class="card-q">目前最大的困境？（可多選） <span class="req">*</span></div>
       <div class="checks" id="painChecks">
         <label class="chk"><input type="checkbox" value="缺曝光">缺曝光</label>
         <label class="chk"><input type="checkbox" value="缺成交">缺成交</label>
@@ -218,10 +240,10 @@
     </div>
   </div>
 
-  <!-- STEP 2｜你是誰 -->
+  <!-- ═══ STEP 2｜基本資料 ═══ -->
   <div class="step" id="s2">
     <div class="step-hero">
-      <div class="step-eyebrow">STEP 2 / 4</div>
+      <div class="step-eyebrow">STEP 2 / 5</div>
       <div class="step-title">讓我認識你</div>
       <div class="step-desc">這些資料用於產出你的專屬品牌建議。</div>
     </div>
@@ -239,12 +261,12 @@
     </div>
   </div>
 
-  <!-- STEP 3｜深入了解 -->
+  <!-- ═══ STEP 3｜品牌故事 ═══ -->
   <div class="step" id="s3">
     <div class="step-hero">
-      <div class="step-eyebrow">STEP 3 / 4</div>
+      <div class="step-eyebrow">STEP 3 / 5</div>
       <div class="step-title">多說一點，建議更準</div>
-      <div class="step-desc">不需要寫很完整，說重點就好。</div>
+      <div class="step-desc">說重點就好，不需要寫得很完整。</div>
     </div>
     <div class="card">
       <div class="card-q">你的客戶是誰？他們在煩惱什麼？ <span class="req">*</span></div>
@@ -268,12 +290,12 @@
     </div>
   </div>
 
-  <!-- STEP 4｜現有資源 -->
+  <!-- ═══ STEP 4｜現有資源 ═══ -->
   <div class="step" id="s4">
     <div class="step-hero">
-      <div class="step-eyebrow">STEP 4 / 4</div>
-      <div class="step-title">最後幾題，馬上完成</div>
-      <div class="step-desc">了解你現有的資源，建議才接地氣。</div>
+      <div class="step-eyebrow">STEP 4 / 5</div>
+      <div class="step-title">你目前有什麼？</div>
+      <div class="step-desc">了解你的資源，建議才接地氣。</div>
     </div>
     <div class="card">
       <div class="card-q">你有實體據點嗎？</div>
@@ -285,7 +307,7 @@
     </div>
     <div class="card">
       <div class="card-q">目前已在使用的平台（可多選）</div>
-      <div class="checks">
+      <div class="checks" id="platformChecks">
         <label class="chk"><input type="checkbox" value="FB">Facebook</label>
         <label class="chk"><input type="checkbox" value="IG">Instagram</label>
         <label class="chk"><input type="checkbox" value="YouTube">YouTube</label>
@@ -298,7 +320,7 @@
     </div>
     <div class="card">
       <div class="card-q">目前已有的素材（可多選）</div>
-      <div class="checks">
+      <div class="checks" id="materialChecks">
         <label class="chk"><input type="checkbox" value="個人照">個人照</label>
         <label class="chk"><input type="checkbox" value="產品照">產品照</label>
         <label class="chk"><input type="checkbox" value="客戶見證">客戶見證</label>
@@ -307,53 +329,131 @@
         <label class="chk"><input type="checkbox" value="都還沒有">都還沒有</label>
       </div>
     </div>
+  </div>
+
+  <!-- ═══ STEP 5｜影音方案 ═══ -->
+  <div class="step" id="s5">
+    <div class="step-hero">
+      <div class="step-eyebrow">STEP 5 / 5</div>
+      <div class="step-title">影音方向評估</div>
+      <div class="step-desc">最後幾題，幫你找到最適合的影音策略。</div>
+    </div>
+    <div class="card">
+      <div class="card-q">你主要賣什麼？ <span class="req">*</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="sell_type" value="實體產品">📦 實體產品</label>
+        <label class="opt"><input type="radio" name="sell_type" value="服務技術">🛠 服務／技術</label>
+        <label class="opt"><input type="radio" name="sell_type" value="知識課程">🎓 知識／課程</label>
+        <label class="opt"><input type="radio" name="sell_type" value="產品加服務">🎁 產品＋服務</label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-q">你的客戶主要是？</div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="customer_type" value="一般消費者B2C">👤 一般消費者（B2C）</label>
+        <label class="opt"><input type="radio" name="customer_type" value="企業客戶B2B">🏢 企業客戶（B2B）</label>
+        <label class="opt"><input type="radio" name="customer_type" value="兩者都有">🤝 兩者都有</label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-q">你願意在鏡頭前露臉嗎？</div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="face" value="願意，沒問題">😊 願意，沒問題</label>
+        <label class="opt"><input type="radio" name="face" value="有點緊張但可以試試">😅 有點緊張但可以試試</label>
+        <label class="opt"><input type="radio" name="face" value="不太願意">🙈 不太願意</label>
+        <label class="opt"><input type="radio" name="face" value="完全不想露臉">🎭 完全不想露臉</label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-q">每週可以投入影音的時間？</div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="time_per_week" value="1-2小時">⏱ 1-2小時（很忙）</label>
+        <label class="opt"><input type="radio" name="time_per_week" value="3-5小時">⏰ 3-5小時</label>
+        <label class="opt"><input type="radio" name="time_per_week" value="5小時以上">🕐 5小時以上</label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-q">影音製作的預算範圍？</div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="budget" value="自己來零預算">💪 自己來，零預算</label>
+        <label class="opt"><input type="radio" name="budget" value="少量預算3000以下">💰 少量預算（3,000以下）</label>
+        <label class="opt"><input type="radio" name="budget" value="中等預算3000-10000">💳 中等預算（3,000-10,000）</label>
+        <label class="opt"><input type="radio" name="budget" value="有充足預算">🚀 有充足預算</label>
+      </div>
+    </div>
     <p id="submitMsg" class="msg"></p>
   </div>
 
-  <!-- 結果頁 -->
+  <!-- ═══ 結果頁 ═══ -->
   <div class="result" id="resultPage">
+
     <div class="result-hero">
       <div class="result-sun">☀️</div>
       <div class="result-title">診斷完成！</div>
-      <div class="result-desc">初步分析已產出<br>完整品牌建議會在24小時內透過LINE傳給你</div>
+      <div class="result-desc">你的品牌分析已產出<br>告訴顧問你的代碼，立即取得完整建議</div>
     </div>
 
-    <div class="insight-box" id="insightBox">
-      <div class="insight-label">你的品牌卡點分析</div>
+    <!-- 查詢代碼 -->
+    <div class="code-box">
+      <div class="code-label">📋 你的查詢代碼</div>
+      <div class="code-num" id="diagCode">------</div>
+      <div class="code-hint">把這個代碼告訴幸福天使顧問<br>或截圖保存，隨時可以查詢</div>
+      <span class="code-screenshot">📸 請截圖保存</span>
+    </div>
+
+    <!-- 品牌卡點分析 -->
+    <div class="insight-box">
+      <div class="insight-label">🔍 你的品牌卡點分析</div>
       <div class="insight-title" id="insightTitle"></div>
       <div class="insight-desc" id="insightDesc"></div>
     </div>
 
+    <!-- 影音方向建議 -->
+    <div class="video-box">
+      <div class="video-label">🎬 你的影音方向建議</div>
+      <div class="video-title" id="videoTitle"></div>
+      <div class="video-desc" id="videoDesc"></div>
+    </div>
+
+    <!-- 完整建議包含 -->
     <div class="next-steps">
-      <div class="next-steps-title">📋 你的完整建議包含</div>
+      <div class="next-steps-title">📋 完整品牌建議包含</div>
       <div class="next-step-item"><div class="ns-num">1</div>品牌卡點深度分析＋優先改善方向</div>
       <div class="next-step-item"><div class="ns-num">2</div>智慧名片建議（故事、金句、CTA）</div>
-      <div class="next-step-item"><div class="ns-num">3</div>影音策略（平台、主題、第一支影音指令）</div>
-      <div class="next-step-item"><div class="ns-num">4</div>你現在最該做的3件事</div>
+      <div class="next-step-item"><div class="ns-num">3</div>影音平台策略＋第一支影音製作指令</div>
+      <div class="next-step-item"><div class="ns-num">4</div>商業閉環設計＋你現在最該做的3件事</div>
     </div>
 
-    <div class="notice">加入LINE官方帳號才能收到你的完整品牌建議報告。</div>
+    <div class="notice">加入LINE官方帳號，24小時內收到完整品牌建議報告。</div>
 
-    <div style="background:#fff;border:1px solid var(--gold-border);border-radius:18px;padding:20px;margin-bottom:12px;">
-      <div style="font-size:12px;font-weight:700;color:var(--brown-dark);margin-bottom:8px;">📋 步驟一｜複製這段文字</div>
-      <div style="background:var(--gold-pale);border:1px solid var(--gold-border);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--brown-dark);line-height:1.8;" id="copyMsg"></div>
-      <button onclick="copyDiagMsg()" id="copyBtn" style="display:block;width:100%;margin-top:10px;padding:12px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:900;font-family:'Noto Sans TC',sans-serif;cursor:pointer;">一鍵複製</button>
+    <!-- 複製文案 -->
+    <div class="copy-area">
+      <div class="copy-area-label">📋 步驟一｜複製這段文字</div>
+      <div class="copy-text" id="copyMsg"></div>
+      <button class="copy-btn-full" id="copyBtn" onclick="copyDiagMsg()">一鍵複製</button>
     </div>
 
+    <!-- LINE -->
     <div class="line-box">
       <p>📲 步驟二｜加入LINE官方帳號<br>把剛才複製的文字貼給我們<br>24小時內收到你的專屬品牌建議</p>
       <a class="line-btn" href="https://lin.ee/UoF8eYY" target="_blank">＋ 加入 LINE 官方帳號</a>
     </div>
 
-    <!-- 素材收集區 -->
-    <div id="materialSection" style="margin-top:12px;">
-      <div style="background:linear-gradient(135deg,var(--dark),#2e1f0a);border-radius:18px;padding:20px;text-align:center;margin-bottom:12px;">
-        <div style="font-size:11px;font-weight:700;color:var(--gold-bright);letter-spacing:2px;margin-bottom:8px;">下一步</div>
-        <div style="font-family:'Noto Serif TC',serif;font-size:18px;font-weight:900;color:#fff;margin-bottom:8px;">準備好深入合作了嗎？</div>
-        <div style="font-size:12px;color:rgba(255,255,255,.6);line-height:1.8;">填寫品牌素材，我幫你產出完整品牌方案＋建立智慧名片<br>填完約5分鐘，24小時內收到完整方案</div>
+    <!-- 素材收集觸發 -->
+    <div class="material-trigger">
+      <div class="material-trigger-tag">深入合作</div>
+      <div class="material-trigger-title">準備好了嗎？</div>
+      <div class="material-trigger-desc">
+        填寫品牌素材，我幫你產出完整品牌方案＋建立智慧名片<br>
+        填完約5分鐘，24小時內收到完整方案
       </div>
+      <button class="material-trigger-btn" onclick="showMaterial()">填寫品牌素材，取得完整方案 →</button>
+    </div>
 
-      <!-- STEP M1 -->
+    <!-- ═══ 素材收集區 ═══ -->
+    <div id="materialSection">
+
+      <!-- SM1 -->
       <div class="step on" id="sm1">
         <div class="step-hero">
           <div class="step-eyebrow">素材收集 1 / 4</div>
@@ -368,7 +468,7 @@
         </div>
       </div>
 
-      <!-- STEP M2 -->
+      <!-- SM2 -->
       <div class="step" id="sm2">
         <div class="step-hero">
           <div class="step-eyebrow">素材收集 2 / 4</div>
@@ -387,12 +487,12 @@
         </div>
       </div>
 
-      <!-- STEP M3 -->
+      <!-- SM3 -->
       <div class="step" id="sm3">
         <div class="step-hero">
           <div class="step-eyebrow">素材收集 3 / 4</div>
           <div class="step-title">品牌風格偏好</div>
-          <div class="step-desc">幫AI理解你想呈現的感覺。</div>
+          <div class="step-desc">幫我理解你想呈現的感覺。</div>
         </div>
         <div class="card">
           <div class="card-q">你希望客戶感受到什麼？ <span class="req">*</span></div>
@@ -410,12 +510,12 @@
         </div>
       </div>
 
-      <!-- STEP M4 -->
+      <!-- SM4 -->
       <div class="step" id="sm4">
         <div class="step-hero">
           <div class="step-eyebrow">素材收集 4 / 4</div>
           <div class="step-title">聯繫與平台</div>
-          <div class="step-desc">最後一步！填完送出，24小時內收到完整品牌方案。</div>
+          <div class="step-desc">最後一步！填完送出，24小時內收到完整方案。</div>
         </div>
         <div class="card">
           <label class="fl">LINE 個人連結</label>
@@ -426,7 +526,7 @@
           <input type="text" id="m_address" placeholder="例：台東市中正路1號">
         </div>
         <div class="card">
-          <div class="card-title" style="font-size:14px;font-weight:700;color:var(--brown-dark);margin-bottom:10px;">現有平台連結（有哪些填哪些）</div>
+          <div style="font-size:14px;font-weight:700;color:var(--brown-dark);margin-bottom:10px;">現有平台連結（有哪些填哪些）</div>
           <label class="fl">YouTube</label>
           <input type="url" id="m_youtube" placeholder="https://www.youtube.com/@yourchannel">
           <label class="fl">Facebook</label>
@@ -439,95 +539,286 @@
         <p id="matMsg" class="msg"></p>
       </div>
 
-      <!-- 素材收集結果 -->
-      <div class="step" id="sm_done">
+      <!-- 素材完成 -->
+      <div class="mat-done" id="matDone">
         <div class="result-hero" style="margin-bottom:12px;">
           <div class="result-sun">☀️</div>
           <div class="result-title">素材已收到！</div>
-          <div class="result-desc">我們會在24小時內完成品牌分析<br>並把完整方案透過LINE OA傳給你</div>
+          <div class="result-desc">我們會在24小時內完成品牌分析<br>並把完整方案透過LINE傳給你</div>
         </div>
+
+        <!-- 素材代碼 -->
+        <div class="code-box">
+          <div class="code-label">📋 你的素材代碼</div>
+          <div class="code-num" id="matCode">------</div>
+          <div class="code-hint">把這個代碼告訴顧問<br>或截圖保存</div>
+          <span class="code-screenshot">📸 請截圖保存</span>
+        </div>
+
         <div class="next-steps">
-          <div class="next-steps-title">📦 你將收到的完整方案包含</div>
+          <div class="next-steps-title">📦 你將收到的完整方案</div>
           <div class="next-step-item"><div class="ns-num">1</div>品牌故事＋一句話理念×3版本</div>
           <div class="next-step-item"><div class="ns-num">2</div>跑馬燈內容＋照片牆拍攝建議</div>
           <div class="next-step-item"><div class="ns-num">3</div>CTA按鈕建議＋智慧名片完整規劃</div>
           <div class="next-step-item"><div class="ns-num">4</div>影音品牌DNA＋第一支影音製作指令</div>
         </div>
 
-        <div style="background:#fff;border:1px solid var(--gold-border);border-radius:18px;padding:20px;margin-top:12px;">
-          <div style="font-size:12px;font-weight:700;color:var(--brown-dark);margin-bottom:8px;">📋 步驟一｜複製這段文字</div>
-          <div style="background:var(--gold-pale);border:1px solid var(--gold-border);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--brown-dark);line-height:1.8;" id="matCopyMsg"></div>
-          <button onclick="copyMatMsg()" id="matCopyBtn" style="display:block;width:100%;margin-top:10px;padding:12px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:900;font-family:'Noto Sans TC',sans-serif;cursor:pointer;">一鍵複製</button>
+        <div class="copy-area" style="margin-top:12px;">
+          <div class="copy-area-label">📋 步驟一｜複製這段文字</div>
+          <div class="copy-text" id="matCopyMsg"></div>
+          <button class="copy-btn-full" id="matCopyBtn" onclick="copyMatMsg()">一鍵複製</button>
         </div>
 
         <div class="line-box" style="margin-top:12px;">
-          <p>📲 步驟二｜加入LINE官方帳號<br>把剛才複製的文字貼給我們<br>24小時內收到完整品牌方案</p>
+          <p>📲 步驟二｜加入LINE官方帳號<br>把剛才複製的文字貼給我們</p>
           <a class="line-btn" href="https://lin.ee/UoF8eYY" target="_blank">＋ 加入 LINE 官方帳號</a>
         </div>
       </div>
 
       <!-- 素材導航 -->
-      <div class="nav" id="matNav" style="display:none;">
+      <div class="nav" id="matNav">
         <button class="btn-prev" id="matPrev" onclick="matPrev()" style="display:none">← 上一步</button>
         <button class="btn-next" id="matNext" onclick="matNext()">下一步 →</button>
         <button class="btn-submit" id="matSubmit" onclick="submitMaterial()" style="display:none">送出取得方案 ✦</button>
       </div>
-    </div>
-  </div>
+
+    </div><!-- /materialSection -->
+
+  </div><!-- /resultPage -->
 
 </div><!-- /wrap -->
 
-<!-- 導航 -->
+<!-- 主導航 -->
 <div class="nav" id="navBar">
   <button class="btn-prev" id="btnPrev" onclick="prev()" style="display:none">← 上一步</button>
   <button class="btn-next" id="btnNext" onclick="next()">下一步 →</button>
-  <button class="btn-submit" id="btnSubmit" onclick="submit()" style="display:none">送出，取得分析 ✦</button>
+  <button class="btn-submit" id="btnSubmit" onclick="submit()" style="display:none">送出，取得診斷 ✦</button>
 </div>
 
 <script>
-// 素材收集步驟
+const GAS = 'https://script.google.com/macros/s/AKfycbxpxXKX-rE3VfqYiRqjoDGtruYI0Q1CjOk3jGyBCcAwMR0Erf__TmL5snJikX3KMDYZ/exec';
+const TOTAL = 5;
+let cur = 1;
+let diagCode = '';
 let matCur = 1;
 const MAT_TOTAL = 4;
 
+// ─── 主流程 ───
+function upd() {
+  const pct = (cur / TOTAL) * 100;
+  document.getElementById('progBar').style.width = pct + '%';
+  document.getElementById('progLabel').textContent = '第 ' + cur + ' 步，共 ' + TOTAL + ' 步';
+  document.getElementById('btnPrev').style.display = cur > 1 ? 'block' : 'none';
+  document.getElementById('btnNext').style.display = cur < TOTAL ? 'block' : 'none';
+  document.getElementById('btnSubmit').style.display = cur === TOTAL ? 'block' : 'none';
+}
+
+function next() {
+  if (!validate(cur)) return;
+  document.getElementById('s' + cur).classList.remove('on');
+  cur++;
+  document.getElementById('s' + cur).classList.add('on');
+  upd();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prev() {
+  document.getElementById('s' + cur).classList.remove('on');
+  cur--;
+  document.getElementById('s' + cur).classList.add('on');
+  upd();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function validate(step) {
+  if (step === 1) {
+    if (!rv('industry')) { alert('請選擇你的行業'); return false; }
+    if (!cv('painChecks')) { alert('請選擇目前的困境'); return false; }
+    if (!rv('cta_goal')) { alert('請選擇希望客戶做什麼'); return false; }
+  }
+  if (step === 2) {
+    if (!v('name')) { alert('請填寫姓名／品牌名稱'); return false; }
+    if (!v('phone')) { alert('請填寫電話'); return false; }
+  }
+  if (step === 3) {
+    if (!v('audience')) { alert('請描述你的目標客群'); return false; }
+  }
+  if (step === 5) {
+    if (!rv('sell_type')) { alert('請選擇你主要賣什麼'); return false; }
+  }
+  return true;
+}
+
+async function submit() {
+  const msg = document.getElementById('submitMsg');
+  msg.textContent = '送出中，請稍候…';
+
+  const pains = getChecked('#painChecks');
+  const platforms = getChecked('#platformChecks');
+  const materials = getChecked('#materialChecks');
+  const industry = rv('industry');
+
+  const payload = {
+    name: v('name'), phone: v('phone'), email: v('email'),
+    line_id: v('line_id'), business_name: v('title'),
+    industry,
+    pain_points: pains,
+    cta_goals: [rv('cta_goal')],
+    materials,
+    growth_goals: [],
+    long_term_mindset: '',
+    audience: v('audience'),
+    story: v('story'),
+    style: rv('style'),
+    location: rv('location'),
+    platforms,
+    sell_type: rv('sell_type'),
+    customer_type: rv('customer_type'),
+    face: rv('face'),
+    time_per_week: rv('time_per_week'),
+    budget: rv('budget')
+  };
+
+  let code = '';
+  try {
+    const res = await fetch(GAS, { method: 'POST', body: JSON.stringify({ action: 'submitDiagnosis', payload }) });
+    const data = await res.json();
+    if (data.ok && data.code) code = data.code;
+  } catch(e) {}
+
+  // 備用代碼（GAS失敗時）
+  if (!code) {
+    const p = (v('phone')||'').replace(/\D/g,'');
+    const last4 = p.length >= 4 ? p.slice(-4) : '0000';
+    code = last4 + Math.random().toString(36).slice(-2).toUpperCase();
+  }
+
+  diagCode = code;
+  document.getElementById('diagCode').textContent = code;
+
+  // 即時診斷分析
+  const insight = getInsight(pains, industry);
+  document.getElementById('insightTitle').textContent = insight.title;
+  document.getElementById('insightDesc').textContent = insight.desc;
+
+  // 即時影音建議
+  const video = getVideoSuggestion(rv('face'), rv('time_per_week'), rv('budget'), platforms);
+  document.getElementById('videoTitle').textContent = video.title;
+  document.getElementById('videoDesc').textContent = video.desc;
+
+  // 複製文案
+  const clientName = v('name') || '我';
+  const industryText = industry || '';
+  document.getElementById('copyMsg').textContent =
+    '我是' + clientName + '，已送出品牌診斷' +
+    (industryText ? '（' + industryText + '）' : '') +
+    '，查詢代碼：' + code + ' ☀️';
+
+  // 切換到結果頁
+  document.getElementById('s5').classList.remove('on');
+  document.getElementById('resultPage').classList.add('on');
+  document.getElementById('navBar').style.display = 'none';
+  document.getElementById('progLabel').style.display = 'none';
+  document.getElementById('progBar').style.width = '100%';
+  msg.textContent = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── 即時分析 ───
+function getInsight(pains, industry) {
+  if (pains.includes('缺曝光') || pains.includes('沒有固定客源')) {
+    return {
+      title: '你的核心問題：還沒建立穩定的流量入口',
+      desc: '你有能力，但市場還不知道你的存在。最快的突破口是建立一個讓人找得到你的數位入口——Google地圖、短影音或智慧名片，讓有需求的人主動找上門。'
+    };
+  }
+  if (pains.includes('缺信任') || pains.includes('沒有品牌感')) {
+    return {
+      title: '你的核心問題：有人看但不信任你',
+      desc: '流量不是問題，轉換才是問題。客戶看了但不行動，通常是品牌說服力不足。你需要一個讓人「一看就懂、一看就信任」的完整品牌呈現。'
+    };
+  }
+  if (pains.includes('缺成交') || pains.includes('不知道怎麼導流')) {
+    return {
+      title: '你的核心問題：客戶看完不知道下一步',
+      desc: '有人看但沒有行動，通常是缺少明確的成交路徑。每個接觸點都需要清楚的CTA，一步一步引導客戶走向成交。'
+    };
+  }
+  if (pains.includes('不知道做內容') || pains.includes('不知道問題在哪')) {
+    return {
+      title: '你的核心問題：方向還不夠清楚',
+      desc: '方向不清楚是最消耗能量的狀態。你需要先確認品牌定位和目標客群，再決定內容策略，才不會做了很多卻沒有累積。'
+    };
+  }
+  return {
+    title: '你的品牌需要一套整合的曝光系統',
+    desc: '多個卡點同時存在，代表你需要的不是單點優化，而是建立一套從曝光到成交的完整流程。智慧名片是整合各個入口最快的起點。'
+  };
+}
+
+function getVideoSuggestion(face, time, budget, platforms) {
+  if (face === '完全不想露臉') {
+    return {
+      title: '建議：圖文內容＋產品展示影片',
+      desc: '不露臉也可以做很好的影音！建議從產品特寫、手作過程、文字動態圖開始。IG圖文和FB貼文是你最適合的起點，不需要出現在鏡頭前。'
+    };
+  }
+  if (time === '1-2小時') {
+    return {
+      title: '建議：每週一支短影音，聚焦單一平台',
+      desc: '時間有限，就要精準。建議先選一個平台深耕，內容模板化——同一個框架每週換一個主題，30秒IG Reels或YouTube Shorts是最高效的選擇。'
+    };
+  }
+  if (platforms.includes('YouTube') || platforms.includes('IG')) {
+    return {
+      title: '建議：善用你已有的平台，加強短影音比例',
+      desc: '你已經有平台基礎！現在最重要的是提高短影音比例——YouTube Shorts和IG Reels的觸及率是一般貼文的3-5倍，是快速擴大曝光的關鍵。'
+    };
+  }
+  return {
+    title: '建議：從一支「自我介紹影片」開始',
+    desc: '什麼都沒有的時候，最重要的第一支影片是「你是誰、你幫助誰、為什麼找你」。60秒說清楚，放在名片CTA按鈕，讓每個看到名片的人都能立刻認識你。'
+  };
+}
+
+// ─── 素材收集 ───
 function showMaterial() {
   document.getElementById('materialSection').style.display = 'block';
   document.getElementById('matNav').style.display = 'flex';
-  document.getElementById('navBar').style.display = 'none';
   matUpd();
-  window.scrollTo({top: document.getElementById('materialSection').offsetTop - 20, behavior: 'smooth'});
+  window.scrollTo({ top: document.getElementById('materialSection').offsetTop - 20, behavior: 'smooth' });
 }
 
 function matUpd() {
-  for(let i=1;i<=MAT_TOTAL;i++) {
-    const el = document.getElementById('sm'+i);
-    if(el) el.classList.toggle('on', i===matCur);
+  for (let i = 1; i <= MAT_TOTAL; i++) {
+    const el = document.getElementById('sm' + i);
+    if (el) el.classList.toggle('on', i === matCur);
   }
-  document.getElementById('sm_done').classList.remove('on');
-  document.getElementById('matPrev').style.display = matCur>1?'block':'none';
-  document.getElementById('matNext').style.display = matCur<MAT_TOTAL?'block':'none';
-  document.getElementById('matSubmit').style.display = matCur===MAT_TOTAL?'block':'none';
+  document.getElementById('matPrev').style.display = matCur > 1 ? 'block' : 'none';
+  document.getElementById('matNext').style.display = matCur < MAT_TOTAL ? 'block' : 'none';
+  document.getElementById('matSubmit').style.display = matCur === MAT_TOTAL ? 'block' : 'none';
 }
 
 function matNext() {
-  if(!matValidate(matCur)) return;
+  if (!matValidate(matCur)) return;
   matCur++;
   matUpd();
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({ top: document.getElementById('materialSection').offsetTop - 20, behavior: 'smooth' });
 }
 
 function matPrev() {
   matCur--;
   matUpd();
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({ top: document.getElementById('materialSection').offsetTop - 20, behavior: 'smooth' });
 }
 
 function matValidate(step) {
-  if(step===2) {
-    if(!v('m_story')){alert('請填寫核心故事');return false;}
-    if(!v('m_audience')){alert('請填寫目標客群');return false;}
+  if (step === 2) {
+    if (!v('m_story')) { alert('請填寫核心故事'); return false; }
+    if (!v('m_audience')) { alert('請填寫目標客群'); return false; }
   }
-  if(step===3) {
-    if(!rv('m_style')){alert('請選擇品牌風格');return false;}
+  if (step === 3) {
+    if (!rv('m_style')) { alert('請選擇品牌風格'); return false; }
   }
   return true;
 }
@@ -535,6 +826,7 @@ function matValidate(step) {
 async function submitMaterial() {
   const msg = document.getElementById('matMsg');
   msg.textContent = '送出中，請稍候…';
+
   const payload = {
     industry: rv('industry') || '',
     cta_goal: rv('cta_goal') || '',
@@ -547,191 +839,85 @@ async function submitMaterial() {
     facebook: v('m_facebook'), instagram: v('m_instagram'),
     other_platform: v('m_other')
   };
+
+  let mCode = '';
   try {
-    await fetch(GAS, {method:'POST', body:JSON.stringify({action:'submitMaterial', payload})});
+    const res = await fetch(GAS, { method: 'POST', body: JSON.stringify({ action: 'submitMaterial', payload }) });
+    const data = await res.json();
+    if (data.ok && data.code) mCode = data.code;
   } catch(e) {}
-  for(let i=1;i<=MAT_TOTAL;i++) {
-    const el=document.getElementById('sm'+i);
-    if(el) el.classList.remove('on');
+
+  if (!mCode) {
+    const p = (v('phone')||'').replace(/\D/g,'');
+    const last4 = p.length >= 4 ? p.slice(-4) : '0000';
+    mCode = last4 + Math.random().toString(36).slice(-2).toUpperCase();
+  }
+
+  document.getElementById('matCode').textContent = mCode;
+
+  // 隱藏表單步驟
+  for (let i = 1; i <= MAT_TOTAL; i++) {
+    const el = document.getElementById('sm' + i);
+    if (el) el.classList.remove('on');
   }
 
   // 產生素材複製文字
-  const matName = v('name') || v('m_title') || '我';
+  const matName = v('name') || '我';
   const matIndustry = rv('industry') || '';
-  const matCopyText = '我是' + matName + '，已送出品牌素材' + (matIndustry ? '（' + matIndustry + '）' : '') + '，等待完整方案 ☀️';
-  document.getElementById('matCopyMsg').textContent = matCopyText;
+  document.getElementById('matCopyMsg').textContent =
+    '我是' + matName + '，已送出品牌素材' +
+    (matIndustry ? '（' + matIndustry + '）' : '') +
+    '，素材代碼：' + mCode + ' ☀️';
 
-  document.getElementById('sm_done').classList.add('on');
+  document.getElementById('matDone').classList.add('on');
   document.getElementById('matNav').style.display = 'none';
   msg.textContent = '';
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({ top: document.getElementById('matDone').offsetTop - 20, behavior: 'smooth' });
 }
 
-function copyMatMsg(){
-  const text = document.getElementById('matCopyMsg').textContent;
-  navigator.clipboard.writeText(text).then(()=>{
-    const btn = document.getElementById('matCopyBtn');
-    btn.textContent = '✓ 已複製！去貼到LINE OA';
-    btn.style.background = '#4caf50';
-    setTimeout(()=>{
-      btn.textContent = '一鍵複製';
-      btn.style.background = 'linear-gradient(135deg,var(--gold),var(--gold-light))';
-    }, 3000);
-  });
-}
-
-const GAS='https://script.google.com/macros/s/AKfycbxpxXKX-rE3VfqYiRqjoDGtruYI0Q1CjOk3jGyBCcAwMR0Erf__TmL5snJikX3KMDYZ/exec';
-const TOTAL=4;
-let cur=1;
-
-function upd(){
-  const pct=(cur/TOTAL)*100;
-  document.getElementById('progBar').style.width=pct+'%';
-  document.getElementById('progLabel').textContent='第 '+cur+' 步，共 '+TOTAL+' 步';
-  document.getElementById('btnPrev').style.display=cur>1?'block':'none';
-  document.getElementById('btnNext').style.display=cur<TOTAL?'block':'none';
-  document.getElementById('btnSubmit').style.display=cur===TOTAL?'block':'none';
-}
-
-function next(){
-  if(!validate(cur))return;
-  document.getElementById('s'+cur).classList.remove('on');
-  cur++;
-  document.getElementById('s'+cur).classList.add('on');
-  upd();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function prev(){
-  document.getElementById('s'+cur).classList.remove('on');
-  cur--;
-  document.getElementById('s'+cur).classList.add('on');
-  upd();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function validate(step){
-  if(step===1){
-    if(!rv('industry')){alert('請選擇你的行業');return false;}
-    if(!cv('painChecks')){alert('請選擇目前的困境');return false;}
-    if(!rv('cta_goal')){alert('請選擇希望客戶做什麼');return false;}
-  }
-  if(step===2){
-    if(!v('name')){alert('請填寫姓名／品牌名稱');return false;}
-    if(!v('phone')){alert('請填寫電話');return false;}
-  }
-  if(step===3){
-    if(!v('audience')){alert('請描述你的目標客群');return false;}
-  }
-  return true;
-}
-
-function v(id){const el=document.getElementById(id);return el?el.value.trim():'';}
-function rv(name){const el=document.querySelector('input[name="'+name+'"]:checked');return el?el.value:'';}
-function cv(groupId){return document.querySelectorAll('#'+groupId+' input:checked').length>0;}
-function cva(groupId){return Array.from(document.querySelectorAll('#'+groupId+' input:checked')).map(i=>i.value);}
-function cva2(name){return Array.from(document.querySelectorAll('input[name="'+name+'"]:checked')).map(i=>i.value);}
-function getAllChecked(selector){return Array.from(document.querySelectorAll(selector+' input:checked')).map(i=>i.value);}
-
-document.addEventListener('change',function(e){
-  if(e.target.type==='radio'){
-    document.querySelectorAll('input[name="'+e.target.name+'"]').forEach(r=>r.closest('.opt').classList.toggle('sel',r.checked));
-  }
-  if(e.target.type==='checkbox'){
-    e.target.closest('.chk').classList.toggle('sel',e.target.checked);
-  }
-});
-
-// 即時分析
-function getInsight(pains, industry){
-  const painStr = pains.join('、');
-  if(pains.includes('缺曝光')||pains.includes('沒有固定客源')){
-    return {
-      title:'你的核心問題：被看見的機會太少',
-      desc:'你有能力，但市場還不知道你的存在。優先建立一個讓人找得到你的數位入口，搭配Google地圖或短影音，讓有需求的人主動找上門。'
-    };
-  }
-  if(pains.includes('缺信任')||pains.includes('沒有品牌感')){
-    return {
-      title:'你的核心問題：客戶看了但不信任',
-      desc:'有流量但沒有轉換，通常是品牌說服力不足。你需要一個讓人「一看就懂你在做什麼、一看就信任你」的完整品牌呈現。'
-    };
-  }
-  if(pains.includes('缺成交')||pains.includes('不知道怎麼導流')){
-    return {
-      title:'你的核心問題：客戶看完不知道下一步',
-      desc:'有人看但沒有行動，通常是缺少明確的成交路徑。每個接觸點都需要清楚的CTA，引導客戶走向下一步。'
-    };
-  }
-  if(pains.includes('不知道做內容')||pains.includes('不知道問題在哪')){
-    return {
-      title:'你的核心問題：還沒找到適合你的方向',
-      desc:'方向不清楚是最消耗能量的狀態。你需要先確認品牌定位和目標客群，再決定內容策略，才不會白做工。'
-    };
-  }
-  return {
-    title:'你的品牌需要一個整合的曝光系統',
-    desc:'多個卡點同時存在，代表你需要的不是單點優化，而是建立一套從曝光到成交的完整流程。'
-  };
-}
-
-async function submit(){
-  const msg=document.getElementById('submitMsg');
-  msg.textContent='送出中，請稍候…';
-
-  const pains=getAllChecked('#painChecks');
-  const platforms=getAllChecked('#s4 .checks:nth-child(1)');
-  const materials=getAllChecked('#s4 .checks:nth-child(2)');
-  const industry=rv('industry');
-
-  const payload={
-    name:v('name'), phone:v('phone'), email:v('email'),
-    line_id:v('line_id'), title:v('title'),
-    industry, cta_goal:rv('cta_goal'),
-    pain_points:pains,
-    audience:v('audience'), story:v('story'),
-    style:rv('style'), location:rv('location'),
-    platforms:getAllChecked('#s4 .card:nth-child(2) .checks'),
-    materials:getAllChecked('#s4 .card:nth-child(3) .checks')
-  };
-
-  try{
-    await fetch(GAS,{method:'POST',body:JSON.stringify({action:'submitDiagnosis',payload})});
-  }catch(e){}
-
-  // 產出即時洞察
-  const insight=getInsight(pains, industry);
-  document.getElementById('insightTitle').textContent=insight.title;
-  document.getElementById('insightDesc').textContent=insight.desc;
-
-  // 切換到結果頁
-  // 產生複製文字
-  const clientName = v('name') || '我';
-  const industryText = rv('industry') || '';
-  const copyText = '我是' + clientName + '，已送出品牌診斷' + (industryText ? '（' + industryText + '）' : '') + '，想了解更多 ☀️';
-  document.getElementById('copyMsg').textContent = copyText;
-
-  document.getElementById('s4').classList.remove('on');
-  document.getElementById('resultPage').classList.add('on');
-  document.getElementById('navBar').style.display='none';
-  document.getElementById('progLabel').style.display='none';
-  document.getElementById('progBar').style.width='100%';
-  msg.textContent='';
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function copyDiagMsg(){
+// ─── 複製 ───
+function copyDiagMsg() {
   const text = document.getElementById('copyMsg').textContent;
-  navigator.clipboard.writeText(text).then(()=>{
+  navigator.clipboard.writeText(text).then(() => {
     const btn = document.getElementById('copyBtn');
     btn.textContent = '✓ 已複製！去貼到LINE OA';
     btn.style.background = '#4caf50';
-    setTimeout(()=>{
+    setTimeout(() => {
       btn.textContent = '一鍵複製';
       btn.style.background = 'linear-gradient(135deg,var(--gold),var(--gold-light))';
     }, 3000);
   });
 }
+
+function copyMatMsg() {
+  const text = document.getElementById('matCopyMsg').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('matCopyBtn');
+    btn.textContent = '✓ 已複製！去貼到LINE OA';
+    btn.style.background = '#4caf50';
+    setTimeout(() => {
+      btn.textContent = '一鍵複製';
+      btn.style.background = 'linear-gradient(135deg,var(--gold),var(--gold-light))';
+    }, 3000);
+  });
+}
+
+// ─── 工具函數 ───
+function v(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+function rv(name) { const el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ''; }
+function cv(groupId) { return document.querySelectorAll('#' + groupId + ' input:checked').length > 0; }
+function getChecked(selector) { return Array.from(document.querySelectorAll(selector + ' input:checked')).map(i => i.value); }
+
+document.addEventListener('change', function(e) {
+  if (e.target.type === 'radio') {
+    document.querySelectorAll('input[name="' + e.target.name + '"]').forEach(r => {
+      r.closest('.opt').classList.toggle('sel', r.checked);
+    });
+  }
+  if (e.target.type === 'checkbox') {
+    e.target.closest('.chk').classList.toggle('sel', e.target.checked);
+  }
+});
 
 upd();
 </script>
