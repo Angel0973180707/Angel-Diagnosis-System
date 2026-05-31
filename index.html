@@ -1,477 +1,787 @@
-<!-- ═══════════════════════════════════════════════════
-     素材收集區 v3.0（含照片上傳）
-     取代 diagnosis.html 裡的 #materialSection 整段
-     ═══════════════════════════════════════════════════ -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>幸福天使｜免費品牌診斷</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #b8860b; --gold-light: #d4a017; --gold-bright: #f0c040;
+      --gold-pale: #fdf3d8; --gold-border: #e8d4a0;
+      --brown-dark: #2a1a06; --brown-mid: #5a3a14; --brown-light: #8a6030;
+      --cream: #fdfaf3; --dark: #1a1008; --dark-2: #251608;
+      --green: #06c755;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Noto Sans TC", sans-serif; background: var(--cream); color: var(--brown-dark); }
 
-<!-- 貼在 diagnosis.html 的 <style> 裡補充以下CSS -->
-<style id="material-upload-styles">
-/* 照片上傳區 */
-.upload-section { margin: 10px 0; }
-.upload-label { font-size: 12px; font-weight: 700; color: var(--brown-mid); margin-bottom: 6px; display: block; }
-.upload-hint { font-size: 11px; color: var(--brown-light); margin-bottom: 8px; line-height: 1.6; }
+    /* Hero */
+    .hero {
+      background: linear-gradient(160deg, var(--dark) 0%, #2e1f0a 50%, #4a2e0e 100%);
+      padding: 36px 24px 30px; text-align: center; position: relative; overflow: hidden;
+    }
+    .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 30% 30%, rgba(184,134,11,.25) 0%, transparent 55%); }
+    .hero-content { position: relative; }
+    .hero-sun { font-size: 44px; display: block; margin-bottom: 8px; filter: drop-shadow(0 0 20px rgba(212,160,23,.8)); animation: sp 4s ease-in-out infinite; }
+    @keyframes sp { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
+    .hero-tag { display:inline-block; background:rgba(184,134,11,.2); border:1px solid rgba(184,134,11,.4); color:var(--gold-bright); font-size:11px; font-weight:700; padding:5px 14px; border-radius:999px; letter-spacing:2px; margin-bottom:12px; }
+    .hero h1 { font-family:"Noto Serif TC",serif; font-size:22px; font-weight:900; color:#fff; line-height:1.5; margin-bottom:8px; }
+    .hero h1 em { color:var(--gold-bright); font-style:normal; }
+    .hero-sub { font-size:12px; color:rgba(255,255,255,.6); line-height:1.8; }
 
-.upload-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.upload-single { grid-column: 1 / -1; }
+    /* 進度 */
+    .prog-wrap { background:rgba(0,0,0,.08); height:3px; }
+    .prog-bar { background:linear-gradient(90deg,var(--gold),var(--gold-bright)); height:3px; transition:width .4s ease; }
+    .prog-label { text-align:center; font-size:11px; color:var(--brown-light); padding:7px 0 2px; letter-spacing:.5px; }
 
-.upload-slot {
-  border: 2px dashed var(--gold-border); border-radius: 12px;
-  background: var(--gold-pale); min-height: 90px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  cursor: pointer; transition: all .18s; position: relative; overflow: hidden;
-}
-.upload-slot:hover { border-color: var(--gold); background: #fff3d0; }
-.upload-slot.has-img { border-style: solid; border-color: var(--gold); }
-.upload-slot input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; z-index: 2; }
-.upload-slot-icon { font-size: 24px; margin-bottom: 4px; }
-.upload-slot-text { font-size: 11px; color: var(--brown-light); font-weight: 700; text-align: center; padding: 0 8px; }
-.upload-slot-sub { font-size: 10px; color: var(--brown-light); opacity: .6; }
-.upload-preview {
-  width: 100%; height: 100%; object-fit: cover;
-  position: absolute; inset: 0; z-index: 1; border-radius: 10px;
-}
-.upload-remove {
-  position: absolute; top: 4px; right: 4px; z-index: 3;
-  background: rgba(0,0,0,.5); color: #fff; border: none; border-radius: 50%;
-  width: 22px; height: 22px; font-size: 12px; cursor: pointer;
-  display: none; align-items: center; justify-content: center;
-}
-.upload-slot.has-img .upload-remove { display: flex; }
-.upload-slot.has-img .upload-slot-icon,
-.upload-slot.has-img .upload-slot-text,
-.upload-slot.has-img .upload-slot-sub { display: none; }
+    /* 主體 */
+    .wrap { max-width:580px; margin:0 auto; padding:0 16px 110px; }
 
-/* 多張上傳 */
-.multi-upload-wrap { border: 1.5px solid var(--gold-border); border-radius: 12px; padding: 12px; background: var(--gold-pale); }
-.multi-upload-thumbs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; min-height: 60px; }
-.multi-thumb {
-  width: 60px; height: 60px; border-radius: 8px; object-fit: cover;
-  border: 2px solid var(--gold-border); cursor: pointer; position: relative;
-}
-.multi-thumb-wrap { position: relative; }
-.multi-thumb-remove {
-  position: absolute; top: -4px; right: -4px;
-  background: var(--brown-dark); color: #fff; border: none; border-radius: 50%;
-  width: 18px; height: 18px; font-size: 10px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-}
-.multi-upload-btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: #fff; border: 1.5px solid var(--gold-border); border-radius: 999px;
-  padding: 7px 14px; font-size: 12px; font-weight: 700; color: var(--brown-mid);
-  cursor: pointer; font-family: "Noto Sans TC", sans-serif;
-}
-.multi-upload-btn:hover { border-color: var(--gold); color: var(--gold); }
-.multi-upload-count { font-size: 11px; color: var(--brown-light); margin-left: 6px; }
-.upload-progress { font-size: 11px; color: var(--gold); margin-top: 4px; min-height: 14px; }
-</style>
+    /* Step */
+    .step { display:none; }
+    .step.on { display:block; }
 
-<!-- 素材收集觸發按鈕（放在結果頁 .material-trigger 裡） -->
-<!-- 已在 diagnosis.html 結果頁內 -->
+    .step-hero {
+      background:linear-gradient(135deg,var(--gold-pale),#fde9bb);
+      border-radius:0 0 20px 20px; padding:16px 20px 14px; margin-bottom:12px;
+      border:1px solid var(--gold-border); border-top:none;
+    }
+    .step-eyebrow { font-size:10px; font-weight:700; color:var(--gold); letter-spacing:2px; margin-bottom:3px; }
+    .step-title { font-family:"Noto Serif TC",serif; font-size:18px; font-weight:900; color:var(--brown-dark); line-height:1.5; }
+    .step-desc { font-size:12px; color:var(--brown-light); margin-top:4px; line-height:1.7; }
 
-<!-- ═══ 素材收集區完整HTML ═══ -->
-<div id="materialSection" style="display:none; margin-top:8px;">
+    /* 卡片 */
+    .card { background:#fff; border-radius:16px; padding:16px; margin:10px 0; border:1px solid var(--gold-border); box-shadow:0 2px 10px rgba(80,50,20,.05); }
+    .card-q { font-size:14px; font-weight:700; color:var(--brown-dark); margin-bottom:10px; }
+    .req { color:var(--gold); }
 
-  <!-- SM1｜你是誰 -->
-  <div class="step on" id="sm1">
-    <div class="step-hero">
-      <div class="step-eyebrow">素材收集 1 / 4</div>
-      <div class="step-title">你是誰</div>
-      <div class="step-desc">名片上的基本身份資訊。</div>
-    </div>
-    <div class="card">
-      <label class="fl">職稱／副標</label>
-      <input type="text" id="m_title" placeholder="例：健康烘焙師 ／ 幸福生活顧問">
-      <label class="fl">單位／公司</label>
-      <input type="text" id="m_company" placeholder="例：天使幸福股份有限公司">
-    </div>
+    /* Radio */
+    .opts { display:flex; flex-direction:column; gap:7px; }
+    .opt { background:var(--gold-pale); border:1.5px solid var(--gold-border); border-radius:12px; padding:11px 14px; display:flex; align-items:center; gap:10px; font-size:13px; cursor:pointer; transition:all .18s; }
+    .opt input { accent-color:var(--gold); width:15px; height:15px; flex-shrink:0; }
+    .opt.sel { background:#fff3d0; border-color:var(--gold); }
+    .opt-icon { font-size:16px; flex-shrink:0; }
 
-    <!-- 頭像＋Logo上傳 -->
-    <div class="card">
-      <div class="card-q">上傳照片素材</div>
-      <div class="upload-section">
-        <span class="upload-label">個人照／頭像</span>
-        <span class="upload-hint">讓客戶第一眼認識你的照片，建議正面、清晰、有笑容</span>
-        <div class="upload-grid">
-          <div class="upload-slot upload-single" id="slot_avatar" onclick="triggerUpload('avatar')">
-            <input type="file" id="file_avatar" accept="image/*" onchange="handleSingle(this,'avatar')" onclick="event.stopPropagation()">
-            <div class="upload-slot-icon">🤳</div>
-            <div class="upload-slot-text">點擊上傳個人照</div>
-            <div class="upload-slot-sub">JPG / PNG</div>
-            <img class="upload-preview" id="prev_avatar">
-            <button class="upload-remove" onclick="removeSingle(event,'avatar')">✕</button>
-          </div>
-        </div>
-        <div class="upload-progress" id="prog_avatar"></div>
-      </div>
+    /* Checkbox */
+    .checks { display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:4px; }
+    .chk { background:var(--gold-pale); border:1.5px solid var(--gold-border); border-radius:11px; padding:9px 11px; display:flex; align-items:center; gap:7px; font-size:13px; cursor:pointer; transition:all .18s; }
+    .chk input { accent-color:var(--gold); width:14px; height:14px; flex-shrink:0; }
+    .chk.sel { background:#fff3d0; border-color:var(--gold); }
 
-      <div class="upload-section" style="margin-top:14px;">
-        <span class="upload-label">Logo（若有）</span>
-        <span class="upload-hint">品牌標誌，建議PNG透明背景</span>
-        <div class="upload-slot upload-single" id="slot_logo" onclick="triggerUpload('logo')">
-          <input type="file" id="file_logo" accept="image/*" onchange="handleSingle(this,'logo')" onclick="event.stopPropagation()">
-          <div class="upload-slot-icon">🏷</div>
-          <div class="upload-slot-text">點擊上傳Logo</div>
-          <div class="upload-slot-sub">JPG / PNG</div>
-          <img class="upload-preview" id="prev_logo">
-          <button class="upload-remove" onclick="removeSingle(event,'logo')">✕</button>
-        </div>
-        <div class="upload-progress" id="prog_logo"></div>
-      </div>
-    </div>
+    /* 輸入 */
+    .fl { display:block; font-size:12px; font-weight:700; color:var(--brown-mid); margin:10px 0 4px; }
+    .fh { font-size:11px; color:var(--brown-light); margin-bottom:5px; line-height:1.6; }
+    input[type="text"],input[type="tel"],input[type="email"],input[type="url"],textarea,select {
+      width:100%; padding:11px 13px; border:1.5px solid var(--gold-border); border-radius:11px;
+      font-size:14px; font-family:"Noto Sans TC",sans-serif;
+      background:var(--gold-pale); color:var(--brown-dark); outline:none; transition:border-color .2s;
+    }
+    input:focus,textarea:focus,select:focus { border-color:var(--gold); }
+    textarea { resize:vertical; min-height:80px; line-height:1.7; }
+
+    /* 底部導航 */
+    .nav {
+      position:fixed; bottom:0; left:0; right:0;
+      background:#fff; border-top:1px solid var(--gold-border);
+      padding:10px 16px; display:flex; gap:10px;
+      max-width:580px; margin:0 auto; z-index:100;
+      left:50%; transform:translateX(-50%); width:100%;
+    }
+    .btn-prev { flex:1; padding:13px; background:#f0e4c8; color:var(--brown-mid); border:none; border-radius:12px; font-size:14px; font-weight:700; font-family:"Noto Sans TC",sans-serif; cursor:pointer; }
+    .btn-next { flex:2; padding:13px; background:linear-gradient(135deg,var(--gold),var(--gold-light)); color:#fff; border:none; border-radius:12px; font-size:14px; font-weight:700; font-family:"Noto Sans TC",sans-serif; cursor:pointer; box-shadow:0 4px 14px rgba(184,134,11,.3); }
+    .btn-submit { flex:2; padding:13px; background:var(--brown-dark); color:#fff; border:none; border-radius:12px; font-size:14px; font-weight:700; font-family:"Noto Sans TC",sans-serif; cursor:pointer; }
+    .msg { font-size:12px; color:var(--brown-light); text-align:center; margin-top:6px; min-height:16px; }
+
+    /* 結果頁 */
+    .result { display:none; padding-top:8px; }
+    .result.on { display:block; }
+
+    .result-hero { background:linear-gradient(135deg,var(--dark),#2e1f0a); border-radius:20px; padding:26px 20px; text-align:center; margin-bottom:14px; }
+    .result-sun { font-size:42px; margin-bottom:8px; filter:drop-shadow(0 0 16px rgba(212,160,23,.8)); }
+    .result-title { font-family:"Noto Serif TC",serif; font-size:20px; font-weight:900; color:#fff; margin-bottom:6px; }
+    .result-desc { font-size:13px; color:rgba(255,255,255,.65); line-height:1.8; }
+
+    /* 代碼顯示 */
+    .code-box {
+      background:linear-gradient(135deg,#fff8e6,#fff0cc);
+      border:2px solid var(--gold); border-radius:18px;
+      padding:20px; text-align:center; margin:12px 0;
+    }
+    .code-label { font-size:11px; font-weight:700; color:var(--brown-mid); letter-spacing:2px; margin-bottom:8px; }
+    .code-num { font-size:44px; font-weight:900; color:var(--brown-dark); letter-spacing:8px; font-family:"Noto Serif TC",serif; line-height:1.2; }
+    .code-hint { font-size:12px; color:var(--brown-light); margin-top:8px; line-height:1.7; }
+    .code-screenshot { display:inline-block; margin-top:10px; background:var(--gold); color:#fff; font-size:12px; font-weight:700; padding:7px 16px; border-radius:999px; }
+
+    /* 診斷洞察 */
+    .insight-box { background:#fff; border-radius:16px; padding:18px; margin:10px 0; border:1px solid var(--gold-border); box-shadow:0 2px 10px rgba(80,50,20,.05); }
+    .insight-label { font-size:10px; font-weight:700; color:var(--gold); letter-spacing:1px; margin-bottom:8px; }
+    .insight-title { font-family:"Noto Serif TC",serif; font-size:15px; font-weight:900; color:var(--brown-dark); margin-bottom:6px; }
+    .insight-desc { font-size:13px; color:var(--brown-light); line-height:1.8; }
+
+    /* 影音建議 */
+    .video-box { background:linear-gradient(135deg,#1a1008,#2e1f0a); border-radius:16px; padding:18px; margin:10px 0; border:1px solid rgba(184,134,11,.3); }
+    .video-label { font-size:10px; font-weight:700; color:var(--gold-bright); letter-spacing:1px; margin-bottom:8px; }
+    .video-title { font-size:15px; font-weight:900; color:#fff; margin-bottom:6px; }
+    .video-desc { font-size:13px; color:rgba(255,255,255,.65); line-height:1.8; }
+
+    /* 下一步 */
+    .next-steps { background:var(--gold-pale); border:1px solid var(--gold-border); border-radius:16px; padding:18px; margin:10px 0; }
+    .next-steps-title { font-size:13px; font-weight:700; color:var(--brown-dark); margin-bottom:10px; }
+    .next-step-item { display:flex; gap:10px; align-items:flex-start; margin-bottom:8px; font-size:13px; color:var(--brown-mid); line-height:1.6; }
+    .next-step-item:last-child { margin-bottom:0; }
+    .ns-num { background:var(--gold); color:#fff; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:900; flex-shrink:0; margin-top:1px; }
+
+    .notice { background:linear-gradient(135deg,#fff8e6,#fff0cc); border-left:3px solid var(--gold); padding:12px 14px; border-radius:0 10px 10px 0; font-size:12px; color:var(--brown-light); line-height:1.8; margin:10px 0; }
+
+    /* 複製區 */
+    .copy-area { background:#fff; border:1px solid var(--gold-border); border-radius:18px; padding:18px; margin:12px 0; }
+    .copy-area-label { font-size:12px; font-weight:700; color:var(--brown-dark); margin-bottom:8px; }
+    .copy-text { background:var(--gold-pale); border:1px solid var(--gold-border); border-radius:10px; padding:12px 14px; font-size:13px; color:var(--brown-dark); line-height:1.8; }
+    .copy-btn-full { display:block; width:100%; margin-top:10px; padding:12px; background:linear-gradient(135deg,var(--gold),var(--gold-light)); color:#fff; border:none; border-radius:10px; font-size:14px; font-weight:900; font-family:"Noto Sans TC",sans-serif; cursor:pointer; }
+
+    /* LINE */
+    .line-box { background:var(--green); border-radius:18px; padding:20px; text-align:center; margin-top:12px; }
+    .line-box p { color:#fff; font-size:13px; line-height:1.8; margin-bottom:12px; }
+    .line-btn { display:inline-block; background:#fff; color:var(--green); font-weight:900; font-size:15px; padding:12px 28px; border-radius:999px; text-decoration:none; font-family:"Noto Sans TC",sans-serif; }
+
+    /* 素材收集觸發 */
+    .material-trigger { background:linear-gradient(135deg,var(--dark),#2e1f0a); border-radius:18px; padding:22px 20px; text-align:center; margin-top:16px; }
+    .material-trigger-tag { font-size:11px; font-weight:700; color:var(--gold-bright); letter-spacing:2px; margin-bottom:8px; }
+    .material-trigger-title { font-family:"Noto Serif TC",serif; font-size:18px; font-weight:900; color:#fff; margin-bottom:8px; }
+    .material-trigger-desc { font-size:12px; color:rgba(255,255,255,.6); line-height:1.8; margin-bottom:16px; }
+    .material-trigger-btn { display:block; width:100%; padding:15px; background:linear-gradient(135deg,var(--gold),var(--gold-light)); color:#fff; border:none; border-radius:12px; font-size:15px; font-weight:900; font-family:"Noto Sans TC",sans-serif; cursor:pointer; box-shadow:0 4px 16px rgba(184,134,11,.4); }
+
+    /* 素材收集區 */
+    #materialSection { display:none; margin-top:8px; }
+
+    /* 素材導航 */
+    #matNav { display:none; }
+
+    /* 素材完成頁 */
+    .mat-done { display:none; }
+    .mat-done.on { display:block; }
+
+    @media (max-width:380px) {
+      .checks { grid-template-columns:1fr; }
+      .hero h1 { font-size:19px; }
+      .code-num { font-size:36px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <span class="hero-sun">☀️</span>
+    <div class="hero-tag">幸福天使｜免費品牌診斷</div>
+    <h1>你不是不努力，<br>你只是還不知道<br><em>卡點在哪裡。</em></h1>
+    <p class="hero-sub">填完5步，立即看到品牌診斷＋影音建議</p>
   </div>
+</div>
 
-  <!-- SM2｜核心故事 -->
-  <div class="step" id="sm2">
+<div class="prog-wrap"><div class="prog-bar" id="progBar" style="width:20%"></div></div>
+<div class="prog-label" id="progLabel">第 1 步，共 5 步</div>
+
+<div class="wrap">
+
+  <!-- ═══ STEP 1｜行業與卡點 ═══ -->
+  <div class="step on" id="s1">
     <div class="step-hero">
-      <div class="step-eyebrow">素材收集 2 / 4</div>
-      <div class="step-title">你的核心故事</div>
-      <div class="step-desc">品牌DNA最重要的原料，說真話就好。</div>
-    </div>
-    <div class="card">
-      <div class="card-q">為什麼做這件事？ <span class="req">*</span></div>
-      <div class="fh">有沒有一個轉折或經歷，讓你走到現在這條路？</div>
-      <textarea id="m_story" placeholder="例：我媽媽生病的時候，我才發現原來健康不能等……"></textarea>
-    </div>
-    <div class="card">
-      <div class="card-q">目標客群是誰？他們的痛點是什麼？ <span class="req">*</span></div>
-      <div class="fh">你最想幫助的人是誰？他們在煩惱什麼？</div>
-      <textarea id="m_audience" placeholder="例：35-55歲的媽媽，工作忙碌，想照顧家人健康但不知從哪開始……"></textarea>
+      <div class="step-eyebrow">STEP 1 / 5</div>
+      <div class="step-title">你做什麼，卡在哪？</div>
+      <div class="step-desc">30秒填完，馬上幫你分析。</div>
     </div>
 
-    <!-- 產品照上傳 -->
     <div class="card">
-      <div class="card-q">產品／服務照片</div>
-      <div class="fh">你的產品或服務實拍，讓我看到你在賣什麼、感覺如何（最多10張）</div>
-      <div class="multi-upload-wrap">
-        <div class="multi-upload-thumbs" id="thumbs_product"></div>
-        <div style="display:flex;align-items:center;">
-          <button class="multi-upload-btn" onclick="triggerMulti('product')">
-            <span>📷</span> 選擇照片
-          </button>
-          <input type="file" id="file_product" accept="image/*" multiple style="display:none" onchange="handleMulti(this,'product',10)">
-          <span class="multi-upload-count" id="count_product">0 / 10</span>
-        </div>
-        <div class="upload-progress" id="prog_product"></div>
+      <div class="card-q">你的行業是？ <span class="req">*</span></div>
+      <div class="opts" id="industryOpts">
+        <label class="opt"><input type="radio" name="industry" value="健康食品保健"><span class="opt-icon">💊</span>健康食品／保健品</label>
+        <label class="opt"><input type="radio" name="industry" value="美業美容美甲"><span class="opt-icon">💄</span>美業／美容／美甲</label>
+        <label class="opt"><input type="radio" name="industry" value="小農手作烘焙"><span class="opt-icon">🌾</span>小農／手作／烘焙</label>
+        <label class="opt"><input type="radio" name="industry" value="講師顧問教練"><span class="opt-icon">🎓</span>講師／顧問／教練</label>
+        <label class="opt"><input type="radio" name="industry" value="房仲保險金融"><span class="opt-icon">🏠</span>房仲／保險／金融</label>
+        <label class="opt"><input type="radio" name="industry" value="餐飲在地店家"><span class="opt-icon">🍜</span>餐飲／在地店家</label>
+        <label class="opt"><input type="radio" name="industry" value="生活用品居家"><span class="opt-icon">🛍</span>生活用品／居家</label>
+        <label class="opt"><input type="radio" name="industry" value="個人品牌自媒體"><span class="opt-icon">🎬</span>個人品牌／自媒體</label>
+        <label class="opt"><input type="radio" name="industry" value="在家接單服務業"><span class="opt-icon">🏡</span>在家接單／服務業</label>
+        <label class="opt"><input type="radio" name="industry" value="招生教育"><span class="opt-icon">📚</span>招生／教育</label>
+        <label class="opt"><input type="radio" name="industry" value="其他"><span class="opt-icon">✨</span>其他</label>
       </div>
     </div>
-  </div>
 
-  <!-- SM3｜品牌風格 -->
-  <div class="step" id="sm3">
-    <div class="step-hero">
-      <div class="step-eyebrow">素材收集 3 / 4</div>
-      <div class="step-title">品牌風格偏好</div>
-      <div class="step-desc">幫我理解你想呈現的感覺。</div>
-    </div>
     <div class="card">
-      <div class="card-q">你希望客戶感受到什麼？ <span class="req">*</span></div>
+      <div class="card-q">目前最大的困境？（可多選） <span class="req">*</span></div>
+      <div class="checks" id="painChecks">
+        <label class="chk"><input type="checkbox" value="缺曝光">缺曝光</label>
+        <label class="chk"><input type="checkbox" value="缺成交">缺成交</label>
+        <label class="chk"><input type="checkbox" value="缺信任">缺信任</label>
+        <label class="chk"><input type="checkbox" value="不知道做內容">不知道做內容</label>
+        <label class="chk"><input type="checkbox" value="沒有品牌感">沒有品牌感</label>
+        <label class="chk"><input type="checkbox" value="客戶回購低">客戶回購低</label>
+        <label class="chk"><input type="checkbox" value="不知道怎麼導流">不知道導流</label>
+        <label class="chk"><input type="checkbox" value="招生困難">招生困難</label>
+        <label class="chk"><input type="checkbox" value="不知道問題在哪">不知道問題在哪</label>
+        <label class="chk"><input type="checkbox" value="沒有固定客源">沒有固定客源</label>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-q">你最希望客戶看完後做什麼？ <span class="req">*</span></div>
       <div class="opts">
-        <label class="opt"><input type="radio" name="m_style" value="溫暖療癒，像朋友一樣">🌸 溫暖療癒，像朋友一樣</label>
-        <label class="opt"><input type="radio" name="m_style" value="專業權威，讓人信任放心">📚 專業權威，讓人信任放心</label>
-        <label class="opt"><input type="radio" name="m_style" value="活潑有趣，有能量有感染力">✨ 活潑有趣，有能量有感染力</label>
-        <label class="opt"><input type="radio" name="m_style" value="質感生活，慢活精緻有品味">🏡 質感生活，慢活精緻有品味</label>
-        <label class="opt"><input type="radio" name="m_style" value="真實親切，說真話有溫度">💬 真實親切，說真話有溫度</label>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-q">不想要的感覺</div>
-      <textarea id="m_avoid" placeholder="例：不要太推銷感、不要太正式"></textarea>
-    </div>
-
-    <!-- 客戶見證照 -->
-    <div class="card">
-      <div class="card-q">客戶見證截圖（若有）</div>
-      <div class="fh">客戶好評、感謝訊息、使用前後對比（最多3張）</div>
-      <div class="multi-upload-wrap">
-        <div class="multi-upload-thumbs" id="thumbs_witness"></div>
-        <div style="display:flex;align-items:center;">
-          <button class="multi-upload-btn" onclick="triggerMulti('witness')">
-            <span>💬</span> 選擇截圖
-          </button>
-          <input type="file" id="file_witness" accept="image/*" multiple style="display:none" onchange="handleMulti(this,'witness',3)">
-          <span class="multi-upload-count" id="count_witness">0 / 3</span>
-        </div>
-        <div class="upload-progress" id="prog_witness"></div>
+        <label class="opt"><input type="radio" name="cta_goal" value="加LINE諮詢">💬 加LINE諮詢</label>
+        <label class="opt"><input type="radio" name="cta_goal" value="立即預約">📅 立即預約</label>
+        <label class="opt"><input type="radio" name="cta_goal" value="直接下單">🛍 直接下單</label>
+        <label class="opt"><input type="radio" name="cta_goal" value="填問卷了解需求">📋 填問卷了解需求</label>
+        <label class="opt"><input type="radio" name="cta_goal" value="看案例作品">🖼 看案例作品</label>
+        <label class="opt"><input type="radio" name="cta_goal" value="加入社群">👥 加入社群</label>
       </div>
     </div>
   </div>
 
-  <!-- SM4｜聯繫與平台 -->
-  <div class="step" id="sm4">
+  <!-- ═══ STEP 2｜基本資料 ═══ -->
+  <div class="step" id="s2">
     <div class="step-hero">
-      <div class="step-eyebrow">素材收集 4 / 4</div>
-      <div class="step-title">聯繫與平台</div>
-      <div class="step-desc">最後一步！填完送出，24小時內收到完整方案。</div>
+      <div class="step-eyebrow">STEP 2 / 5</div>
+      <div class="step-title">讓我認識你</div>
+      <div class="step-desc">這些資料用於產出你的專屬品牌建議。</div>
     </div>
     <div class="card">
-      <label class="fl">LINE 個人連結</label>
-      <input type="url" id="m_line_personal" placeholder="https://line.me/ti/p/yourID">
-      <label class="fl">LINE 官方帳號</label>
-      <input type="url" id="m_line_oa" placeholder="https://lin.ee/yourOA">
-      <label class="fl">地址（有實體據點才填）</label>
-      <input type="text" id="m_address" placeholder="例：台東市中正路1號">
+      <label class="fl">姓名／品牌名稱 <span class="req">*</span></label>
+      <input type="text" id="name" placeholder="例：王小明 ／ 幸福烘焙坊">
+      <label class="fl">職稱／副標</label>
+      <input type="text" id="title" placeholder="例：健康烘焙師 ／ 幸福生活顧問">
+      <label class="fl">電話 <span class="req">*</span></label>
+      <input type="tel" id="phone" placeholder="例：0912-345-678">
+      <label class="fl">Email</label>
+      <input type="email" id="email" placeholder="example@mail.com">
+      <label class="fl">LINE ID</label>
+      <input type="text" id="line_id" placeholder="方便後續聯繫">
     </div>
-    <div class="card">
-      <div style="font-size:14px;font-weight:700;color:var(--brown-dark);margin-bottom:10px;">現有平台連結</div>
-      <label class="fl">YouTube</label>
-      <input type="url" id="m_youtube" placeholder="https://www.youtube.com/@yourchannel">
-      <label class="fl">Facebook</label>
-      <input type="url" id="m_facebook" placeholder="https://www.facebook.com/yourpage">
-      <label class="fl">Instagram</label>
-      <input type="url" id="m_instagram" placeholder="https://www.instagram.com/yourid">
-      <label class="fl">其他平台</label>
-      <input type="text" id="m_other" placeholder="TikTok / 小紅書 / Threads…">
-    </div>
-
-    <!-- 場景照 -->
-    <div class="card">
-      <div class="card-q">環境／場景照片（若有）</div>
-      <div class="fh">工作室、店面、工作情境、生活風格照（最多3張）</div>
-      <div class="multi-upload-wrap">
-        <div class="multi-upload-thumbs" id="thumbs_scene"></div>
-        <div style="display:flex;align-items:center;">
-          <button class="multi-upload-btn" onclick="triggerMulti('scene')">
-            <span>🏡</span> 選擇照片
-          </button>
-          <input type="file" id="file_scene" accept="image/*" multiple style="display:none" onchange="handleMulti(this,'scene',3)">
-          <span class="multi-upload-count" id="count_scene">0 / 3</span>
-        </div>
-        <div class="upload-progress" id="prog_scene"></div>
-      </div>
-    </div>
-
-    <p id="matMsg" class="msg"></p>
   </div>
 
-  <!-- 素材完成 -->
-  <div class="mat-done" id="matDone">
-    <div class="result-hero" style="margin-bottom:12px;">
-      <div class="result-sun">☀️</div>
-      <div class="result-title">素材已收到！</div>
-      <div class="result-desc">我們會在24小時內完成品牌分析<br>並把完整方案透過LINE傳給你</div>
+  <!-- ═══ STEP 3｜品牌故事 ═══ -->
+  <div class="step" id="s3">
+    <div class="step-hero">
+      <div class="step-eyebrow">STEP 3 / 5</div>
+      <div class="step-title">多說一點，建議更準</div>
+      <div class="step-desc">說重點就好，不需要寫得很完整。</div>
     </div>
+    <div class="card">
+      <div class="card-q">你的客戶是誰？他們在煩惱什麼？ <span class="req">*</span></div>
+      <div class="fh">越具體越好，例如：35-50歲媽媽、想照顧家人健康、不知道怎麼選保健品</div>
+      <textarea id="audience" placeholder="描述你最想服務的客戶…"></textarea>
+    </div>
+    <div class="card">
+      <div class="card-q">你為什麼做這件事？</div>
+      <div class="fh">有沒有一個讓你走到這條路的故事或轉折？</div>
+      <textarea id="story" placeholder="不用寫很長，說出你最想讓客戶知道的那件事…"></textarea>
+    </div>
+    <div class="card">
+      <div class="card-q">你想要什麼感覺的品牌？</div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="style" value="溫暖療癒">🌸 溫暖療癒，像朋友一樣</label>
+        <label class="opt"><input type="radio" name="style" value="專業權威">📚 專業權威，讓人信任</label>
+        <label class="opt"><input type="radio" name="style" value="活潑有趣">✨ 活潑有趣，有感染力</label>
+        <label class="opt"><input type="radio" name="style" value="質感生活">🏡 質感生活，慢活精緻</label>
+        <label class="opt"><input type="radio" name="style" value="真實親切">💬 真實親切，說真話</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 4｜現有資源 ═══ -->
+  <div class="step" id="s4">
+    <div class="step-hero">
+      <div class="step-eyebrow">STEP 4 / 5</div>
+      <div class="step-title">你目前有什麼？</div>
+      <div class="step-desc">了解你的資源，建議才接地氣。</div>
+    </div>
+    <div class="card">
+      <div class="card-q">你有實體據點嗎？</div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="location" value="有店面工作室">🏪 有店面／工作室</label>
+        <label class="opt"><input type="radio" name="location" value="在家接單">🏠 在家接單</label>
+        <label class="opt"><input type="radio" name="location" value="線上為主">💻 線上為主</label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-q">目前已在使用的平台（可多選）</div>
+      <div class="checks" id="platformChecks">
+        <label class="chk"><input type="checkbox" value="FB">Facebook</label>
+        <label class="chk"><input type="checkbox" value="IG">Instagram</label>
+        <label class="chk"><input type="checkbox" value="YouTube">YouTube</label>
+        <label class="chk"><input type="checkbox" value="TikTok">TikTok</label>
+        <label class="chk"><input type="checkbox" value="LINE OA">LINE官方帳號</label>
+        <label class="chk"><input type="checkbox" value="Google地圖">Google地圖</label>
+        <label class="chk"><input type="checkbox" value="小紅書">小紅書</label>
+        <label class="chk"><input type="checkbox" value="都還沒有">都還沒有</label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-q">目前已有的素材（可多選）</div>
+      <div class="checks" id="materialChecks">
+        <label class="chk"><input type="checkbox" value="個人照">個人照</label>
+        <label class="chk"><input type="checkbox" value="產品照">產品照</label>
+        <label class="chk"><input type="checkbox" value="客戶見證">客戶見證</label>
+        <label class="chk"><input type="checkbox" value="Logo">Logo</label>
+        <label class="chk"><input type="checkbox" value="短影音">短影音</label>
+        <label class="chk"><input type="checkbox" value="都還沒有">都還沒有</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 5｜影音方案 ═══ -->
+  <div class="step" id="s5">
+    <div class="step-hero">
+      <div class="step-eyebrow">STEP 5 / 5</div>
+      <div class="step-title">影音方向評估</div>
+      <div class="step-desc">最後幾題，幫你找到最適合的影音策略。</div>
+    </div>
+    <div class="card">
+      <div class="card-q">你主要賣什麼？ <span class="req">*</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="sell_type" value="實體產品">📦 實體產品</label>
+        <label class="opt"><input type="radio" name="sell_type" value="服務技術">🛠 服務／技術</label>
+        <label class="opt"><input type="radio" name="sell_type" value="知識課程">🎓 知識／課程</label>
+        <label class="opt"><input type="radio" name="sell_type" value="產品加服務">🎁 產品＋服務</label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-q">你的客戶主要是？</div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="customer_type" value="一般消費者B2C">👤 一般消費者（B2C）</label>
+        <label class="opt"><input type="radio" name="customer_type" value="企業客戶B2B">🏢 企業客戶（B2B）</label>
+        <label class="opt"><input type="radio" name="customer_type" value="兩者都有">🤝 兩者都有</label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-q">你願意在鏡頭前露臉嗎？</div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="face" value="願意，沒問題">😊 願意，沒問題</label>
+        <label class="opt"><input type="radio" name="face" value="有點緊張但可以試試">😅 有點緊張但可以試試</label>
+        <label class="opt"><input type="radio" name="face" value="不太願意">🙈 不太願意</label>
+        <label class="opt"><input type="radio" name="face" value="完全不想露臉">🎭 完全不想露臉</label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-q">每週可以投入影音的時間？</div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="time_per_week" value="1-2小時">⏱ 1-2小時（很忙）</label>
+        <label class="opt"><input type="radio" name="time_per_week" value="3-5小時">⏰ 3-5小時</label>
+        <label class="opt"><input type="radio" name="time_per_week" value="5小時以上">🕐 5小時以上</label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-q">影音製作的預算範圍？</div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="budget" value="自己來零預算">💪 自己來，零預算</label>
+        <label class="opt"><input type="radio" name="budget" value="少量預算3000以下">💰 少量預算（3,000以下）</label>
+        <label class="opt"><input type="radio" name="budget" value="中等預算3000-10000">💳 中等預算（3,000-10,000）</label>
+        <label class="opt"><input type="radio" name="budget" value="有充足預算">🚀 有充足預算</label>
+      </div>
+    </div>
+    <p id="submitMsg" class="msg"></p>
+  </div>
+
+  <!-- ═══ 結果頁 ═══ -->
+  <div class="result" id="resultPage">
+
+    <div class="result-hero">
+      <div class="result-sun">☀️</div>
+      <div class="result-title">診斷完成！</div>
+      <div class="result-desc">你的品牌分析已產出<br>告訴顧問你的代碼，立即取得完整建議</div>
+    </div>
+
+    <!-- 查詢代碼 -->
     <div class="code-box">
-      <div class="code-label">📋 你的素材代碼</div>
-      <div class="code-num" id="matCode">------</div>
-      <div class="code-hint">把這個代碼告訴顧問<br>或截圖保存</div>
+      <div class="code-label">📋 你的查詢代碼</div>
+      <div class="code-num" id="diagCode">------</div>
+      <div class="code-hint">把這個代碼告訴幸福天使顧問<br>或截圖保存，隨時可以查詢</div>
       <span class="code-screenshot">📸 請截圖保存</span>
     </div>
+
+    <!-- 品牌卡點分析 -->
+    <div class="insight-box">
+      <div class="insight-label">🔍 你的品牌卡點分析</div>
+      <div class="insight-title" id="insightTitle"></div>
+      <div class="insight-desc" id="insightDesc"></div>
+    </div>
+
+    <!-- 影音方向建議 -->
+    <div class="video-box">
+      <div class="video-label">🎬 你的影音方向建議</div>
+      <div class="video-title" id="videoTitle"></div>
+      <div class="video-desc" id="videoDesc"></div>
+    </div>
+
+    <!-- 完整建議包含 -->
     <div class="next-steps">
-      <div class="next-steps-title">📦 你將收到的完整方案</div>
-      <div class="next-step-item"><div class="ns-num">1</div>品牌故事＋一句話理念×3版本</div>
-      <div class="next-step-item"><div class="ns-num">2</div>跑馬燈內容＋照片牆拍攝建議</div>
-      <div class="next-step-item"><div class="ns-num">3</div>CTA按鈕建議＋智慧名片完整規劃</div>
-      <div class="next-step-item"><div class="ns-num">4</div>影音品牌DNA＋第一支影音製作指令</div>
+      <div class="next-steps-title">📋 完整品牌建議包含</div>
+      <div class="next-step-item"><div class="ns-num">1</div>品牌卡點深度分析＋優先改善方向</div>
+      <div class="next-step-item"><div class="ns-num">2</div>智慧名片建議（故事、金句、CTA）</div>
+      <div class="next-step-item"><div class="ns-num">3</div>影音平台策略＋第一支影音製作指令</div>
+      <div class="next-step-item"><div class="ns-num">4</div>商業閉環設計＋你現在最該做的3件事</div>
     </div>
-    <div class="copy-area" style="margin-top:12px;">
+
+    <div class="notice">加入LINE官方帳號，24小時內收到完整品牌建議報告。</div>
+
+    <!-- 複製文案 -->
+    <div class="copy-area">
       <div class="copy-area-label">📋 步驟一｜複製這段文字</div>
-      <div class="copy-text" id="matCopyMsg"></div>
-      <button class="copy-btn-full" id="matCopyBtn" onclick="copyMatMsg()">一鍵複製</button>
+      <div class="copy-text" id="copyMsg"></div>
+      <button class="copy-btn-full" id="copyBtn" onclick="copyDiagMsg()">一鍵複製</button>
     </div>
-    <div class="line-box" style="margin-top:12px;">
-      <p>📲 步驟二｜加入LINE官方帳號<br>把剛才複製的文字貼給我們</p>
+
+    <!-- LINE -->
+    <div class="line-box">
+      <p>📲 步驟二｜加入LINE官方帳號<br>把剛才複製的文字貼給我們<br>24小時內收到你的專屬品牌建議</p>
       <a class="line-btn" href="https://lin.ee/UoF8eYY" target="_blank">＋ 加入 LINE 官方帳號</a>
     </div>
-  </div>
 
-  <!-- 素材導航 -->
-  <div class="nav" id="matNav" style="display:none;">
-    <button class="btn-prev" id="matPrev" onclick="matPrev()" style="display:none">← 上一步</button>
-    <button class="btn-next" id="matNext" onclick="matNext()">下一步 →</button>
-    <button class="btn-submit" id="matSubmit" onclick="submitMaterial()" style="display:none">送出取得方案 ✦</button>
-  </div>
+    <!-- 素材收集觸發 -->
+    <div class="material-trigger">
+      <div class="material-trigger-tag">深入合作</div>
+      <div class="material-trigger-title">準備好了嗎？</div>
+      <div class="material-trigger-desc">
+        填寫品牌素材，我幫你產出完整品牌方案＋建立智慧名片<br>
+        填完約5分鐘，24小時內收到完整方案
+      </div>
+      <button class="material-trigger-btn" onclick="showMaterial()">填寫品牌素材，取得完整方案 →</button>
+    </div>
 
-</div><!-- /materialSection -->
+    <!-- ═══ 素材收集區 ═══ -->
+    <div id="materialSection">
 
-<!-- ═══ Firebase 上傳 JS ═══ -->
-<script type="module">
-import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
+      <!-- SM1 -->
+      <div class="step on" id="sm1">
+        <div class="step-hero">
+          <div class="step-eyebrow">素材收集 1 / 4</div>
+          <div class="step-title">你是誰</div>
+          <div class="step-desc">名片上的基本身份資訊。</div>
+        </div>
+        <div class="card">
+          <label class="fl">職稱／副標</label>
+          <input type="text" id="m_title" placeholder="例：健康烘焙師 ／ 幸福生活顧問">
+          <label class="fl">單位／公司</label>
+          <input type="text" id="m_company" placeholder="例：天使幸福股份有限公司">
+        </div>
+      </div>
 
-const FB_CONFIG = {
-  apiKey: "AIzaSyD8DTzmzyuDFkrBMjGNZkJoN9fcY9_8mb4",
-  authDomain: "happiness-smart-card-pro-7389a.firebaseapp.com",
-  projectId: "happiness-smart-card-pro-7389a",
-  storageBucket: "happiness-smart-card-pro-7389a.firebasestorage.app",
-  messagingSenderId: "143313936007",
-  appId: "1:143313936007:web:7c948563c51e8a47d3a222"
-};
+      <!-- SM2 -->
+      <div class="step" id="sm2">
+        <div class="step-hero">
+          <div class="step-eyebrow">素材收集 2 / 4</div>
+          <div class="step-title">你的核心故事</div>
+          <div class="step-desc">品牌DNA最重要的原料，說真話就好。</div>
+        </div>
+        <div class="card">
+          <div class="card-q">為什麼做這件事？ <span class="req">*</span></div>
+          <div class="fh">有沒有一個轉折或經歷，讓你走到現在這條路？</div>
+          <textarea id="m_story" placeholder="例：我媽媽生病的時候，我才發現原來健康不能等……"></textarea>
+        </div>
+        <div class="card">
+          <div class="card-q">目標客群是誰？他們的痛點是什麼？ <span class="req">*</span></div>
+          <div class="fh">你最想幫助的人是誰？他們在煩惱什麼？</div>
+          <textarea id="m_audience" placeholder="例：35-55歲的媽媽，工作忙碌，想照顧家人健康但不知從哪開始……"></textarea>
+        </div>
+      </div>
 
-const app = getApps().length ? getApps()[0] : initializeApp(FB_CONFIG);
-const auth = getAuth(app);
-const storage = getStorage(app);
+      <!-- SM3 -->
+      <div class="step" id="sm3">
+        <div class="step-hero">
+          <div class="step-eyebrow">素材收集 3 / 4</div>
+          <div class="step-title">品牌風格偏好</div>
+          <div class="step-desc">幫我理解你想呈現的感覺。</div>
+        </div>
+        <div class="card">
+          <div class="card-q">你希望客戶感受到什麼？ <span class="req">*</span></div>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="m_style" value="溫暖療癒，像朋友一樣">🌸 溫暖療癒，像朋友一樣</label>
+            <label class="opt"><input type="radio" name="m_style" value="專業權威，讓人信任放心">📚 專業權威，讓人信任放心</label>
+            <label class="opt"><input type="radio" name="m_style" value="活潑有趣，有能量有感染力">✨ 活潑有趣，有能量有感染力</label>
+            <label class="opt"><input type="radio" name="m_style" value="質感生活，慢活精緻有品味">🏡 質感生活，慢活精緻有品味</label>
+            <label class="opt"><input type="radio" name="m_style" value="真實親切，說真話有溫度">💬 真實親切，說真話有溫度</label>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-q">不想要的感覺</div>
+          <textarea id="m_avoid" placeholder="例：不要太推銷感、不要太正式"></textarea>
+        </div>
+      </div>
 
-// 確保匿名登入
-async function ensureAuth() {
-  if (auth.currentUser) return auth.currentUser;
-  return (await signInAnonymously(auth)).user;
-}
+      <!-- SM4 -->
+      <div class="step" id="sm4">
+        <div class="step-hero">
+          <div class="step-eyebrow">素材收集 4 / 4</div>
+          <div class="step-title">聯繫與平台</div>
+          <div class="step-desc">最後一步！填完送出，24小時內收到完整方案。</div>
+        </div>
+        <div class="card">
+          <label class="fl">LINE 個人連結</label>
+          <input type="url" id="m_line_personal" placeholder="https://line.me/ti/p/yourID">
+          <label class="fl">LINE 官方帳號</label>
+          <input type="url" id="m_line_oa" placeholder="https://lin.ee/yourOA">
+          <label class="fl">地址（有實體據點才填）</label>
+          <input type="text" id="m_address" placeholder="例：台東市中正路1號">
+        </div>
+        <div class="card">
+          <div style="font-size:14px;font-weight:700;color:var(--brown-dark);margin-bottom:10px;">現有平台連結（有哪些填哪些）</div>
+          <label class="fl">YouTube</label>
+          <input type="url" id="m_youtube" placeholder="https://www.youtube.com/@yourchannel">
+          <label class="fl">Facebook</label>
+          <input type="url" id="m_facebook" placeholder="https://www.facebook.com/yourpage">
+          <label class="fl">Instagram</label>
+          <input type="url" id="m_instagram" placeholder="https://www.instagram.com/yourid">
+          <label class="fl">其他平台</label>
+          <input type="text" id="m_other" placeholder="TikTok / 小紅書 / Threads…">
+        </div>
+        <p id="matMsg" class="msg"></p>
+      </div>
 
-// 上傳單張圖片，回傳 URL
-async function uploadPhoto(blob, path) {
-  await ensureAuth();
-  const storageRef = ref(storage, path);
-  await uploadBytes(storageRef, blob, {
-    contentType: blob.type || 'image/jpeg',
-    cacheControl: 'public,max-age=31536000,immutable'
-  });
-  return await getDownloadURL(storageRef);
-}
+      <!-- 素材完成 -->
+      <div class="mat-done" id="matDone">
+        <div class="result-hero" style="margin-bottom:12px;">
+          <div class="result-sun">☀️</div>
+          <div class="result-title">素材已收到！</div>
+          <div class="result-desc">我們會在24小時內完成品牌分析<br>並把完整方案透過LINE傳給你</div>
+        </div>
 
-// 產生診斷素材專用路徑
-function diagPath(phone, type, index) {
-  const p = (phone || '').replace(/\D/g, '') || 'unknown';
-  const ts = Date.now().toString(36);
-  return `diagnosis/${p}_${ts}/${type}${index !== undefined ? '_' + index : ''}.jpg`;
-}
+        <!-- 素材代碼 -->
+        <div class="code-box">
+          <div class="code-label">📋 你的素材代碼</div>
+          <div class="code-num" id="matCode">------</div>
+          <div class="code-hint">把這個代碼告訴顧問<br>或截圖保存</div>
+          <span class="code-screenshot">📸 請截圖保存</span>
+        </div>
 
-// 掛載到 window 供一般 script 呼叫
-window._fbUpload = { uploadPhoto, diagPath };
-</script>
+        <div class="next-steps">
+          <div class="next-steps-title">📦 你將收到的完整方案</div>
+          <div class="next-step-item"><div class="ns-num">1</div>品牌故事＋一句話理念×3版本</div>
+          <div class="next-step-item"><div class="ns-num">2</div>跑馬燈內容＋照片牆拍攝建議</div>
+          <div class="next-step-item"><div class="ns-num">3</div>CTA按鈕建議＋智慧名片完整規劃</div>
+          <div class="next-step-item"><div class="ns-num">4</div>影音品牌DNA＋第一支影音製作指令</div>
+        </div>
+
+        <div class="copy-area" style="margin-top:12px;">
+          <div class="copy-area-label">📋 步驟一｜複製這段文字</div>
+          <div class="copy-text" id="matCopyMsg"></div>
+          <button class="copy-btn-full" id="matCopyBtn" onclick="copyMatMsg()">一鍵複製</button>
+        </div>
+
+        <div class="line-box" style="margin-top:12px;">
+          <p>📲 步驟二｜加入LINE官方帳號<br>把剛才複製的文字貼給我們</p>
+          <a class="line-btn" href="https://lin.ee/UoF8eYY" target="_blank">＋ 加入 LINE 官方帳號</a>
+        </div>
+      </div>
+
+      <!-- 素材導航 -->
+      <div class="nav" id="matNav">
+        <button class="btn-prev" id="matPrev" onclick="matPrev()" style="display:none">← 上一步</button>
+        <button class="btn-next" id="matNext" onclick="matNext()">下一步 →</button>
+        <button class="btn-submit" id="matSubmit" onclick="submitMaterial()" style="display:none">送出取得方案 ✦</button>
+      </div>
+
+    </div><!-- /materialSection -->
+
+  </div><!-- /resultPage -->
+
+</div><!-- /wrap -->
+
+<!-- 主導航 -->
+<div class="nav" id="navBar">
+  <button class="btn-prev" id="btnPrev" onclick="prev()" style="display:none">← 上一步</button>
+  <button class="btn-next" id="btnNext" onclick="next()">下一步 →</button>
+  <button class="btn-submit" id="btnSubmit" onclick="submit()" style="display:none">送出，取得診斷 ✦</button>
+</div>
 
 <script>
-// ─── 照片狀態管理 ───
-const photoUrls = {
-  avatar: '',
-  logo: '',
-  product: [],  // 最多10張
-  witness: [],  // 最多3張
-  scene: []     // 最多3張
-};
-
-// 單張上傳觸發
-function triggerUpload(type) {
-  document.getElementById('file_' + type).click();
-}
-
-// 單張處理（avatar / logo）
-async function handleSingle(input, type) {
-  const file = input.files[0];
-  if (!file) return;
-
-  const prog = document.getElementById('prog_' + type);
-  const slot = document.getElementById('slot_' + type);
-  const prev = document.getElementById('prev_' + type);
-
-  // 先顯示本地預覽
-  const localUrl = URL.createObjectURL(file);
-  prev.src = localUrl;
-  slot.classList.add('has-img');
-  prog.textContent = '上傳中…';
-
-  try {
-    const phone = document.getElementById('phone') ? document.getElementById('phone').value.replace(/\D/g,'') : 'unknown';
-    const path = window._fbUpload.diagPath(phone, type);
-    const url = await window._fbUpload.uploadPhoto(file, path);
-    photoUrls[type] = url;
-    prog.textContent = '✓ 上傳完成';
-    setTimeout(() => { prog.textContent = ''; }, 2000);
-  } catch(e) {
-    prog.textContent = '上傳失敗，請重試';
-    console.error(e);
-  }
-}
-
-// 移除單張
-function removeSingle(event, type) {
-  event.stopPropagation();
-  photoUrls[type] = '';
-  document.getElementById('prev_' + type).src = '';
-  document.getElementById('slot_' + type).classList.remove('has-img');
-  document.getElementById('file_' + type).value = '';
-  document.getElementById('prog_' + type).textContent = '';
-}
-
-// 多張上傳觸發
-function triggerMulti(type) {
-  document.getElementById('file_' + type).click();
-}
-
-// 多張處理
-async function handleMulti(input, type, maxCount) {
-  const files = Array.from(input.files);
-  if (!files.length) return;
-
-  const current = photoUrls[type].length;
-  const remaining = maxCount - current;
-  if (remaining <= 0) {
-    alert('最多上傳 ' + maxCount + ' 張');
-    return;
-  }
-
-  const toUpload = files.slice(0, remaining);
-  const prog = document.getElementById('prog_' + type);
-  prog.textContent = '上傳中 0 / ' + toUpload.length + '…';
-
-  const phone = document.getElementById('phone') ? document.getElementById('phone').value.replace(/\D/g,'') : 'unknown';
-  let done = 0;
-
-  for (const file of toUpload) {
-    // 先顯示本地縮圖
-    const localUrl = URL.createObjectURL(file);
-    addThumb(type, localUrl, photoUrls[type].length);
-
-    try {
-      const idx = photoUrls[type].length;
-      const path = window._fbUpload.diagPath(phone, type, idx);
-      const url = await window._fbUpload.uploadPhoto(file, path);
-      photoUrls[type].push(url);
-      done++;
-      prog.textContent = '上傳中 ' + done + ' / ' + toUpload.length + '…';
-    } catch(e) {
-      console.error('上傳失敗:', e);
-    }
-  }
-
-  updateCount(type, maxCount);
-  prog.textContent = '✓ ' + done + ' 張上傳完成';
-  setTimeout(() => { prog.textContent = ''; }, 2000);
-  input.value = '';
-}
-
-// 新增縮圖
-function addThumb(type, url, idx) {
-  const container = document.getElementById('thumbs_' + type);
-  const wrap = document.createElement('div');
-  wrap.className = 'multi-thumb-wrap';
-  wrap.dataset.idx = idx;
-  wrap.innerHTML = `
-    <img class="multi-thumb" src="${url}" onclick="zoomPhoto('${url}')">
-    <button class="multi-thumb-remove" onclick="removeThumb('${type}',${idx},this.closest('.multi-thumb-wrap'))">✕</button>
-  `;
-  container.appendChild(wrap);
-}
-
-// 移除縮圖
-function removeThumb(type, idx, el) {
-  photoUrls[type].splice(idx, 1);
-  el.remove();
-  // 重新編號
-  const thumbs = document.querySelectorAll('#thumbs_' + type + ' .multi-thumb-wrap');
-  thumbs.forEach((t, i) => { t.dataset.idx = i; });
-  const maxMap = { product: 10, witness: 3, scene: 3 };
-  updateCount(type, maxMap[type]);
-}
-
-// 更新計數
-function updateCount(type, max) {
-  document.getElementById('count_' + type).textContent = photoUrls[type].length + ' / ' + max;
-}
-
-// 點縮圖放大
-function zoomPhoto(url) {
-  const overlay = document.createElement('div');
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;display:flex;align-items:center;justify-content:center;';
-  overlay.innerHTML = `<img src="${url}" style="max-width:95vw;max-height:90vh;border-radius:12px;box-shadow:0 0 40px rgba(0,0,0,.5);">`;
-  overlay.onclick = () => overlay.remove();
-  document.body.appendChild(overlay);
-}
-
-// ─── 素材收集流程 ───
+const GAS = 'https://script.google.com/macros/s/AKfycbxpxXKX-rE3VfqYiRqjoDGtruYI0Q1CjOk3jGyBCcAwMR0Erf__TmL5snJikX3KMDYZ/exec';
+const TOTAL = 5;
+let cur = 1;
+let diagCode = '';
 let matCur = 1;
 const MAT_TOTAL = 4;
 
+// ─── 主流程 ───
+function upd() {
+  const pct = (cur / TOTAL) * 100;
+  document.getElementById('progBar').style.width = pct + '%';
+  document.getElementById('progLabel').textContent = '第 ' + cur + ' 步，共 ' + TOTAL + ' 步';
+  document.getElementById('btnPrev').style.display = cur > 1 ? 'block' : 'none';
+  document.getElementById('btnNext').style.display = cur < TOTAL ? 'block' : 'none';
+  document.getElementById('btnSubmit').style.display = cur === TOTAL ? 'block' : 'none';
+}
+
+function next() {
+  if (!validate(cur)) return;
+  document.getElementById('s' + cur).classList.remove('on');
+  cur++;
+  document.getElementById('s' + cur).classList.add('on');
+  upd();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prev() {
+  document.getElementById('s' + cur).classList.remove('on');
+  cur--;
+  document.getElementById('s' + cur).classList.add('on');
+  upd();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function validate(step) {
+  if (step === 1) {
+    if (!rv('industry')) { alert('請選擇你的行業'); return false; }
+    if (!cv('painChecks')) { alert('請選擇目前的困境'); return false; }
+    if (!rv('cta_goal')) { alert('請選擇希望客戶做什麼'); return false; }
+  }
+  if (step === 2) {
+    if (!v('name')) { alert('請填寫姓名／品牌名稱'); return false; }
+    if (!v('phone')) { alert('請填寫電話'); return false; }
+  }
+  if (step === 3) {
+    if (!v('audience')) { alert('請描述你的目標客群'); return false; }
+  }
+  if (step === 5) {
+    if (!rv('sell_type')) { alert('請選擇你主要賣什麼'); return false; }
+  }
+  return true;
+}
+
+async function submit() {
+  const msg = document.getElementById('submitMsg');
+  msg.textContent = '送出中，請稍候…';
+
+  const pains = getChecked('#painChecks');
+  const platforms = getChecked('#platformChecks');
+  const materials = getChecked('#materialChecks');
+  const industry = rv('industry');
+
+  const payload = {
+    name: v('name'), phone: v('phone'), email: v('email'),
+    line_id: v('line_id'), business_name: v('title'),
+    industry,
+    pain_points: pains,
+    cta_goals: [rv('cta_goal')],
+    materials,
+    growth_goals: [],
+    long_term_mindset: '',
+    audience: v('audience'),
+    story: v('story'),
+    style: rv('style'),
+    location: rv('location'),
+    platforms,
+    sell_type: rv('sell_type'),
+    customer_type: rv('customer_type'),
+    face: rv('face'),
+    time_per_week: rv('time_per_week'),
+    budget: rv('budget')
+  };
+
+  let code = '';
+  try {
+    const res = await fetch(GAS, { method: 'POST', body: JSON.stringify({ action: 'submitDiagnosis', payload }) });
+    const data = await res.json();
+    if (data.ok && data.code) code = data.code;
+  } catch(e) {}
+
+  // 備用代碼（GAS失敗時）
+  if (!code) {
+    const p = (v('phone')||'').replace(/\D/g,'');
+    const last4 = p.length >= 4 ? p.slice(-4) : '0000';
+    code = last4 + Math.random().toString(36).slice(-2).toUpperCase();
+  }
+
+  diagCode = code;
+  document.getElementById('diagCode').textContent = code;
+
+  // 即時診斷分析
+  const insight = getInsight(pains, industry);
+  document.getElementById('insightTitle').textContent = insight.title;
+  document.getElementById('insightDesc').textContent = insight.desc;
+
+  // 即時影音建議
+  const video = getVideoSuggestion(rv('face'), rv('time_per_week'), rv('budget'), platforms);
+  document.getElementById('videoTitle').textContent = video.title;
+  document.getElementById('videoDesc').textContent = video.desc;
+
+  // 複製文案
+  const clientName = v('name') || '我';
+  const industryText = industry || '';
+  document.getElementById('copyMsg').textContent =
+    '我是' + clientName + '，已送出品牌診斷' +
+    (industryText ? '（' + industryText + '）' : '') +
+    '，查詢代碼：' + code + ' ☀️';
+
+  // 切換到結果頁
+  document.getElementById('s5').classList.remove('on');
+  document.getElementById('resultPage').classList.add('on');
+  document.getElementById('navBar').style.display = 'none';
+  document.getElementById('progLabel').style.display = 'none';
+  document.getElementById('progBar').style.width = '100%';
+  msg.textContent = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── 即時分析 ───
+function getInsight(pains, industry) {
+  if (pains.includes('缺曝光') || pains.includes('沒有固定客源')) {
+    return {
+      title: '你的核心問題：還沒建立穩定的流量入口',
+      desc: '你有能力，但市場還不知道你的存在。最快的突破口是建立一個讓人找得到你的數位入口——Google地圖、短影音或智慧名片，讓有需求的人主動找上門。'
+    };
+  }
+  if (pains.includes('缺信任') || pains.includes('沒有品牌感')) {
+    return {
+      title: '你的核心問題：有人看但不信任你',
+      desc: '流量不是問題，轉換才是問題。客戶看了但不行動，通常是品牌說服力不足。你需要一個讓人「一看就懂、一看就信任」的完整品牌呈現。'
+    };
+  }
+  if (pains.includes('缺成交') || pains.includes('不知道怎麼導流')) {
+    return {
+      title: '你的核心問題：客戶看完不知道下一步',
+      desc: '有人看但沒有行動，通常是缺少明確的成交路徑。每個接觸點都需要清楚的CTA，一步一步引導客戶走向成交。'
+    };
+  }
+  if (pains.includes('不知道做內容') || pains.includes('不知道問題在哪')) {
+    return {
+      title: '你的核心問題：方向還不夠清楚',
+      desc: '方向不清楚是最消耗能量的狀態。你需要先確認品牌定位和目標客群，再決定內容策略，才不會做了很多卻沒有累積。'
+    };
+  }
+  return {
+    title: '你的品牌需要一套整合的曝光系統',
+    desc: '多個卡點同時存在，代表你需要的不是單點優化，而是建立一套從曝光到成交的完整流程。智慧名片是整合各個入口最快的起點。'
+  };
+}
+
+function getVideoSuggestion(face, time, budget, platforms) {
+  if (face === '完全不想露臉') {
+    return {
+      title: '建議：圖文內容＋產品展示影片',
+      desc: '不露臉也可以做很好的影音！建議從產品特寫、手作過程、文字動態圖開始。IG圖文和FB貼文是你最適合的起點，不需要出現在鏡頭前。'
+    };
+  }
+  if (time === '1-2小時') {
+    return {
+      title: '建議：每週一支短影音，聚焦單一平台',
+      desc: '時間有限，就要精準。建議先選一個平台深耕，內容模板化——同一個框架每週換一個主題，30秒IG Reels或YouTube Shorts是最高效的選擇。'
+    };
+  }
+  if (platforms.includes('YouTube') || platforms.includes('IG')) {
+    return {
+      title: '建議：善用你已有的平台，加強短影音比例',
+      desc: '你已經有平台基礎！現在最重要的是提高短影音比例——YouTube Shorts和IG Reels的觸及率是一般貼文的3-5倍，是快速擴大曝光的關鍵。'
+    };
+  }
+  return {
+    title: '建議：從一支「自我介紹影片」開始',
+    desc: '什麼都沒有的時候，最重要的第一支影片是「你是誰、你幫助誰、為什麼找你」。60秒說清楚，放在名片CTA按鈕，讓每個看到名片的人都能立刻認識你。'
+  };
+}
+
+// ─── 素材收集 ───
 function showMaterial() {
   document.getElementById('materialSection').style.display = 'block';
   document.getElementById('matNav').style.display = 'flex';
@@ -504,11 +814,11 @@ function matPrev() {
 
 function matValidate(step) {
   if (step === 2) {
-    if (!document.getElementById('m_story').value.trim()) { alert('請填寫核心故事'); return false; }
-    if (!document.getElementById('m_audience').value.trim()) { alert('請填寫目標客群'); return false; }
+    if (!v('m_story')) { alert('請填寫核心故事'); return false; }
+    if (!v('m_audience')) { alert('請填寫目標客群'); return false; }
   }
   if (step === 3) {
-    if (!document.querySelector('input[name="m_style"]:checked')) { alert('請選擇品牌風格'); return false; }
+    if (!rv('m_style')) { alert('請選擇品牌風格'); return false; }
   }
   return true;
 }
@@ -517,36 +827,19 @@ async function submitMaterial() {
   const msg = document.getElementById('matMsg');
   msg.textContent = '送出中，請稍候…';
 
-  const phone = document.getElementById('phone') ? document.getElementById('phone').value.trim() : '';
-
   const payload = {
-    industry: document.querySelector('input[name="industry"]:checked')?.value || '',
-    cta_goal: document.querySelector('input[name="cta_goal"]:checked')?.value || '',
-    name: document.getElementById('name')?.value.trim() || '',
-    phone,
-    email: document.getElementById('email')?.value.trim() || '',
-    title: document.getElementById('m_title')?.value.trim() || '',
-    company: document.getElementById('m_company')?.value.trim() || '',
-    core_story: document.getElementById('m_story')?.value.trim() || '',
-    target_audience: document.getElementById('m_audience')?.value.trim() || '',
-    style: document.querySelector('input[name="m_style"]:checked')?.value || '',
-    avoid_style: document.getElementById('m_avoid')?.value.trim() || '',
-    line_personal: document.getElementById('m_line_personal')?.value.trim() || '',
-    line_oa: document.getElementById('m_line_oa')?.value.trim() || '',
-    address: document.getElementById('m_address')?.value.trim() || '',
-    youtube: document.getElementById('m_youtube')?.value.trim() || '',
-    facebook: document.getElementById('m_facebook')?.value.trim() || '',
-    instagram: document.getElementById('m_instagram')?.value.trim() || '',
-    other_platform: document.getElementById('m_other')?.value.trim() || '',
-    // 照片URLs
-    photo_avatar: photoUrls.avatar,
-    photo_logo: photoUrls.logo,
-    photo_product: photoUrls.product,
-    photo_witness: photoUrls.witness,
-    photo_scene: photoUrls.scene
+    industry: rv('industry') || '',
+    cta_goal: rv('cta_goal') || '',
+    name: v('name'), phone: v('phone'), email: v('email'),
+    title: v('m_title'), company: v('m_company'),
+    core_story: v('m_story'), target_audience: v('m_audience'),
+    style: rv('m_style'), avoid_style: v('m_avoid'),
+    line_personal: v('m_line_personal'), line_oa: v('m_line_oa'),
+    address: v('m_address'), youtube: v('m_youtube'),
+    facebook: v('m_facebook'), instagram: v('m_instagram'),
+    other_platform: v('m_other')
   };
 
-  const GAS = 'https://script.google.com/macros/s/AKfycbxpxXKX-rE3VfqYiRqjoDGtruYI0Q1CjOk3jGyBCcAwMR0Erf__TmL5snJikX3KMDYZ/exec';
   let mCode = '';
   try {
     const res = await fetch(GAS, { method: 'POST', body: JSON.stringify({ action: 'submitMaterial', payload }) });
@@ -555,31 +848,45 @@ async function submitMaterial() {
   } catch(e) {}
 
   if (!mCode) {
-    const p = phone.replace(/\D/g,'');
+    const p = (v('phone')||'').replace(/\D/g,'');
     const last4 = p.length >= 4 ? p.slice(-4) : '0000';
     mCode = last4 + Math.random().toString(36).slice(-2).toUpperCase();
   }
 
   document.getElementById('matCode').textContent = mCode;
 
+  // 隱藏表單步驟
   for (let i = 1; i <= MAT_TOTAL; i++) {
     const el = document.getElementById('sm' + i);
     if (el) el.classList.remove('on');
   }
 
-  const matName = document.getElementById('name')?.value.trim() || '我';
-  const matIndustry = document.querySelector('input[name="industry"]:checked')?.value || '';
-  const photoCount = photoUrls.product.length + photoUrls.witness.length + photoUrls.scene.length +
-    (photoUrls.avatar ? 1 : 0) + (photoUrls.logo ? 1 : 0);
+  // 產生素材複製文字
+  const matName = v('name') || '我';
+  const matIndustry = rv('industry') || '';
   document.getElementById('matCopyMsg').textContent =
     '我是' + matName + '，已送出品牌素材' +
     (matIndustry ? '（' + matIndustry + '）' : '') +
-    '，共上傳' + photoCount + '張照片，素材代碼：' + mCode + ' ☀️';
+    '，素材代碼：' + mCode + ' ☀️';
 
   document.getElementById('matDone').classList.add('on');
   document.getElementById('matNav').style.display = 'none';
   msg.textContent = '';
   window.scrollTo({ top: document.getElementById('matDone').offsetTop - 20, behavior: 'smooth' });
+}
+
+// ─── 複製 ───
+function copyDiagMsg() {
+  const text = document.getElementById('copyMsg').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✓ 已複製！去貼到LINE OA';
+    btn.style.background = '#4caf50';
+    setTimeout(() => {
+      btn.textContent = '一鍵複製';
+      btn.style.background = 'linear-gradient(135deg,var(--gold),var(--gold-light))';
+    }, 3000);
+  });
 }
 
 function copyMatMsg() {
@@ -594,4 +901,25 @@ function copyMatMsg() {
     }, 3000);
   });
 }
+
+// ─── 工具函數 ───
+function v(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+function rv(name) { const el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ''; }
+function cv(groupId) { return document.querySelectorAll('#' + groupId + ' input:checked').length > 0; }
+function getChecked(selector) { return Array.from(document.querySelectorAll(selector + ' input:checked')).map(i => i.value); }
+
+document.addEventListener('change', function(e) {
+  if (e.target.type === 'radio') {
+    document.querySelectorAll('input[name="' + e.target.name + '"]').forEach(r => {
+      r.closest('.opt').classList.toggle('sel', r.checked);
+    });
+  }
+  if (e.target.type === 'checkbox') {
+    e.target.closest('.chk').classList.toggle('sel', e.target.checked);
+  }
+});
+
+upd();
 </script>
+</body>
+</html>
