@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>幸福天使｜品牌素材收集</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold:#b8860b;--gold-light:#d4a017;--gold-bright:#f0c040;
+      --gold-pale:#fdf3d8;--gold-border:#e8d4a0;
+      --brown-dark:#2a1a06;--brown-mid:#5a3a14;--brown-light:#8a6030;
+      --cream:#fdfaf3;--dark:#1a1008;--green:#06c755;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:"Noto Sans TC",sans-serif;background:var(--cream);color:var(--brown-dark);}
+
+    .hero{background:linear-gradient(160deg,var(--dark) 0%,#2e1f0a 50%,#4a2e0e 100%);padding:36px 24px 30px;text-align:center;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 30%,rgba(184,134,11,.25) 0%,transparent 55%);}
+    .hero-content{position:relative;}
+    .hero-sun{font-size:44px;display:block;margin-bottom:8px;filter:drop-shadow(0 0 20px rgba(212,160,23,.8));animation:sp 4s ease-in-out infinite;}
+    @keyframes sp{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+    .hero-tag{display:inline-block;background:rgba(184,134,11,.2);border:1px solid rgba(184,134,11,.4);color:var(--gold-bright);font-size:11px;font-weight:700;padding:5px 14px;border-radius:999px;letter-spacing:2px;margin-bottom:12px;}
+    .hero h1{font-family:"Noto Serif TC",serif;font-size:22px;font-weight:900;color:#fff;line-height:1.5;margin-bottom:8px;}
+    .hero h1 em{color:var(--gold-bright);font-style:normal;}
+    .hero-sub{font-size:12px;color:rgba(255,255,255,.6);line-height:1.8;}
+
+    .prog-wrap{background:rgba(0,0,0,.08);height:3px;}
+    .prog-bar{background:linear-gradient(90deg,var(--gold),var(--gold-bright));height:3px;transition:width .4s ease;}
+    .prog-label{text-align:center;font-size:11px;color:var(--brown-light);padding:7px 0 2px;letter-spacing:.5px;}
+
+    .wrap{max-width:580px;margin:0 auto;padding:0 16px 110px;}
+
+    .step{display:none;}
+    .step.on{display:block;}
+
+    .step-hero{background:linear-gradient(135deg,var(--gold-pale),#fde9bb);border-radius:0 0 20px 20px;padding:16px 20px 14px;margin-bottom:12px;border:1px solid var(--gold-border);border-top:none;}
+    .step-eyebrow{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:2px;margin-bottom:3px;}
+    .step-title{font-family:"Noto Serif TC",serif;font-size:18px;font-weight:900;color:var(--brown-dark);line-height:1.5;}
+    .step-desc{font-size:12px;color:var(--brown-light);margin-top:4px;line-height:1.7;}
+
+    .card{background:#fff;border-radius:16px;padding:16px;margin:10px 0;border:1px solid var(--gold-border);box-shadow:0 2px 10px rgba(80,50,20,.05);}
+    .card-q{font-size:14px;font-weight:700;color:var(--brown-dark);margin-bottom:10px;}
+    .req{color:var(--gold);}
+
+    .opts{display:flex;flex-direction:column;gap:7px;}
+    .opt{background:var(--gold-pale);border:1.5px solid var(--gold-border);border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer;transition:all .18s;}
+    .opt input{accent-color:var(--gold);width:15px;height:15px;flex-shrink:0;}
+    .opt.sel{background:#fff3d0;border-color:var(--gold);}
+
+    .fl{display:block;font-size:12px;font-weight:700;color:var(--brown-mid);margin:10px 0 4px;}
+    .fh{font-size:11px;color:var(--brown-light);margin-bottom:5px;line-height:1.6;}
+    input[type="text"],input[type="tel"],input[type="email"],input[type="url"],textarea{width:100%;padding:11px 13px;border:1.5px solid var(--gold-border);border-radius:11px;font-size:14px;font-family:"Noto Sans TC",sans-serif;background:var(--gold-pale);color:var(--brown-dark);outline:none;transition:border-color .2s;}
+    input:focus,textarea:focus{border-color:var(--gold);}
+    textarea{resize:vertical;min-height:80px;line-height:1.7;}
+
+    .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:580px;background:#fff;border-top:1px solid var(--gold-border);padding:10px 16px;display:flex;gap:10px;z-index:100;}
+    .btn-prev{flex:1;padding:13px;background:#f0e4c8;color:var(--brown-mid);border:none;border-radius:12px;font-size:14px;font-weight:700;font-family:"Noto Sans TC",sans-serif;cursor:pointer;}
+    .btn-next{flex:2;padding:13px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;font-family:"Noto Sans TC",sans-serif;cursor:pointer;box-shadow:0 4px 14px rgba(184,134,11,.3);}
+    .btn-submit{flex:2;padding:13px;background:var(--brown-dark);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;font-family:"Noto Sans TC",sans-serif;cursor:pointer;}
+    .msg{font-size:12px;color:var(--brown-light);text-align:center;margin-top:6px;min-height:16px;}
+
+    /* 上傳 */
+    .upload-slot{border:2px dashed var(--gold-border);border-radius:12px;background:var(--gold-pale);min-height:90px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .18s;position:relative;overflow:hidden;}
+    .upload-slot:hover{border-color:var(--gold);background:#fff3d0;}
+    .upload-slot.has-img{border-style:solid;border-color:var(--gold);}
+    .upload-slot input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2;}
+    .upload-slot-icon{font-size:24px;margin-bottom:4px;}
+    .upload-slot-text{font-size:11px;color:var(--brown-light);font-weight:700;text-align:center;padding:0 8px;}
+    .upload-slot-sub{font-size:10px;color:var(--brown-light);opacity:.6;}
+    .upload-preview{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;z-index:1;border-radius:10px;}
+    .upload-remove{position:absolute;top:4px;right:4px;z-index:3;background:rgba(0,0,0,.5);color:#fff;border:none;border-radius:50%;width:22px;height:22px;font-size:12px;cursor:pointer;display:none;align-items:center;justify-content:center;}
+    .upload-slot.has-img .upload-remove{display:flex;}
+    .upload-slot.has-img .upload-slot-icon,.upload-slot.has-img .upload-slot-text,.upload-slot.has-img .upload-slot-sub{display:none;}
+    .multi-upload-wrap{border:1.5px solid var(--gold-border);border-radius:12px;padding:12px;background:var(--gold-pale);}
+    .multi-upload-thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;min-height:40px;}
+    .multi-thumb-wrap{position:relative;}
+    .multi-thumb{width:60px;height:60px;border-radius:8px;object-fit:cover;border:2px solid var(--gold-border);cursor:pointer;display:block;}
+    .multi-thumb-remove{position:absolute;top:-4px;right:-4px;background:var(--brown-dark);color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+    .multi-upload-btn{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1.5px solid var(--gold-border);border-radius:999px;padding:7px 14px;font-size:12px;font-weight:700;color:var(--brown-mid);cursor:pointer;font-family:"Noto Sans TC",sans-serif;}
+    .multi-upload-count{font-size:11px;color:var(--brown-light);margin-left:6px;}
+    .upload-progress{font-size:11px;color:var(--gold);margin-top:4px;min-height:14px;}
+    .photo-zoom-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;display:flex;align-items:center;justify-content:center;}
+    .photo-zoom-img{max-width:95vw;max-height:90vh;border-radius:12px;}
+
+    /* 完成頁 */
+    .done-page{display:none;padding-top:8px;}
+    .done-page.on{display:block;}
+    .result-hero{background:linear-gradient(135deg,var(--dark),#2e1f0a);border-radius:20px;padding:26px 20px;text-align:center;margin-bottom:14px;}
+    .result-sun{font-size:42px;margin-bottom:8px;filter:drop-shadow(0 0 16px rgba(212,160,23,.8));}
+    .result-title{font-family:"Noto Serif TC",serif;font-size:20px;font-weight:900;color:#fff;margin-bottom:6px;}
+    .result-desc{font-size:13px;color:rgba(255,255,255,.65);line-height:1.8;}
+    .code-box{background:linear-gradient(135deg,#fff8e6,#fff0cc);border:2px solid var(--gold);border-radius:18px;padding:20px;text-align:center;margin:12px 0;}
+    .code-label{font-size:11px;font-weight:700;color:var(--brown-mid);letter-spacing:2px;margin-bottom:8px;}
+    .code-num{font-size:44px;font-weight:900;color:var(--brown-dark);letter-spacing:8px;font-family:"Noto Serif TC",serif;line-height:1.2;}
+    .code-hint{font-size:12px;color:var(--brown-light);margin-top:8px;line-height:1.7;}
+    .code-screenshot{display:inline-block;margin-top:10px;background:var(--gold);color:#fff;font-size:12px;font-weight:700;padding:7px 16px;border-radius:999px;}
+    .next-steps{background:var(--gold-pale);border:1px solid var(--gold-border);border-radius:16px;padding:18px;margin:10px 0;}
+    .next-steps-title{font-size:13px;font-weight:700;color:var(--brown-dark);margin-bottom:10px;}
+    .next-step-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;font-size:13px;color:var(--brown-mid);line-height:1.6;}
+    .next-step-item:last-child{margin-bottom:0;}
+    .ns-num{background:var(--gold);color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;flex-shrink:0;margin-top:1px;}
+    .copy-area{background:#fff;border:1px solid var(--gold-border);border-radius:18px;padding:18px;margin:12px 0;}
+    .copy-area-label{font-size:12px;font-weight:700;color:var(--brown-dark);margin-bottom:8px;}
+    .copy-text{background:var(--gold-pale);border:1px solid var(--gold-border);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--brown-dark);line-height:1.8;}
+    .copy-btn-full{display:block;width:100%;margin-top:10px;padding:12px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:900;font-family:"Noto Sans TC",sans-serif;cursor:pointer;}
+    .line-box{background:var(--green);border-radius:18px;padding:20px;text-align:center;margin-top:12px;}
+    .line-box p{color:#fff;font-size:13px;line-height:1.8;margin-bottom:12px;}
+    .line-btn{display:inline-block;background:#fff;color:var(--green);font-weight:900;font-size:15px;padding:12px 28px;border-radius:999px;text-decoration:none;font-family:"Noto Sans TC",sans-serif;}
+
+    @media(max-width:380px){.hero h1{font-size:19px;}.code-num{font-size:36px;}}
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <span class="hero-sun">☀️</span>
+    <div class="hero-tag">幸福天使｜品牌素材收集</div>
+    <h1>讓我更了解你，<br>幫你產出<em>專屬品牌方案</em></h1>
+    <p class="hero-sub">填完約5分鐘，24小時內收到完整方案</p>
+  </div>
+</div>
+
+<div class="prog-wrap"><div class="prog-bar" id="progBar" style="width:25%"></div></div>
+<div class="prog-label" id="progLabel">第 1 步，共 4 步</div>
+
+<div class="wrap">
+
+  <!-- SM1｜你是誰 -->
+  <div class="step on" id="sm1">
+    <div class="step-hero">
+      <div class="step-eyebrow">STEP 1 / 4</div>
+      <div class="step-title">你是誰</div>
+      <div class="step-desc">名片上的基本身份資訊。</div>
+    </div>
+    <div class="card">
+      <label class="fl">姓名／品牌名稱 <span class="req">*</span></label>
+      <input type="text" id="name" placeholder="例：王小明 ／ 幸福烘焙坊">
+      <label class="fl">職稱／副標</label>
+      <input type="text" id="m_title" placeholder="例：健康烘焙師 ／ 幸福生活顧問">
+      <label class="fl">單位／公司</label>
+      <input type="text" id="m_company" placeholder="例：天使幸福股份有限公司">
+      <label class="fl">電話 <span class="req">*</span></label>
+      <input type="tel" id="phone" placeholder="例：0912-345-678">
+      <label class="fl">Email</label>
+      <input type="email" id="email" placeholder="example@mail.com">
+    </div>
+    <div class="card">
+      <div class="card-q">上傳個人照／頭像</div>
+      <div class="fh">讓客戶第一眼認識你，建議正面、清晰、有笑容</div>
+      <div class="upload-slot" id="slot_avatar" onclick="triggerUpload('avatar')">
+        <input type="file" id="file_avatar" accept="image/*" onchange="handleSingle(this,'avatar')" onclick="event.stopPropagation()">
+        <div class="upload-slot-icon">🤳</div>
+        <div class="upload-slot-text">點擊上傳個人照</div>
+        <div class="upload-slot-sub">JPG / PNG</div>
+        <img class="upload-preview" id="prev_avatar">
+        <button class="upload-remove" onclick="removeSingle(event,'avatar')">✕</button>
+      </div>
+      <div class="upload-progress" id="prog_avatar"></div>
+      <div style="margin-top:12px;">
+        <div class="card-q" style="margin-bottom:4px;">上傳Logo（若有）</div>
+        <div class="fh">品牌標誌，建議PNG透明背景</div>
+        <div class="upload-slot" id="slot_logo" onclick="triggerUpload('logo')">
+          <input type="file" id="file_logo" accept="image/*" onchange="handleSingle(this,'logo')" onclick="event.stopPropagation()">
+          <div class="upload-slot-icon">🏷</div>
+          <div class="upload-slot-text">點擊上傳Logo</div>
+          <div class="upload-slot-sub">JPG / PNG</div>
+          <img class="upload-preview" id="prev_logo">
+          <button class="upload-remove" onclick="removeSingle(event,'logo')">✕</button>
+        </div>
+        <div class="upload-progress" id="prog_logo"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SM2｜核心故事 -->
+  <div class="step" id="sm2">
+    <div class="step-hero">
+      <div class="step-eyebrow">STEP 2 / 4</div>
+      <div class="step-title">你的核心故事</div>
+      <div class="step-desc">品牌DNA最重要的原料，說真話就好。</div>
+    </div>
+    <div class="card">
+      <div class="card-q">為什麼做這件事？ <span class="req">*</span></div>
+      <div class="fh">有沒有一個轉折或經歷，讓你走到現在這條路？</div>
+      <textarea id="m_story" placeholder="例：我媽媽生病的時候，我才發現原來健康不能等……"></textarea>
+    </div>
+    <div class="card">
+      <div class="card-q">目標客群是誰？他們的痛點是什麼？ <span class="req">*</span></div>
+      <div class="fh">你最想幫助的人是誰？他們在煩惱什麼？</div>
+      <textarea id="m_audience" placeholder="例：35-55歲的媽媽，工作忙碌，想照顧家人健康但不知從哪開始……"></textarea>
+    </div>
+    <div class="card">
+      <div class="card-q">產品／服務照片（最多10張）</div>
+      <div class="fh">你的產品或服務實拍，讓我看到你在賣什麼、感覺如何</div>
+      <div class="multi-upload-wrap">
+        <div class="multi-upload-thumbs" id="thumbs_product"></div>
+        <div style="display:flex;align-items:center;">
+          <button class="multi-upload-btn" onclick="triggerMulti('product')">📷 選擇照片</button>
+          <input type="file" id="file_product" accept="image/*" multiple style="display:none" onchange="handleMulti(this,'product',10)">
+          <span class="multi-upload-count" id="count_product">0 / 10</span>
+        </div>
+        <div class="upload-progress" id="prog_product"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SM3｜品牌風格 -->
+  <div class="step" id="sm3">
+    <div class="step-hero">
+      <div class="step-eyebrow">STEP 3 / 4</div>
+      <div class="step-title">品牌風格偏好</div>
+      <div class="step-desc">幫我理解你想呈現的感覺。</div>
+    </div>
+    <div class="card">
+      <div class="card-q">你希望客戶感受到什麼？ <span class="req">*</span></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="m_style" value="溫暖療癒，像朋友一樣">🌸 溫暖療癒，像朋友一樣</label>
+        <label class="opt"><input type="radio" name="m_style" value="專業權威，讓人信任放心">📚 專業權威，讓人信任放心</label>
+        <label class="opt"><input type="radio" name="m_style" value="活潑有趣，有能量有感染力">✨ 活潑有趣，有能量有感染力</label>
+        <label class="opt"><input type="radio" name="m_style" value="質感生活，慢活精緻有品味">🏡 質感生活，慢活精緻有品味</label>
+        <label class="opt"><input type="radio" name="m_style" value="真實親切，說真話有溫度">💬 真實親切，說真話有溫度</label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-q">不想要的感覺</div>
+      <textarea id="m_avoid" placeholder="例：不要太推銷感、不要太正式"></textarea>
+    </div>
+    <div class="card">
+      <div class="card-q">客戶見證截圖（最多3張）</div>
+      <div class="fh">客戶好評、感謝訊息、使用前後對比</div>
+      <div class="multi-upload-wrap">
+        <div class="multi-upload-thumbs" id="thumbs_witness"></div>
+        <div style="display:flex;align-items:center;">
+          <button class="multi-upload-btn" onclick="triggerMulti('witness')">💬 選擇截圖</button>
+          <input type="file" id="file_witness" accept="image/*" multiple style="display:none" onchange="handleMulti(this,'witness',3)">
+          <span class="multi-upload-count" id="count_witness">0 / 3</span>
+        </div>
+        <div class="upload-progress" id="prog_witness"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SM4｜聯繫與平台 -->
+  <div class="step" id="sm4">
+    <div class="step-hero">
+      <div class="step-eyebrow">STEP 4 / 4</div>
+      <div class="step-title">聯繫與平台</div>
+      <div class="step-desc">最後一步！填完送出，24小時內收到完整方案。</div>
+    </div>
+    <div class="card">
+      <label class="fl">LINE 個人連結</label>
+      <input type="url" id="m_line_personal" placeholder="https://line.me/ti/p/yourID">
+      <label class="fl">LINE 官方帳號</label>
+      <input type="url" id="m_line_oa" placeholder="https://lin.ee/yourOA">
+      <label class="fl">地址（有實體據點才填）</label>
+      <input type="text" id="m_address" placeholder="例：台南市中西路1號">
+    </div>
+    <div class="card">
+      <div style="font-size:14px;font-weight:700;color:var(--brown-dark);margin-bottom:10px;">現有平台連結（有哪些填哪些）</div>
+      <label class="fl">YouTube</label>
+      <input type="url" id="m_youtube" placeholder="https://www.youtube.com/@yourchannel">
+      <label class="fl">Facebook</label>
+      <input type="url" id="m_facebook" placeholder="https://www.facebook.com/yourpage">
+      <label class="fl">Instagram</label>
+      <input type="url" id="m_instagram" placeholder="https://www.instagram.com/yourid">
+      <label class="fl">其他平台</label>
+      <input type="text" id="m_other" placeholder="TikTok / 小紅書 / Threads…">
+    </div>
+    <div class="card">
+      <div class="card-q">環境／場景照片（最多3張）</div>
+      <div class="fh">工作室、店面、工作情境、生活風格照</div>
+      <div class="multi-upload-wrap">
+        <div class="multi-upload-thumbs" id="thumbs_scene"></div>
+        <div style="display:flex;align-items:center;">
+          <button class="multi-upload-btn" onclick="triggerMulti('scene')">🏡 選擇照片</button>
+          <input type="file" id="file_scene" accept="image/*" multiple style="display:none" onchange="handleMulti(this,'scene',3)">
+          <span class="multi-upload-count" id="count_scene">0 / 3</span>
+        </div>
+        <div class="upload-progress" id="prog_scene"></div>
+      </div>
+    </div>
+    <p id="matMsg" class="msg"></p>
+  </div>
+
+  <!-- 完成頁 -->
+  <div class="done-page" id="donePage">
+    <div class="result-hero">
+      <div class="result-sun">☀️</div>
+      <div class="result-title">素材已收到！</div>
+      <div class="result-desc">我們會在24小時內完成品牌分析<br>並把完整方案透過LINE傳給你</div>
+    </div>
+    <div class="code-box">
+      <div class="code-label">📋 你的素材代碼</div>
+      <div class="code-num" id="matCode">------</div>
+      <div class="code-hint">把這個代碼告訴顧問<br>或截圖保存，隨時可以查詢</div>
+      <span class="code-screenshot">📸 請截圖保存</span>
+    </div>
+    <div class="next-steps">
+      <div class="next-steps-title">📦 你將收到的完整方案</div>
+      <div class="next-step-item"><div class="ns-num">1</div>品牌故事＋一句話理念×3版本</div>
+      <div class="next-step-item"><div class="ns-num">2</div>跑馬燈內容＋照片牆拍攝建議</div>
+      <div class="next-step-item"><div class="ns-num">3</div>CTA按鈕建議＋智慧名片完整規劃</div>
+      <div class="next-step-item"><div class="ns-num">4</div>影音品牌DNA＋第一支影音製作指令</div>
+      <div class="next-step-item"><div class="ns-num">5</div>申請製作智慧名片流程步驟</div>
+    </div>
+    <div class="copy-area">
+      <div class="copy-area-label">📋 步驟一｜複製這段文字</div>
+      <div class="copy-text" id="matCopyMsg"></div>
+      <button class="copy-btn-full" id="matCopyBtn" onclick="copyMatMsg()">一鍵複製</button>
+    </div>
+    <div class="line-box">
+      <p>📲 步驟二｜加入LINE官方帳號<br>把剛才複製的文字貼給我們<br>24小時內收到完整品牌方案</p>
+      <a class="line-btn" href="https://lin.ee/UoF8eYY" target="_blank">＋ 加入 LINE 官方帳號</a>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<div class="nav" id="navBar">
+  <button class="btn-prev" id="btnPrev" onclick="prev()" style="display:none">← 上一步</button>
+  <button class="btn-next" id="btnNext" onclick="next()">下一步 →</button>
+  <button class="btn-submit" id="btnSubmit" onclick="submitMaterial()" style="display:none">送出取得方案 ✦</button>
+</div>
+
+<!-- Firebase -->
+<script type="module">
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
+
+const FB_CONFIG={
+  apiKey:"AIzaSyD8DTzmzyuDFkrBMjGNZkJoN9fcY9_8mb4",
+  authDomain:"happiness-smart-card-pro-7389a.firebaseapp.com",
+  projectId:"happiness-smart-card-pro-7389a",
+  storageBucket:"happiness-smart-card-pro-7389a.firebasestorage.app",
+  messagingSenderId:"143313936007",
+  appId:"1:143313936007:web:7c948563c51e8a47d3a222"
+};
+
+const app=getApps().length?getApps()[0]:initializeApp(FB_CONFIG);
+const auth=getAuth(app);
+const storage=getStorage(app);
+
+async function ensureAuth(){if(auth.currentUser)return;await signInAnonymously(auth);}
+
+async function uploadPhoto(blob,path){
+  await ensureAuth();
+  const r=ref(storage,path);
+  await uploadBytes(r,blob,{contentType:blob.type||'image/jpeg',cacheControl:'public,max-age=31536000,immutable'});
+  return await getDownloadURL(r);
+}
+
+function diagPath(phone,type,index){
+  const p=(phone||'').replace(/\D/g,'')||'unknown';
+  const ts=Date.now().toString(36);
+  return `diagnosis/${p}_${ts}/${type}${index!==undefined?'_'+index:''}.jpg`;
+}
+
+window._fb={uploadPhoto,diagPath};
+</script>
+
+<script>
+const GAS='https://script.google.com/macros/s/AKfycbxpxXKX-rE3VfqYiRqjoDGtruYI0Q1CjOk3jGyBCcAwMR0Erf__TmL5snJikX3KMDYZ/exec';
+const TOTAL=4;
+let cur=1;
+const photoUrls={avatar:'',logo:'',product:[],witness:[],scene:[]};
+
+function upd(){
+  document.getElementById('progBar').style.width=(cur/TOTAL*100)+'%';
+  document.getElementById('progLabel').textContent='第 '+cur+' 步，共 '+TOTAL+' 步';
+  document.getElementById('btnPrev').style.display=cur>1?'block':'none';
+  document.getElementById('btnNext').style.display=cur<TOTAL?'block':'none';
+  document.getElementById('btnSubmit').style.display=cur===TOTAL?'block':'none';
+}
+
+function next(){
+  if(!validate(cur))return;
+  document.getElementById('sm'+cur).classList.remove('on');
+  cur++;
+  document.getElementById('sm'+cur).classList.add('on');
+  upd();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function prev(){
+  document.getElementById('sm'+cur).classList.remove('on');
+  cur--;
+  document.getElementById('sm'+cur).classList.add('on');
+  upd();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function validate(step){
+  if(step===1){
+    if(!v('name')){alert('請填寫姓名／品牌名稱');return false;}
+    if(!v('phone')){alert('請填寫電話');return false;}
+  }
+  if(step===2){
+    if(!v('m_story')){alert('請填寫核心故事');return false;}
+    if(!v('m_audience')){alert('請填寫目標客群');return false;}
+  }
+  if(step===3){
+    if(!rv('m_style')){alert('請選擇品牌風格');return false;}
+  }
+  return true;
+}
+
+async function submitMaterial(){
+  const msg=document.getElementById('matMsg');
+  msg.textContent='送出中，請稍候…';
+
+  const payload={
+    industry:'',cta_goal:'',
+    name:v('name'),phone:v('phone'),email:v('email'),
+    title:v('m_title'),company:v('m_company'),
+    core_story:v('m_story'),target_audience:v('m_audience'),
+    style:rv('m_style'),avoid_style:v('m_avoid'),
+    line_personal:v('m_line_personal'),line_oa:v('m_line_oa'),
+    address:v('m_address'),youtube:v('m_youtube'),
+    facebook:v('m_facebook'),instagram:v('m_instagram'),
+    other_platform:v('m_other'),
+    photo_avatar:photoUrls.avatar,photo_logo:photoUrls.logo,
+    photo_product:photoUrls.product,
+    photo_witness:photoUrls.witness,
+    photo_scene:photoUrls.scene
+  };
+
+  let mCode='';
+  try{
+    const res=await fetch(GAS,{method:'POST',body:JSON.stringify({action:'submitMaterial',payload})});
+    const data=await res.json();
+    if(data.ok&&data.code)mCode=data.code;
+  }catch(e){}
+
+  if(!mCode){
+    const p=v('phone').replace(/\D/g,'');
+    mCode=(p.length>=4?p.slice(-4):'0000')+Math.random().toString(36).slice(-2).toUpperCase();
+  }
+
+  document.getElementById('matCode').textContent=mCode;
+
+  const photoCount=(photoUrls.avatar?1:0)+(photoUrls.logo?1:0)+
+    photoUrls.product.length+photoUrls.witness.length+photoUrls.scene.length;
+  const matName=v('name')||'我';
+
+  document.getElementById('matCopyMsg').textContent=
+    '我是'+matName+'，已送出品牌素材，共上傳'+photoCount+'張照片，素材代碼：'+mCode+' ☀️';
+
+  for(let i=1;i<=TOTAL;i++){
+    const el=document.getElementById('sm'+i);
+    if(el)el.classList.remove('on');
+  }
+  document.getElementById('donePage').classList.add('on');
+  document.getElementById('navBar').style.display='none';
+  document.getElementById('progLabel').style.display='none';
+  document.getElementById('progBar').style.width='100%';
+  msg.textContent='';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function copyMatMsg(){
+  navigator.clipboard.writeText(document.getElementById('matCopyMsg').textContent).then(()=>{
+    const btn=document.getElementById('matCopyBtn');
+    btn.textContent='✓ 已複製！去貼到LINE OA';
+    btn.style.background='#4caf50';
+    setTimeout(()=>{btn.textContent='一鍵複製';btn.style.background='linear-gradient(135deg,var(--gold),var(--gold-light))';},3000);
+  });
+}
+
+function triggerUpload(type){document.getElementById('file_'+type).click();}
+function triggerMulti(type){document.getElementById('file_'+type).click();}
+
+async function handleSingle(input,type){
+  const file=input.files[0];if(!file)return;
+  const prog=document.getElementById('prog_'+type);
+  const slot=document.getElementById('slot_'+type);
+  const prev=document.getElementById('prev_'+type);
+  prev.src=URL.createObjectURL(file);
+  slot.classList.add('has-img');
+  prog.textContent='上傳中…';
+  try{
+    const phone=v('phone').replace(/\D/g,'')||'unknown';
+    const url=await window._fb.uploadPhoto(file,window._fb.diagPath(phone,type));
+    photoUrls[type]=url;
+    prog.textContent='✓ 上傳完成';
+    setTimeout(()=>{prog.textContent='';},2000);
+  }catch(e){prog.textContent='上傳失敗，請重試';}
+}
+
+function removeSingle(event,type){
+  event.stopPropagation();
+  photoUrls[type]='';
+  document.getElementById('prev_'+type).src='';
+  document.getElementById('slot_'+type).classList.remove('has-img');
+  document.getElementById('file_'+type).value='';
+  document.getElementById('prog_'+type).textContent='';
+}
+
+async function handleMulti(input,type,maxCount){
+  const files=Array.from(input.files);if(!files.length)return;
+  const remaining=maxCount-photoUrls[type].length;
+  if(remaining<=0){alert('最多上傳 '+maxCount+' 張');return;}
+  const toUpload=files.slice(0,remaining);
+  const prog=document.getElementById('prog_'+type);
+  prog.textContent='上傳中 0 / '+toUpload.length+'…';
+  const phone=v('phone').replace(/\D/g,'')||'unknown';
+  let done=0;
+  for(const file of toUpload){
+    addThumb(type,URL.createObjectURL(file));
+    try{
+      const idx=photoUrls[type].length;
+      const url=await window._fb.uploadPhoto(file,window._fb.diagPath(phone,type,idx));
+      photoUrls[type].push(url);
+      done++;
+      prog.textContent='上傳中 '+done+' / '+toUpload.length+'…';
+    }catch(e){console.error(e);}
+  }
+  updateCount(type,maxCount);
+  prog.textContent='✓ '+done+' 張上傳完成';
+  setTimeout(()=>{prog.textContent='';},2000);
+  input.value='';
+}
+
+function addThumb(type,url){
+  const container=document.getElementById('thumbs_'+type);
+  const wrap=document.createElement('div');
+  wrap.className='multi-thumb-wrap';
+  const idx=container.children.length;
+  wrap.innerHTML=`<img class="multi-thumb" src="${url}" onclick="zoomPhoto('${url}')"><button class="multi-thumb-remove" onclick="removeThumb('${type}',${idx},this.closest('.multi-thumb-wrap'))">✕</button>`;
+  container.appendChild(wrap);
+}
+
+function removeThumb(type,idx,el){
+  photoUrls[type].splice(idx,1);el.remove();
+  const maxMap={product:10,witness:3,scene:3};
+  updateCount(type,maxMap[type]);
+}
+
+function updateCount(type,max){document.getElementById('count_'+type).textContent=photoUrls[type].length+' / '+max;}
+
+function zoomPhoto(url){
+  const o=document.createElement('div');o.className='photo-zoom-overlay';
+  o.innerHTML=`<img class="photo-zoom-img" src="${url}">`;
+  o.onclick=()=>o.remove();document.body.appendChild(o);
+}
+
+function v(id){const el=document.getElementById(id);return el?el.value.trim():'';}
+function rv(name){const el=document.querySelector('input[name="'+name+'"]:checked');return el?el.value:'';}
+
+document.addEventListener('change',function(e){
+  if(e.target.type==='radio'){
+    document.querySelectorAll('input[name="'+e.target.name+'"]').forEach(r=>r.closest('.opt').classList.toggle('sel',r.checked));
+  }
+});
+
+upd();
+</script>
+</body>
+</html>
