@@ -346,20 +346,31 @@ const storage=getStorage(app);
 
 async function ensureAuth(){if(auth.currentUser)return;await signInAnonymously(auth);}
 
-async function uploadPhoto(blob,path){
+// 上傳路徑與 HSC 一致：cards/{sessionId}/{type}_{index}.jpg
+// sessionId 用電話後4碼+時間戳，避免和正式名片衝突
+function getSessionId(phone){
+  const p=(phone||'').replace(/\D/g,'').slice(-4)||'0000';
+  return 'diag_'+p+'_'+Date.now().toString(36);
+}
+
+async function uploadPhoto(blob, fileName){
   await ensureAuth();
-  const r=ref(storage,path);
-  await uploadBytes(r,blob,{contentType:blob.type||'image/jpeg',cacheControl:'public,max-age=31536000,immutable'});
+  const sessionId = window._fb._sessionId || (window._fb._sessionId = getSessionId(window._fb._phone||''));
+  const path = `cards/${sessionId}/${fileName}`;
+  const r = ref(storage, path);
+  await uploadBytes(r, blob, {
+    contentType: blob.type||'image/jpeg',
+    cacheControl: 'public,max-age=31536000,immutable'
+  });
   return await getDownloadURL(r);
 }
 
-function diagPath(phone,type,index){
-  const p=(phone||'').replace(/\D/g,'')||'unknown';
-  const ts=Date.now().toString(36);
-  return `diagnosis/${p}_${ts}/${type}${index!==undefined?'_'+index:''}.jpg`;
-}
-
-window._fb={uploadPhoto,diagPath};
+window._fb={
+  uploadPhoto,
+  getSessionId,
+  _sessionId: null,
+  _phone: ''
+};
 </script>
 
 <script>
@@ -483,7 +494,9 @@ async function handleSingle(input,type){
   prog.textContent='上傳中…';
   try{
     const phone=v('phone').replace(/\D/g,'')||'unknown';
-    const url=await window._fb.uploadPhoto(file,window._fb.diagPath(phone,type));
+    window._fb._phone=phone;
+    const fileName=type+'.jpg';
+    const url=await window._fb.uploadPhoto(file,fileName);
     photoUrls[type]=url;
     prog.textContent='✓ 上傳完成';
     setTimeout(()=>{prog.textContent='';},2000);
@@ -511,8 +524,10 @@ async function handleMulti(input,type,maxCount){
   for(const file of toUpload){
     addThumb(type,URL.createObjectURL(file));
     try{
+      window._fb._phone=phone;
       const idx=photoUrls[type].length;
-      const url=await window._fb.uploadPhoto(file,window._fb.diagPath(phone,type,idx));
+      const fileName=type+'_'+idx+'.jpg';
+      const url=await window._fb.uploadPhoto(file,fileName);
       photoUrls[type].push(url);
       done++;
       prog.textContent='上傳中 '+done+' / '+toUpload.length+'…';
