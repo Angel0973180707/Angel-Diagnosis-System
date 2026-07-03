@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>幸福天使智慧名片｜服務流程說明</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #b8860b; --gold-light: #d4a017; --gold-bright: #f0c040;
+      --gold-pale: #fdf3d8; --gold-border: #e8d4a0;
+      --brown-dark: #2a1a06; --brown-mid: #5a3a14; --brown-light: #8a6030;
+      --cream: #fdfaf3; --dark: #1a1008;
+      --green: #06c755;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Noto Sans TC", sans-serif; background: var(--cream); color: var(--brown-dark); }
+
+    .hero {
+      background: linear-gradient(160deg, var(--dark) 0%, #2e1f0a 50%, #4a2e0e 100%);
+      padding: 36px 24px 32px; text-align: center; position: relative; overflow: hidden;
+    }
+    .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 30% 30%, rgba(184,134,11,.25) 0%, transparent 55%); }
+    .hero-content { position: relative; }
+    .hero-sun { font-size: 44px; display: block; margin-bottom: 8px; filter: drop-shadow(0 0 20px rgba(212,160,23,.8)); animation: sp 4s ease-in-out infinite; }
+    @keyframes sp { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
+    .hero-tag { display:inline-block; background:rgba(184,134,11,.2); border:1px solid rgba(184,134,11,.4); color:var(--gold-bright); font-size:11px; font-weight:700; padding:5px 14px; border-radius:999px; letter-spacing:2px; margin-bottom:12px; }
+    .hero h1 { font-family:"Noto Serif TC",serif; font-size:20px; font-weight:900; color:#fff; line-height:1.55; margin-bottom:8px; }
+    .hero-sub { font-size:12px; color:rgba(255,255,255,.65); line-height:1.9; }
+    .back-link { display:inline-block; margin-top:14px; font-size:12px; color:rgba(255,255,255,.4); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.15); padding-bottom:1px; }
+
+    .wrap { max-width:580px; margin:0 auto; padding:24px 16px 60px; }
+
+    /* 時間軸 */
+    .step-list { position: relative; }
+    .step-list::before {
+      content:'';
+      position:absolute;
+      left:21px;
+      top:44px;
+      bottom:44px;
+      width:2px;
+      background:linear-gradient(to bottom, var(--gold-border) 0%, var(--gold-border) 100%);
+    }
+
+    .flow-step { display:flex; gap:14px; margin-bottom:14px; align-items:flex-start; position:relative; }
+
+    .step-num {
+      flex-shrink:0;
+      width:44px; height:44px;
+      border-radius:50%;
+      background:linear-gradient(135deg, var(--gold), var(--gold-light));
+      color:#fff;
+      font-size:16px; font-weight:900;
+      font-family:"Noto Serif TC",serif;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 2px 10px rgba(184,134,11,.3);
+      position:relative; z-index:1;
+    }
+    .step-num.final {
+      background:linear-gradient(135deg, var(--dark), #3a2510);
+      font-size:18px;
+    }
+
+    .step-body {
+      flex:1;
+      background:#fff;
+      border-radius:16px;
+      padding:15px 17px;
+      border:1px solid var(--gold-border);
+      box-shadow:0 2px 8px rgba(80,50,20,.05);
+    }
+    .step-body.final-body {
+      background:linear-gradient(135deg, var(--gold-pale), #fde9bb);
+    }
+
+    .step-eyebrow { font-size:10px; font-weight:700; color:var(--gold); letter-spacing:2px; margin-bottom:4px; }
+    .step-title { font-family:"Noto Serif TC",serif; font-size:15px; font-weight:900; color:var(--brown-dark); margin-bottom:8px; line-height:1.55; }
+    .step-text { font-size:13px; color:var(--brown-light); line-height:1.85; margin-bottom:4px; }
+    .step-text:last-child { margin-bottom:0; }
+    .step-text.note { margin-top:8px; }
+
+    .step-bullets { list-style:none; padding:0; margin:6px 0 0; }
+    .step-bullets li {
+      font-size:13px; color:var(--brown-mid); line-height:1.8;
+      padding:2px 0 2px 16px; position:relative;
+    }
+    .step-bullets li::before {
+      content:'✦'; position:absolute; left:0;
+      color:var(--gold); font-size:8px; top:7px;
+    }
+
+    /* LINE */
+    .line-box { background:var(--green); border-radius:18px; padding:22px 20px; text-align:center; margin-top:24px; }
+    .line-box p { color:#fff; font-size:13px; line-height:1.9; margin-bottom:14px; }
+    .line-btn { display:inline-block; background:#fff; color:var(--green); font-weight:900; font-size:15px; padding:12px 28px; border-radius:999px; text-decoration:none; font-family:"Noto Sans TC",sans-serif; }
+
+    @media (max-width:380px) {
+      .hero h1 { font-size:18px; }
+      .step-num { width:38px; height:38px; font-size:14px; }
+      .step-list::before { left:19px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <span class="hero-sun">☀️</span>
+    <div class="hero-tag">幸福天使智慧名片</div>
+    <h1>服務流程說明</h1>
+    <p class="hero-sub">從認識您的品牌，到擁有一張真正能幫您成交的智慧名片，<br>我們陪您一步一步完成。</p>
+    <a href="index.html" class="back-link">← 回到品牌診斷</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="step-list">
+
+    <!-- Step 1 -->
+    <div class="flow-step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-eyebrow">STEP 01</div>
+        <div class="step-title">免費品牌診斷（約2分鐘）</div>
+        <p class="step-text">填寫簡單的5個問題，讓我們認識您的產業、目前遇到的困境、想達成的目標。</p>
+        <p class="step-text">送出後立即獲得：</p>
+        <ul class="step-bullets">
+          <li>專屬查詢代碼</li>
+          <li>初步的品牌卡點分析</li>
+          <li>影音經營建議方向</li>
+        </ul>
+        <p class="step-text note">完成後請將查詢代碼透過LINE告訴我們，我們會在24小時內為您準備完整診斷報告。</p>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="flow-step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-eyebrow">STEP 02</div>
+        <div class="step-title">收到您的專屬診斷報告</div>
+        <p class="step-text">我們會根據您填寫的內容，為您準備一份完整的品牌診斷報告，包含：</p>
+        <ul class="step-bullets">
+          <li>您的品牌卡點深度分析</li>
+          <li>品牌定位建議</li>
+          <li>名片解決方案方向</li>
+          <li>具體行動清單</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="flow-step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-eyebrow">STEP 03</div>
+        <div class="step-title">品牌素材收集（約5分鐘，深化合作時填寫）</div>
+        <p class="step-text">如果您希望進一步打造完整品牌方案，我們會邀請您填寫素材表，包含：</p>
+        <ul class="step-bullets">
+          <li>您的核心故事</li>
+          <li>目標客群描述</li>
+          <li>品牌風格偏好</li>
+          <li>個人照、產品照、Logo 等素材上傳</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="flow-step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-eyebrow">STEP 04</div>
+        <div class="step-title">收到您的品牌方案</div>
+        <p class="step-text">根據您提供的素材，我們會為您準備：</p>
+        <ul class="step-bullets">
+          <li>品牌故事與一句話理念（多版本）</li>
+          <li>名片跑馬燈文案</li>
+          <li>CTA 行動按鈕建議</li>
+          <li>照片牆呈現建議</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="flow-step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <div class="step-eyebrow">STEP 05</div>
+        <div class="step-title">經營優先順序評量</div>
+        <p class="step-text">我們會邀請您填寫一份簡單的評量，讓您：</p>
+        <ul class="step-bullets">
+          <li>排出目前最想優先解決的經營項目</li>
+          <li>了解目前內容經營的健康比例</li>
+          <li>清楚了解合作範圍——哪些由我們協助、哪些由您自己維護</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="flow-step">
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <div class="step-eyebrow">STEP 06</div>
+        <div class="step-title">親自選擇您喜歡的名片內容</div>
+        <p class="step-text">我們會依照您的品牌方案，準備多個版本的品牌故事、理念金句、跑馬燈文字，讓您親自勾選最喜歡、最符合您風格的版本。</p>
+      </div>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="flow-step">
+      <div class="step-num final">✦</div>
+      <div class="step-body final-body">
+        <div class="step-eyebrow">STEP 07</div>
+        <div class="step-title">智慧名片正式上線</div>
+        <p class="step-text">確認內容後，我們會將所有資訊填入您的專屬智慧名片，並完成以下確認：</p>
+        <ul class="step-bullets">
+          <li>逐項核對名片內容</li>
+          <li>實際測試所有按鈕與聯繫方式</li>
+          <li>確認付款完成</li>
+          <li>正式啟用</li>
+        </ul>
+        <p class="step-text note">名片啟用後，我們會將專屬連結傳送給您，即可開始使用！</p>
+      </div>
+    </div>
+
+  </div><!-- /step-list -->
+
+  <!-- LINE -->
+  <div class="line-box">
+    <p>有任何問題？<br>歡迎隨時透過 LINE 官方帳號與我們聯繫<br>我們會盡快回覆您 ☀️</p>
+    <a class="line-btn" href="https://lin.ee/UoF8eYY" target="_blank">＋ 加入 LINE 官方帳號</a>
+  </div>
+
+</div><!-- /wrap -->
+</body>
+</html>
