@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>幸福天使｜經營自我評量</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:#b8860b; --gold-light:#d4a017; --gold-bright:#f0c040;
+  --gold-pale:#fdf3d8; --gold-border:#e8d4a0;
+  --brown-dark:#2a1a06; --brown-mid:#5a3a14; --brown-light:#8a6030;
+  --cream:#fdfaf3; --dark:#1a1008;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"Noto Sans TC",sans-serif;background:var(--cream);color:var(--brown-dark);}
+
+.hero{background:linear-gradient(160deg,var(--dark) 0%,#2e1f0a 50%,#4a2e0e 100%);padding:28px 24px 22px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 30%,rgba(184,134,11,.25) 0%,transparent 55%);}
+.hero-content{position:relative;}
+.hero-sun{font-size:38px;display:block;margin-bottom:8px;filter:drop-shadow(0 0 16px rgba(212,160,23,.8));}
+.hero-tag{display:inline-block;background:rgba(184,134,11,.2);border:1px solid rgba(184,134,11,.4);color:var(--gold-bright);font-size:11px;font-weight:700;padding:4px 14px;border-radius:999px;letter-spacing:2px;margin-bottom:10px;}
+.hero h1{font-family:"Noto Serif TC",serif;font-size:19px;font-weight:900;color:#fff;line-height:1.5;margin-bottom:8px;}
+.hero h1 em{color:var(--gold-bright);font-style:normal;}
+.hero-code{display:inline-block;background:rgba(184,134,11,.15);border:1px solid rgba(184,134,11,.3);color:rgba(255,255,255,.75);font-size:12px;padding:4px 14px;border-radius:999px;letter-spacing:1px;}
+
+.wrap{max-width:580px;margin:0 auto;padding:14px 16px 110px;}
+
+.sec-card{background:#fff;border-radius:16px;padding:18px;margin:12px 0;border:1px solid var(--gold-border);box-shadow:0 2px 10px rgba(80,50,20,.05);}
+.sec-title{font-family:"Noto Serif TC",serif;font-size:16px;font-weight:900;color:var(--brown-dark);display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.sec-num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;font-size:11px;font-weight:900;min-width:24px;height:24px;border-radius:6px;padding:0 5px;flex-shrink:0;}
+.sec-desc{font-size:12px;color:var(--brown-light);line-height:1.8;margin-bottom:14px;}
+
+/* ─── Priority ─── */
+.priority-item{background:var(--gold-pale);border:1.5px solid var(--gold-border);border-radius:12px;padding:11px 12px;margin-bottom:8px;transition:border-color .15s,background .15s;}
+.priority-item.ranked{border-color:var(--gold);background:#fff3d0;}
+.item-row{display:flex;align-items:center;gap:9px;margin-bottom:8px;}
+.item-badge{width:28px;height:28px;border-radius:8px;background:rgba(184,134,11,.15);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:var(--brown-light);flex-shrink:0;transition:all .2s;}
+.item-badge.on{background:var(--gold);color:#fff;}
+.item-text{font-size:13px;font-weight:600;color:var(--brown-dark);line-height:1.5;flex:1;}
+.rank-btns{display:flex;gap:5px;}
+.rank-btn{flex:1;height:32px;border-radius:8px;border:1.5px solid var(--gold-border);background:#fff;color:var(--brown-mid);font-size:13px;font-weight:800;cursor:pointer;font-family:"Noto Sans TC",sans-serif;transition:all .15s;}
+.rank-btn:hover:not([disabled]){border-color:var(--gold);color:var(--gold);}
+.rank-btn.sel{background:var(--gold);border-color:var(--gold);color:#fff;}
+.rank-btn[disabled]{opacity:.25;cursor:default;}
+.priority-summary{font-size:12px;color:var(--brown-light);margin-top:10px;min-height:18px;line-height:1.7;}
+.priority-summary.done{color:var(--gold);font-weight:700;}
+
+/* ─── Content check ─── */
+.content-opts{display:flex;flex-direction:column;gap:8px;}
+.content-opt{background:var(--gold-pale);border:1.5px solid var(--gold-border);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all .18s;}
+.content-opt input{accent-color:var(--gold);width:16px;height:16px;flex-shrink:0;}
+.content-opt.sel{background:#fff3d0;border-color:var(--gold);}
+.content-opt-text{font-size:13px;font-weight:600;color:var(--brown-dark);line-height:1.5;}
+
+.ratio-box{display:none;margin-top:14px;background:linear-gradient(135deg,#fff8e6,#fff0cc);border:1px solid var(--gold-border);border-radius:12px;padding:14px;}
+.ratio-box.show{display:block;}
+.ratio-title{font-size:12px;font-weight:700;color:var(--brown-mid);margin-bottom:10px;}
+.ratio-row{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+.ratio-label{font-size:12px;color:var(--brown-mid);width:68px;flex-shrink:0;}
+.ratio-bar-bg{flex:1;height:11px;background:rgba(184,134,11,.12);border-radius:999px;overflow:hidden;}
+.ratio-bar{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:999px;}
+.ratio-pct{font-size:12px;font-weight:700;color:var(--gold);width:30px;text-align:right;flex-shrink:0;}
+.ratio-comment{font-size:11.5px;color:var(--brown-light);margin-top:10px;line-height:1.8;padding-top:8px;border-top:1px solid var(--gold-border);}
+
+/* ─── Boundaries ─── */
+.bound-plan-tag{display:inline-block;background:rgba(184,134,11,.12);border:1px solid rgba(184,134,11,.25);color:var(--brown-mid);font-size:12px;font-weight:700;padding:5px 14px;border-radius:8px;margin-bottom:12px;}
+.bound-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:400px){.bound-cols{grid-template-columns:1fr;}}
+.bound-col-head{font-size:11px;font-weight:900;letter-spacing:1.5px;padding:7px 10px;border-radius:8px 8px 0 0;text-align:center;}
+.bound-col-head.angel{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;}
+.bound-col-head.client{background:#ebe5d8;color:var(--brown-mid);}
+.bound-col-body{border:1px solid var(--gold-border);border-top:none;border-radius:0 0 8px 8px;overflow:hidden;}
+.bound-row{padding:8px 11px;font-size:12px;line-height:1.6;color:var(--brown-mid);border-bottom:1px solid var(--gold-border);}
+.bound-row:last-child{border-bottom:none;}
+.bound-row.a{background:var(--gold-pale);}
+.bound-row.a::before{content:'✓ ';color:var(--gold);font-weight:900;}
+.bound-row.c{background:#f8f4ec;}
+.bound-row.c::before{content:'◆ ';color:var(--brown-light);}
+.no-plan{font-size:13px;color:var(--brown-light);font-style:italic;}
+
+/* ─── Nav ─── */
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:580px;background:#fff;border-top:1px solid var(--gold-border);padding:10px 16px;z-index:100;}
+.submit-btn{display:block;width:100%;padding:14px;background:linear-gradient(135deg,var(--dark),#3a2810);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:900;font-family:"Noto Sans TC",sans-serif;cursor:pointer;letter-spacing:.5px;box-shadow:0 4px 14px rgba(26,16,8,.3);}
+.submit-btn:disabled{opacity:.5;cursor:not-allowed;}
+.submit-msg{font-size:12px;color:var(--brown-light);text-align:center;margin-top:5px;min-height:16px;}
+
+/* ─── Done ─── */
+.done-screen{display:none;max-width:580px;margin:0 auto;padding:24px 16px 60px;}
+.done-screen.show{display:block;}
+.done-hero{background:linear-gradient(135deg,var(--dark),#2e1f0a);border-radius:20px;padding:32px 20px;text-align:center;}
+.done-sun{font-size:48px;margin-bottom:12px;filter:drop-shadow(0 0 20px rgba(212,160,23,.8));}
+.done-title{font-family:"Noto Serif TC",serif;font-size:22px;font-weight:900;color:#fff;margin-bottom:8px;}
+.done-desc{font-size:13px;color:rgba(255,255,255,.6);line-height:1.9;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <span class="hero-sun">☀️</span>
+    <div class="hero-tag">幸福天使｜經營自我評量</div>
+    <h1>請花 3 分鐘完成<br><em>這份自我評量</em></h1>
+    <div class="hero-code" id="heroCode">查詢代碼：---</div>
+  </div>
+</div>
+
+<div class="wrap" id="mainWrap">
+
+  <!-- Section 1 -->
+  <div class="sec-card">
+    <div class="sec-title"><span class="sec-num">一</span>經營優先順序自評</div>
+    <div class="sec-desc">以下6項，請依您<strong>目前最想解決的順序</strong>排列<br>點選數字 1~6，1 = 最優先，6 = 暫時不急</div>
+    <div id="priorityList"></div>
+    <div class="priority-summary" id="prioritySummary">請為每一項選擇一個數字（1~6 各用一次）</div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="sec-card">
+    <div class="sec-title"><span class="sec-num">二</span>內容配置自評</div>
+    <div class="sec-desc">您現在發的內容，大概偏向哪一種？（單選）</div>
+    <div class="content-opts">
+      <label class="content-opt">
+        <input type="radio" name="content" value="幾乎都在推銷產品">
+        <span class="content-opt-text">幾乎都在推銷產品</span>
+      </label>
+      <label class="content-opt">
+        <input type="radio" name="content" value="故事/知識和推銷各半">
+        <span class="content-opt-text">故事／知識和推銷各半</span>
+      </label>
+      <label class="content-opt">
+        <input type="radio" name="content" value="很少介紹產品，都在閒聊/知識">
+        <span class="content-opt-text">很少真的介紹產品，都在閒聊</span>
+      </label>
+    </div>
+    <div class="ratio-box" id="ratioBox">
+      <div class="ratio-title">📊 建議的內容黃金比例</div>
+      <div class="ratio-row"><span class="ratio-label">故事／品牌</span><div class="ratio-bar-bg"><div class="ratio-bar" style="width:20%"></div></div><span class="ratio-pct">20%</span></div>
+      <div class="ratio-row"><span class="ratio-label">科普／知識</span><div class="ratio-bar-bg"><div class="ratio-bar" style="width:25%"></div></div><span class="ratio-pct">25%</span></div>
+      <div class="ratio-row"><span class="ratio-label">產品／服務</span><div class="ratio-bar-bg"><div class="ratio-bar" style="width:20%"></div></div><span class="ratio-pct">20%</span></div>
+      <div class="ratio-row"><span class="ratio-label">客戶見證</span><div class="ratio-bar-bg"><div class="ratio-bar" style="width:15%"></div></div><span class="ratio-pct">15%</span></div>
+      <div class="ratio-row"><span class="ratio-label">互動／活動</span><div class="ratio-bar-bg"><div class="ratio-bar" style="width:20%"></div></div><span class="ratio-pct">20%</span></div>
+      <div class="ratio-comment" id="ratioComment"></div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="sec-card">
+    <div class="sec-title"><span class="sec-num">三</span>服務界線說明</div>
+    <div class="sec-desc">依您的合作方案，以下清楚說明各自的分工範圍</div>
+    <div id="boundaryContent"></div>
+  </div>
+
+</div><!-- /mainWrap -->
+
+<!-- Done -->
+<div class="done-screen" id="doneScreen">
+  <div class="done-hero">
+    <div class="done-sun">☀️</div>
+    <div class="done-title">已送出，感謝您的評量 ☀️</div>
+    <div class="done-desc">顧問收到後會根據您的評量結果<br>調整品牌方案的重點方向<br>期待為您帶來更精準的建議</div>
+  </div>
+</div>
+
+<!-- Nav -->
+<div class="nav" id="navBar">
+  <button class="submit-btn" id="submitBtn" onclick="doSubmit()">送出評量 →</button>
+  <div class="submit-msg" id="submitMsg"></div>
+</div>
+
+<script>
+const GAS='https://script.google.com/macros/s/AKfycbxpxXKX-rE3VfqYiRqjoDGtruYI0Q1CjOk3jGyBCcAwMR0Erf__TmL5snJikX3KMDYZ/exec';
+
+const params=new URLSearchParams(location.search);
+const diagCode=(params.get('diag')||'').toUpperCase().trim();
+const plan=params.get('plan')||'';
+
+if(diagCode) document.getElementById('heroCode').textContent='查詢代碼：'+diagCode;
+
+// ─── Priority Ranking ───
+const ITEMS=[
+  '品牌識別強化（讓人記住你）',
+  '曝光導流（讓更多人看到）',
+  '信任建立（讓人敢下單）',
+  '轉換優化（讓人真的成交）',
+  '內容穩定產出（不斷更新有東西可看）',
+  '客戶維繫回購（讓熟客一直回來）'
+];
+const ICONS=['①','②','③','④','⑤','⑥'];
+const ranks=new Array(6).fill(0);
+
+function buildPriorityUI(){
+  const list=document.getElementById('priorityList');
+  list.innerHTML=ITEMS.map((text,i)=>`
+    <div class="priority-item" id="pi${i}">
+      <div class="item-row">
+        <div class="item-badge" id="badge${i}">？</div>
+        <div class="item-text">${ICONS[i]} ${esc(text)}</div>
+      </div>
+      <div class="rank-btns">${[1,2,3,4,5,6].map(n=>`<button class="rank-btn" id="rb${i}_${n}" onclick="setRank(${i},${n})">${n}</button>`).join('')}</div>
+    </div>`).join('');
+}
+
+function setRank(itemIdx,rank){
+  const prev=ranks[itemIdx];
+  for(let i=0;i<6;i++){if(i!==itemIdx&&ranks[i]===rank)ranks[i]=0;}
+  ranks[itemIdx]=(prev===rank)?0:rank;
+  renderRanks();
+}
+
+function renderRanks(){
+  const usedByOther=(n,self)=>ranks.some((r,i)=>r===n&&i!==self);
+  for(let i=0;i<6;i++){
+    const badge=document.getElementById('badge'+i);
+    badge.textContent=ranks[i]||'？';
+    badge.classList.toggle('on',ranks[i]>0);
+    document.getElementById('pi'+i).classList.toggle('ranked',ranks[i]>0);
+    for(let n=1;n<=6;n++){
+      const btn=document.getElementById('rb'+i+'_'+n);
+      btn.classList.toggle('sel',ranks[i]===n);
+      btn.disabled=(usedByOther(n,i)&&ranks[i]!==n);
+    }
+  }
+  const done=ranks.every(r=>r>0);
+  const count=ranks.filter(r=>r>0).length;
+  const el=document.getElementById('prioritySummary');
+  if(done){
+    const order=ITEMS.map((t,i)=>({t,r:ranks[i]})).sort((a,b)=>a.r-b.r).map(x=>x.t.split('（')[0]);
+    el.textContent='您的優先順序：'+order.join(' → ');
+    el.className='priority-summary done';
+  } else {
+    el.textContent='已選 '+count+' / 6 項，請為每項各選一個數字';
+    el.className='priority-summary';
+  }
+}
+
+function getPriorityOrder(){
+  return ITEMS.map((t,i)=>({t,r:ranks[i]})).sort((a,b)=>a.r-b.r).map(x=>x.t);
+}
+
+// ─── Content Self Check ───
+document.addEventListener('change',e=>{
+  if(e.target.name==='content'){
+    document.querySelectorAll('.content-opt').forEach(el=>el.classList.toggle('sel',el.querySelector('input').checked));
+    const COMMENTS={
+      '幾乎都在推銷產品':'您目前以推銷為主。建議加入更多故事、知識、見證類內容，讓受眾先信任您，成交就自然發生。',
+      '故事/知識和推銷各半':'您已有初步的內容均衡感！下一步是增加客戶見證類內容，讓信任轉化效率更高。',
+      '很少介紹產品，都在閒聊/知識':'您的互動感很強，可以適度增加產品服務的介紹，讓粉絲清楚知道如何跟您合作。'
+    };
+    document.getElementById('ratioBox').classList.add('show');
+    document.getElementById('ratioComment').textContent=COMMENTS[e.target.value]||'';
+  }
+});
+
+// ─── Boundaries ───
+const BOUNDARIES={
+  '名片建卡':{
+    angel:['品牌診斷分析','名片內容建議產出','智慧名片建置與教學'],
+    client:['日常貼文發布','跟客戶互動回覆','產品庫存與出貨','金流與訂單處理']
+  },
+  '基礎':{
+    angel:['品牌診斷分析','名片內容建議產出','系統建置與教學','第一支影音腳本','首月社群文案'],
+    client:['日常貼文發布與後續內容產出','跟客戶互動回覆','產品庫存與出貨','金流與訂單處理']
+  },
+  '中階':{
+    angel:['品牌診斷分析','名片內容建議產出','系統建置與教學','每月圖文/短影音腳本代寫','發布排程表'],
+    client:['實際發布貼文/影音（腳本由Angel提供）','跟客戶互動回覆','產品庫存與出貨','金流與訂單處理']
+  },
+  '全包':{
+    angel:['品牌診斷分析','名片內容建議產出','系統建置與教學','每月內容產出與發布','社群帳號管理與留言互動','月度數據報告'],
+    client:['產品庫存與出貨','金流與訂單處理','提供產品/活動最新資訊給Angel']
+  }
+};
+
+function renderBoundaries(){
+  const el=document.getElementById('boundaryContent');
+  const b=BOUNDARIES[plan];
+  if(!b){
+    el.innerHTML='<div class="no-plan">（等顧問確認合作方案後，這裡會顯示詳細的服務分工）</div>';
+    return;
+  }
+  el.innerHTML=`<div class="bound-plan-tag">合作方案：${esc(plan)}</div>
+    <div class="bound-cols">
+      <div>
+        <div class="bound-col-head angel">☀️ Angel 負責</div>
+        <div class="bound-col-body">${b.angel.map(t=>`<div class="bound-row a">${esc(t)}</div>`).join('')}</div>
+      </div>
+      <div>
+        <div class="bound-col-head client">👤 您負責</div>
+        <div class="bound-col-body">${b.client.map(t=>`<div class="bound-row c">${esc(t)}</div>`).join('')}</div>
+      </div>
+    </div>`;
+}
+
+// ─── Submit ───
+let submitted=false;
+
+async function doSubmit(){
+  if(submitted)return;
+  const unranked=ranks.filter(r=>r===0).length;
+  if(unranked>0){document.getElementById('submitMsg').textContent='請完成所有 6 項排序（還差 '+unranked+' 項）';return;}
+  const contentEl=document.querySelector('input[name="content"]:checked');
+  if(!contentEl){document.getElementById('submitMsg').textContent='請選擇您的內容配置類型';return;}
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true;
+  document.getElementById('submitMsg').textContent='送出中，請稍候…';
+  try{
+    await fetch(GAS,{
+      method:'POST',
+      headers:{'Content-Type':'text/plain'},
+      body:JSON.stringify({action:'submitAssessment',payload:{diagCode,priorityOrder:getPriorityOrder(),contentSelfCheck:contentEl.value,plan}})
+    });
+  }catch(e){}
+  submitted=true;
+  document.getElementById('mainWrap').style.display='none';
+  document.getElementById('navBar').style.display='none';
+  document.getElementById('doneScreen').classList.add('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+buildPriorityUI();
+renderRanks();
+renderBoundaries();
+</script>
+</body>
+</html>
